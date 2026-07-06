@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="キャップを引き抜く">
+  <circle cx="120" cy="120" r="116" fill="#FCEEF2"/>
+  <g stroke="#C08691" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- barrel (lower, white) -->
+    <rect x="86" y="128" width="46" height="76" rx="22" fill="#ffffff"/>
+    <!-- plunger pulled out (upper), separated -->
+    <g fill="#ffffff">
+      <ellipse cx="109" cy="60" rx="20" ry="6"/>
+      <rect x="105" y="62" width="8" height="30" rx="4"/>
+      <ellipse cx="109" cy="94" rx="13" ry="5"/>
+      <path d="M103 98 h12 v10 l-6 8 -6 -8 z"/>
+    </g>
+    <!-- up arrow -->
+    <g fill="#C08691" stroke="none">
+      <path d="M168 190 v-70 l-14 0 20 -30 20 30 -14 0 v70 z"/>
+    </g>
+  </g>
+</svg>

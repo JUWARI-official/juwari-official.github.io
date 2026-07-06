@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="パウチを開ける">
+  <circle cx="120" cy="120" r="116" fill="#FCEEF2"/>
+  <g stroke="#C08691" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- torn-off top piece -->
+    <path d="M156 64 l36 9 -7 34 -36 -9 z" fill="#E7B2BE"/>
+    <!-- lower pouch with torn top edge -->
+    <path d="M92 128 l7 -7 7 7 7 -7 7 7 7 -7 7 7 7 -7 v66 a12 12 0 0 1 -12 12 h-20 a12 12 0 0 1 -12 -12 z" fill="#EAB6C1"/>
+    <!-- applicator (white) emerging diagonally -->
+    <g transform="rotate(24 120 118)">
+      <rect x="109" y="46" width="22" height="88" rx="11" fill="#ffffff"/>
+      <ellipse cx="120" cy="48" rx="15" ry="6" fill="#ffffff"/>
+      <rect x="113" y="36" width="15" height="12" rx="5" fill="#ffffff"/>
+    </g>
+  </g>
+</svg>

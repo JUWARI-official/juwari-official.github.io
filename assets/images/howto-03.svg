@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="ジェルを押し出す">
+  <circle cx="120" cy="120" r="116" fill="#FCEEF2"/>
+  <g stroke="#C08691" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- applicator held diagonally (white) -->
+    <g transform="rotate(38 128 122)">
+      <rect x="116" y="52" width="24" height="128" rx="12" fill="#ffffff"/>
+      <ellipse cx="128" cy="54" rx="16" ry="6" fill="#ffffff"/>
+      <!-- pushed plunger ring -->
+      <rect x="110" y="108" width="36" height="9" rx="4" fill="#F6E1E7"/>
+    </g>
+    <!-- thumb pressing (simple) -->
+    <path d="M150 118 q22 -6 34 8 q8 10 -2 20 q-14 12 -30 2" fill="#F4D7DE"/>
+    <!-- down arrow (push direction) -->
+    <g fill="#C08691" stroke="none">
+      <path d="M74 62 v54 l-13 0 19 28 19 -28 -13 0 v-54 z"/>
+    </g>
+  </g>
+</svg>
