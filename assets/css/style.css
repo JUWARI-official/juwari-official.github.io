@@ -487,14 +487,17 @@ h1, h2, h3, p { margin: 0; }
 .formula__lines line { stroke: rgba(150,138,132,.55); stroke-width: 1; vector-effect: non-scaling-stroke; }
 /* ポイント（テクスチャー上の狙った位置） */
 .cdot { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: #E39AA6; box-shadow: 0 0 0 3px rgba(205,120,135,.16); transform: translate(-50%,-50%); z-index: 2; }
-/* 成分名ラベル（細い枠のピル） */
+/* 成分名ラベル：TikTokショップ画像と同デザイン＝キーカラーで塗りつぶしたピル＋白文字
+   （グラデ #E9848E→#D3626F・角丸999px・やわらかい影。枠線・白背景は廃止） */
 .clabel {
   position: absolute; transform: translate(-50%,-50%); z-index: 3; white-space: nowrap;
-  border: 1px solid var(--c-pink-soft); border-radius: 999px; background: rgba(255,255,255,.92);
-  -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px);
-  padding: .44em .95em; font-size: clamp(.64rem, 2.9vw, .82rem); color: #6E5B5D; letter-spacing: .02em;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--c-pink) 0%, var(--c-pink-deep) 100%);
+  color: #FFFFFF; font-weight: 500;
+  padding: .44em .95em; font-size: clamp(.64rem, 2.9vw, .82rem); letter-spacing: .04em;
+  box-shadow: 0 6px 14px rgba(211,98,111,.28);
 }
-.clabel sup { font-size: .6em; color: var(--c-pink-deep); }
+.clabel sup { font-size: .6em; color: rgba(255,255,255,.85); }
 /* 各成分の位置（テクスチャーの形状に合わせて個別調整） */
 .cdot--1 { left: 42%; top: 34%; }  .clabel--1 { left: 24%; top: 13%; }
 .cdot--2 { left: 66%; top: 33%; }  .clabel--2 { left: 75%; top: 15%; }
