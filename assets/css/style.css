@@ -531,11 +531,8 @@ h1, h2, h3, p { margin: 0; }
   background: var(--c-pink); color: #fff; font-size: .74em; font-weight: 500; flex: 0 0 auto; line-height: 1;
 }
 .safety__list sup { font-size: .58em; color: var(--c-text-soft); }
-/* 商品ビジュアル：個包装を横向きに寝かせ、少し斜めに配置して立体感を出す */
-.safety__visual { position: relative; width: min(90vw, 460px); aspect-ratio: 2.6 / 1; margin: clamp(1.2rem, 4vw, 2rem) auto 0; }
-/* 個包装（横長・約3.5:1）を少し斜めに。枠より少し小さめの幅で回転しても見切れないように */
-.safety__sachet { position: absolute; left: 50%; top: 50%; width: 90%; transform: translate(-50%, -50%) rotate(-7deg); filter: drop-shadow(0 16px 26px rgba(180,150,155,.22)); }
-.safety__note { margin-top: clamp(2rem, 6vw, 2.8rem); max-width: 34em; margin-inline: auto; }
+/* 注釈：カプセルの直後に。個包装ビジュアル廃止に伴い、詰まりすぎない適度な間隔で */
+.safety__note { margin-top: clamp(1.8rem, 5.5vw, 2.6rem); max-width: 34em; margin-inline: auto; }
 
 /* =========================================================
    ⑨ 使用方法 HOW TO USE — 背景: アイボリー
