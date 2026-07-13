@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
 <!-- ?v= はキャッシュ対策のバージョン番号。CSSを更新したらこの数字も上げる -->
-<link rel="stylesheet" href="assets/css/style.css?v=20260713-5" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260713-6" />
 
 <!-- Judge.me Store script（head内に1回だけ）。Published（承認済み）レビューのみ表示 -->
 <script>jdgm = window.jdgm || {};jdgm.SHOP_DOMAIN = 'qzkx7z-qc.myshopify.com';jdgm.PLATFORM = 'shopify';jdgm.PUBLIC_TOKEN = 'LHK6Tu4tuP8HMSigYrlookmAwbk';</script>
@@ -283,12 +283,12 @@
   </section>
 
   <!-- =========================================================
-       PRICE ご購入（※価格・条件は参考デザインより。TODO: 要確定）
+       PRICE JUWARIをはじめる（ご購入）
        ========================================================= -->
   <section class="section price" id="price" aria-labelledby="price-h">
     <div class="container reveal">
       <p class="eyebrow">PRICE</p>
-      <h2 class="headline" id="price-h">ご購入</h2>
+      <h2 class="headline" id="price-h">JUWARIをはじめる</h2>
       <div class="plans">
 
         <!-- 3本入り -->
@@ -343,6 +343,28 @@
         </article>
 
       </div>
+
+      <!-- 安心バー：FAQまで読まない層にも、購入前の3つの不安（送料・プライバシー・解約）をここで解消 -->
+      <ul class="assure reveal">
+        <li class="assure__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="1.5" y="5" width="13.5" height="11" rx="1.5" /><path d="M15 9h3.8l3.7 3.7V16H15z" /><circle cx="6" cy="18.5" r="1.9" /><circle cx="18" cy="18.5" r="1.9" />
+          </svg>
+          <span>全国送料無料</span>
+        </li>
+        <li class="assure__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 16.5v-9L12 3 3 7.5v9L12 21l9-4.5z" /><path d="M3 7.5l9 4.5 9-4.5" /><path d="M12 12v9" />
+          </svg>
+          <span>無地箱でお届け</span>
+        </li>
+        <li class="assure__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4.5" width="18" height="16" rx="2.5" /><path d="M8 2.5v4M16 2.5v4M3 9.5h18" /><path d="M9 14.5l2.2 2.2 4.3-4.2" />
+          </svg>
+          <span>いつでも解約可能</span>
+        </li>
+      </ul>
 
       <!-- 定期購入の条件（回数縛りなし・いつでも解約/スキップ・配送間隔）。
            条件はShopify定期購入アプリの実仕様（2026-07-13 ユーザー確認済み）と一致させること -->

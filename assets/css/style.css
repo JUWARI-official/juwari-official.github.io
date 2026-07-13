@@ -589,9 +589,9 @@ h1, h2, h3, p { margin: 0; }
 .btn-buy__unit { font-size: .74rem; letter-spacing: .05em; opacity: .92; margin-top: .15em; }
 .btn-buy--single .btn-buy__unit { color: var(--c-text-soft); opacity: 1; }
 .btn-buy__ship { font-size: .78rem; font-weight: 500; letter-spacing: .06em; margin-top: .15em; }
-/* 単品購入＝控えめ（アウトライン）。送料無料は赤で目に入る */
+/* 単品購入＝控えめ（アウトライン）。送料無料はブランドピンク（濃）＋太字で目に入る（パレット外の赤は使わない） */
 .btn-buy--single { background: var(--c-white); border: 1.5px solid var(--c-pink-soft); color: var(--c-heading); box-shadow: 0 6px 18px rgba(200,150,160,.08); }
-.btn-buy--single .btn-buy__ship { color: #D93B4D; }
+.btn-buy--single .btn-buy__ship { color: var(--c-pink-deep); font-weight: 700; }
 .btn-buy--single:hover { box-shadow: 0 12px 26px rgba(200,150,160,.16); }
 /* 定期購入＝主役（塗り）。自然に選びたくなる存在感 */
 .btn-buy--sub { background: linear-gradient(135deg, #F3A7B0, var(--c-pink-deep)); color: #fff; box-shadow: 0 14px 34px rgba(211,98,111,.32); padding-top: 1.2em; }
@@ -603,6 +603,27 @@ h1, h2, h3, p { margin: 0; }
 .btn-buy__pops .pop--best { color: #fff; background: linear-gradient(135deg, #DCC08C, var(--c-gold)); font-weight: 700; box-shadow: 0 3px 10px rgba(150,120,70,.35); }
 /* PC：2商品を横並びで比較しやすく */
 @media (min-width: 768px) { .plans { grid-template-columns: 1fr 1fr; align-items: start; } }
+
+/* 安心バー：送料無料・無地箱・いつでも解約の3点を、細線アイコン付きで価格の直下に。
+   FAQまで読まない層の「買わない理由」を先回りで解消する */
+.assure {
+  list-style: none;
+  margin: clamp(2.6rem, 8vw, 3.6rem) auto 0;
+  padding: 0;
+  max-width: 480px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .5em;
+}
+.assure__item {
+  display: flex; flex-direction: column; align-items: center; gap: .6em;
+  font-size: clamp(.66rem, 3vw, .82rem);
+  line-height: 1.4;
+  color: var(--c-heading);
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+.assure__item svg { width: clamp(26px, 7.5vw, 32px); height: auto; color: var(--c-pink-deep); }
 
 /* 定期購入の条件（回数縛りなし・いつでも解約/スキップ・選べる配送間隔）。
    「買わない理由」を価格の直下で解消する安心パネル */
