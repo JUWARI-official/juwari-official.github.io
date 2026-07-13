@@ -312,33 +312,43 @@ h1, h2, h3, p { margin: 0; }
 /* =========================================================
    ④ 専門家コメント TRUST — 背景: アイボリー
    ========================================================= */
-/* 画像の下端＝セクションの下端に。下パディングを無くし、次セクションへ自然につなぐ */
-.trust { background: var(--c-ivory); padding-bottom: 0; }
-/* 施術写真を背景に、コメントをレイヤーとして重ねる（一体型ビジュアル） */
-.expert {
-  position: relative; overflow: hidden;
-  width: 100vw; margin-left: calc(50% - 50vw); max-width: none;
-  background: #fff; border-radius: 0; padding: 0; box-shadow: none;   /* 右側フェード先＝白 */
+/* 淡い花弁ピンクの面に、円形写真＋白カードを重ねるレイアウト */
+.trust { background: var(--c-sheer-2); }
+.expert { max-width: 560px; margin-inline: auto; position: relative; }
+/* 専門家写真：円形トリミング・コンパクト。カード上部に半分重なる */
+.expert__photo {
+  position: relative; z-index: 2; margin: 0 auto;
+  width: clamp(118px, 32vw, 148px); aspect-ratio: 1 / 1;
+  border-radius: 50%; overflow: hidden;
+  box-shadow: 0 10px 26px rgba(170,120,130,.28);
 }
-.expert__photo { position: absolute; inset: 0; z-index: 0; margin: 0; overflow: hidden;
-  /* 画像そのものを右へ向かってなめらかに白へ溶かす（白い帯・パネルは重ねない）。左（人物の顔側）は 0〜30% を
-     原画のまま維持し、テキスト側は 48%で約55%・74%で約88%・右端で白へ。テキスト帯全体を均一に明るくしてコントラストを確保 */
-  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 30%, rgba(0,0,0,.45) 48%, rgba(0,0,0,.12) 74%, rgba(0,0,0,0) 96%);
-          mask-image: linear-gradient(90deg, #000 0%, #000 30%, rgba(0,0,0,.45) 48%, rgba(0,0,0,.12) 74%, rgba(0,0,0,0) 96%);
+/* 円の中は施術者の顔まわりへ2倍ズーム（原画600pxの中央領域を表示＝小さくても鮮明）。
+   原画とコンテナが同比率だと cover ではズームされないため、明示的に拡大して位置合わせ */
+.expert__photo img { width: 200%; height: 200%; max-width: none; object-fit: cover; margin-left: -42%; margin-top: -38%; }
+/* コメントの白カード：角丸・広めの余白・やわらかい影。写真の下半分を受け止める */
+.expert__card {
+  position: relative; z-index: 1;
+  background: #fff; border-radius: 22px;
+  margin-top: calc(clamp(118px, 32vw, 148px) / -2);
+  padding: calc(clamp(118px, 32vw, 148px) / 2 + clamp(1.4rem, 4.5vw, 2rem))
+           clamp(1.4rem, 5.5vw, 2.6rem)
+           clamp(1.6rem, 5vw, 2.2rem);
+  box-shadow: var(--shadow-soft);
 }
-/* スマホの横トリミング時、人物を左へ寄せて右側（カーテン→白）にテキストの余白を確保（PCは全幅表示で影響なし） */
-.expert__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 70% center; }
-/* 可読性用の全体スクリムは廃止（左の原画を一切加工しない）。右のテキストは白フェード上に乗るので読める */
-.expert::before { display: none; }
-/* テキストは右エリアへ。右揃え＆右寄せ配置で、白くフェードした側に収める */
-.expert__body { position: relative; z-index: 2; padding: var(--section-y) var(--gutter); min-height: 84vh; display: flex; flex-direction: column; justify-content: center; max-width: 560px; margin-left: auto; text-align: right;
-  /* シャドーは全文字で均一・ごく控えめ（発光・縁取りに見せない）。可読性は主に背景の白フェードで確保する */
-  text-shadow: 0 0 3px rgba(255,255,255,.7); }
-/* 並び順：肩書き → 名前 → 本文（雑誌のインタビュー記事のように） */
-.expert__name { margin: 0 0 1.8em; font-size: .9rem; letter-spacing: .06em; }
-.expert__name b { display: block; font-weight: 700; font-size: 1.14rem; color: var(--c-heading); }
-.expert__name span { display:block; color: var(--c-text-soft); font-size: .8rem; margin-bottom:.4em; }
-.expert__comment { font-size: clamp(.95rem, 4vw, 1.06rem); line-height: 2.2; margin: 0; }
+/* 引用符の飾り（参考レイアウトの“ ”）。ブランドの淡花弁ピンクで控えめに */
+.expert__card::before,
+.expert__card::after {
+  position: absolute; font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(3.4rem, 12vw, 4.6rem); line-height: 1; color: var(--c-pink-soft);
+}
+.expert__card::before { content: "\201C"; left: .12em; top: .55em; }
+.expert__card::after  { content: "\201D"; right: .12em; bottom: -.18em; }
+.expert__comment { font-size: clamp(.9rem, 3.8vw, 1rem); line-height: 2.05; margin: 0; text-align: left; }
+/* 肩書き・名前はカード内の末尾に右寄せ（署名らしく） */
+.expert__name { margin: 1.6em 0 0; font-size: .9rem; letter-spacing: .06em; text-align: right; }
+.expert__name b { display: block; font-weight: 700; font-size: 1.1rem; color: var(--c-heading); }
+.expert__name span { display:block; color: var(--c-text-soft); font-size: .78rem; margin-bottom:.35em; }
+.expert__note { margin-top: 1.6em; text-align: center; }
 
 /* =========================================================
    ⑤ レビュー（judge.me 埋め込み枠）— 背景: 白
@@ -790,9 +800,6 @@ h1, h2, h3, p { margin: 0; }
   .survey::before { background: linear-gradient(100deg, rgba(255,250,251,.95) 0%, rgba(255,250,251,.82) 32%, rgba(255,250,251,.4) 52%, rgba(255,250,251,0) 72%); }
   .survey__inner { min-height: 86vh; max-width: 640px; padding-inline: clamp(2.5rem, 5vw, 4.5rem); justify-content: center; }
   .survey__stats { margin: clamp(2.2rem, 4vw, 3rem) 0 0; }
-
-  /* 専門家：施術写真は左に原画のまま、右へ白フェード。テキストは右側に右揃え配置 */
-  .expert__body { min-height: 82vh; max-width: 620px; padding-inline: clamp(2.5rem, 7vw, 7rem); }
 
   .steps  { grid-template-columns: repeat(3, 1fr); }
   .plans  { grid-template-columns: 1fr 1fr; }
