@@ -604,6 +604,46 @@ h1, h2, h3, p { margin: 0; }
 /* PC：2商品を横並びで比較しやすく */
 @media (min-width: 768px) { .plans { grid-template-columns: 1fr 1fr; align-items: start; } }
 
+/* 定期購入の条件（回数縛りなし・いつでも解約/スキップ・選べる配送間隔）。
+   「買わない理由」を価格の直下で解消する安心パネル */
+.plans__terms {
+  margin: clamp(2.6rem, 8vw, 3.6rem) auto 0;
+  max-width: 480px;
+  background: var(--c-sheer-1);
+  border-radius: var(--radius);
+  padding: clamp(1.4rem, 5vw, 1.9rem) clamp(1.2rem, 5vw, 2rem);
+}
+.plans__terms-title {
+  font-size: clamp(.92rem, 3.8vw, 1rem);
+  font-weight: 500;
+  color: var(--c-heading);
+  letter-spacing: .04em;
+}
+.plans__terms-list {
+  list-style: none;
+  margin: 1.1em 0 0;
+  padding: 0;
+  display: grid;
+  gap: .55em;
+  text-align: left;
+  justify-content: center;
+}
+.plans__terms-list li {
+  display: flex;
+  align-items: baseline;
+  gap: .6em;
+  font-size: clamp(.84rem, 3.5vw, .94rem);
+  line-height: 1.7;
+  color: var(--c-text);
+}
+.plans__terms-list .check {
+  display: inline-grid; place-items: center;
+  width: 1.35em; height: 1.35em; border-radius: 50%;
+  background: var(--c-pink); color: #fff;
+  font-size: .72em; font-weight: 500; flex: 0 0 auto; line-height: 1;
+  align-self: center;
+}
+
 /* 全成分アコーディオン（「全成分はこちら」） */
 .allingr { margin: 2.6em auto 0; text-align: left; }
 .allingr__head {

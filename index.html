@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
 <!-- ?v= はキャッシュ対策のバージョン番号。CSSを更新したらこの数字も上げる -->
-<link rel="stylesheet" href="assets/css/style.css?v=20260713-3" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260713-4" />
 
 <!-- Judge.me Store script（head内に1回だけ）。Published（承認済み）レビューのみ表示 -->
 <script>jdgm = window.jdgm || {};jdgm.SHOP_DOMAIN = 'qzkx7z-qc.myshopify.com';jdgm.PLATFORM = 'shopify';jdgm.PUBLIC_TOKEN = 'LHK6Tu4tuP8HMSigYrlookmAwbk';</script>
@@ -47,9 +47,10 @@
      ========================================================= -->
 <header class="hero" id="top">
   <div class="hero__media" aria-hidden="true">
-    <!-- ヒーロー動画（Web最適化済み・自動再生/ミュート/ループ/インライン・ポスターなしで動画をそのまま再生）
-         元素材: copy_F4E7C665-...mov（HEVC縦1080×1920）→ H.264 MP4 / VP9 WebM に変換 -->
-    <video class="hero__video is-active" muted loop autoplay playsinline preload="auto">
+    <!-- ヒーロー動画（Web最適化済み・自動再生/ミュート/ループ/インライン）
+         元素材: copy_F4E7C665-...mov（HEVC縦1080×1920）→ H.264 MP4 / VP9 WebM に変換
+         poster=動画1コマ目のJPEG（約32KB）。preload="metadata"で先読みを抑え、初回表示を高速化 -->
+    <video class="hero__video is-active" muted loop autoplay playsinline preload="metadata" poster="assets/video/hero-poster-v2.jpg">
       <source src="assets/video/hero-v2.webm" type="video/webm" />
       <source src="assets/video/hero-v2.mp4" type="video/mp4" />
     </video>
@@ -98,7 +99,8 @@
   <section class="section solution" aria-labelledby="solution-h">
     <!-- メインビジュアル（背景＋アプリケーター＋ジェルを1枚に構成した完成画像。これ1枚で世界観を表現） -->
     <div class="solution__bg" aria-hidden="true">
-      <img src="assets/images/JUWARI_LP_v4 (2).png" alt="JUWARI デリケート・うるおいジェル ― みずみずしいジェルとアプリケーター、うるおいの水面イメージ" loading="lazy" />
+      <!-- 旧: JUWARI_LP_v4 (2).png（1.2MB）→ WebP化＋リネーム（約20KB・見た目同一） -->
+      <img src="assets/images/solution-main.webp" alt="JUWARI デリケート・うるおいジェル ― みずみずしいジェルとアプリケーター、うるおいの水面イメージ" loading="lazy" />
     </div>
     <div class="solution__inner reveal">
       <h2 class="headline" id="solution-h"><span class="nb">うるおって、</span><br /><span class="nb">ふれたくなる私へ。</span></h2>
@@ -182,7 +184,7 @@
        ========================================================= -->
   <section class="section survey" aria-labelledby="survey-h">
     <div class="survey__photo" aria-hidden="true">
-      <img src="assets/images/survey-woman-v2.png" alt="やわらかな光の中でほほえむ女性" loading="lazy" width="1080" height="1920" />
+      <img src="assets/images/survey-woman-v2.webp" alt="やわらかな光の中でほほえむ女性" loading="lazy" width="1080" height="1920" />
     </div>
     <div class="survey__inner reveal">
       <div class="survey__intro">
@@ -341,6 +343,17 @@
         </article>
 
       </div>
+
+      <!-- 定期購入の条件（回数縛りなし・いつでも解約/スキップ・配送間隔）。
+           条件はShopify定期購入アプリの実仕様（2026-07-13 ユーザー確認済み）と一致させること -->
+      <div class="plans__terms reveal">
+        <p class="plans__terms-title">定期購入は、安心してはじめられます</p>
+        <ul class="plans__terms-list">
+          <li><span class="check" aria-hidden="true">✓</span>回数のお約束はありません</li>
+          <li><span class="check" aria-hidden="true">✓</span>解約・スキップはいつでも可能</li>
+          <li><span class="check" aria-hidden="true">✓</span><span class="nb">お届け間隔は</span><span class="nb">1ヶ月・2ヶ月・3ヶ月</span><span class="nb">から選べます</span></li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -435,7 +448,7 @@
   <section class="section story" aria-labelledby="story-h">
     <!-- 背景：ピンクの波紋。上部はしっかり見え、下へ向かって白へフェードアウト -->
     <div class="story__bg" aria-hidden="true">
-      <img src="assets/images/story-ripple.png" alt="" loading="lazy" />
+      <img src="assets/images/story-ripple.webp" alt="" loading="lazy" />
     </div>
     <div class="container container--narrow reveal">
       <p class="eyebrow">OUR STORY</p>
@@ -465,7 +478,7 @@
      ========================================================= -->
 <footer class="footer">
   <!-- 上部の波（白→ピンク）。曲線はトリミングせず、下のピンクをフッター主背景に -->
-  <img class="footer__wave" src="assets/images/footer-wave.png" alt="" aria-hidden="true" />
+  <img class="footer__wave" src="assets/images/footer-wave.webp" alt="" aria-hidden="true" />
   <div class="footer__body">
   <img class="footer__logo" src="assets/images/logo-wordmark-white.png" alt="JUWARI" width="200" height="50" />
   <div class="footer__sns">
