@@ -548,8 +548,9 @@ h1, h2, h3, p { margin: 0; }
    ========================================================= */
 /* カード廃止：白背景に、STEP番号＋丸いイラストだけを余白広く配置（ミニマル） */
 .howto { background: var(--c-white); text-align:center; }
-/* 購入(price)の直後に置いたとき：CTA→使い方 を自然につなぐため、上の余白だけ少し詰める（下と次セクションは通常どおり） */
-.price + .howto { padding-top: clamp(2.4rem, 8vw, 4.4rem); }
+/* 使い方(howto)の直後に購入(price)を置いたとき：「簡単→じゃあ始めよう」を自然につなぐため、
+   価格側の上余白だけ少し詰める（他のセクション間は通常どおり） */
+.howto + .price { padding-top: clamp(2.4rem, 8vw, 4.4rem); }
 .steps { display:grid; gap: clamp(2.8rem,10vw,4rem); margin-top: clamp(2.8rem,9vw,3.8rem); grid-template-columns: 1fr; }
 .step { background: none; border-radius: 0; padding: 0; box-shadow: none; }
 .step__no { font-family: var(--f-num); font-size: 2.1rem; font-weight:600; color: var(--c-pink-deep); letter-spacing:.08em; }
