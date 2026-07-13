@@ -416,8 +416,9 @@ h1, h2, h3, p { margin: 0; }
   display: flex; flex-direction: column;
 }
 .survey__intro { max-width: 26ch; }
-/* 背景からほんのり浮かび上がる程度の、ごく弱い白い光彩（文字自体は濃く・太くしない） */
-/* 見出しはキーカラーのまま（シャドウなし） */
+/* キャッチコピー：文字色はキーカラーのまま、背景画像（髪など）と重なっても読めるよう白シャドーを追加。
+   グラデ文字(text-fill:transparent)にtext-shadowを使うと内側に透けて白く濁るため、drop-shadowで背後にのみ落とす */
+.survey__intro .headline { filter: drop-shadow(0 1px 2px rgba(255,255,255,.9)) drop-shadow(0 0 9px rgba(255,255,255,.5)); }
 /* 質問文もキャッチと同じトーンで。写真の上に出る右側まで読めるよう、ごく弱い白グロー＋幅を抑えて明るいゾーン内に収める */
 .survey__intro .lead { max-width: 30ch; margin: 1.3em 0 0; text-shadow: 0 1px 3px rgba(255, 255, 255, .95), 0 0 16px rgba(255, 255, 255, .82); }
 /* 回答結果は下部（肩・体の上）に。顔（目・口元）を隠さない配置 */
@@ -453,21 +454,14 @@ h1, h2, h3, p { margin: 0; }
   /* 背景は左＝白、右＝シアーピンク。写真が透けて消える左側が「白い余白」として機能する */
   .survey { background: linear-gradient(100deg, #FFFFFF 0%, #FEF6F7 38%, var(--c-sheer-2) 100%); }
   .survey__photo {
-    inset: 0 0 auto 0; height: auto; aspect-ratio: 1 / 1;   /* 新画像(600×600)と同比率＝cover でも切り取りゼロ */
-    /* 写真そのものを、顔(右)を中心に左へ向かって透過させ背景の白へ溶け込ませる（放射状マスク）＋
-       下端も背景へフェード。2枚のマスクの重なり(intersect)で「左」と「下」を同時に自然消し */
-    -webkit-mask-image:
-      radial-gradient(72% 92% at 76% 40%, #000 46%, rgba(0,0,0,0) 100%),
-      linear-gradient(180deg, #000 84%, transparent 100%);
-    -webkit-mask-composite: source-in;
-    mask-image:
-      radial-gradient(72% 92% at 76% 40%, #000 46%, rgba(0,0,0,0) 100%),
-      linear-gradient(180deg, #000 84%, transparent 100%);
-    mask-composite: intersect;
+    inset: 0 0 auto 0; height: auto; aspect-ratio: 1080 / 1920;   /* 新画像と同比率＝cover でも切り取りゼロ */
+    /* 画像は白背景のクリーンな素材のため、下端のみ背景へフェード（人物をマスクで消さない＝印象を変えない） */
+    -webkit-mask-image: linear-gradient(180deg, #000 86%, transparent 100%);
+            mask-image: linear-gradient(180deg, #000 86%, transparent 100%);
   }
   .survey__photo img { object-position: center; }   /* 比率一致＝切り取りなし・引き伸ばしなし */
-  /* セクション高さを写真高さ(=横幅と同じ)に連動させ、写真の下にカード帯をコンパクトに置く */
-  .survey__inner { min-height: calc(100vw + 190px); }
+  /* セクション高さを写真高さ(=横幅×1920/1080≒178vw)に連動させ、下部（ドレスの上）にカードを重ねる */
+  .survey__inner { min-height: 178vw; }
   /* 左は背景の白で十分明るいので、追加の白スクリムは不要 */
   .survey::before { background: none; }
   /* カードは写真の下（ピンク帯）に配置。幅を抑えて左寄せ */
@@ -723,9 +717,9 @@ h1, h2, h3, p { margin: 0; }
 
   .reviews__cards { grid-template-columns: repeat(3, 1fr); }
 
-  /* アンケート：正方形（1:1）の元画像を右側に等倍配置（トリミング・引き伸ばしなし）。
+  /* アンケート：縦長（1080:1920）の元画像を右側に等倍配置（トリミング・引き伸ばしなし）。
      左縁は背景へ自然にフェードさせ、左の余白に見出し・数字をレイヤー配置 */
-  .survey__photo { inset: 0 0 0 auto; width: auto; height: 100%; aspect-ratio: 1 / 1;
+  .survey__photo { inset: 0 0 0 auto; width: auto; height: 100%; aspect-ratio: 1080 / 1920;
     -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, #000 22%);
             mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, #000 22%); }
   .survey__photo img { object-position: center; }
