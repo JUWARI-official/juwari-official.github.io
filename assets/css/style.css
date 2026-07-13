@@ -6,7 +6,7 @@
 
 /* ---------- デザイントークン ---------- */
 :root {
-  /* 花びらマスター・パレット（軍神と偽りの花嫁 表紙の花弁を実測 #E9848E／色相そのまま展開） */
+  /* ブランドカラー・パレット（コーラルローズ #E9848E を基準に、色相を揃えて展開） */
   --c-white:      #FFFFFF;
   --c-ivory:      #FBF6F6;  /* ベース（花弁を含んだ温かい白） */
   --c-sheer-1:    #FDF4F5;  /* 最淡・花弁トーンの白ピンク */
@@ -34,7 +34,7 @@
   --radius: 20px;
   --btn-h: 60px;
 
-  /* 枠線に頼らず、余白とごく薄い陰影だけで区切る（Tamburins的な空気感） */
+  /* 枠線に頼らず、余白とごく薄い陰影だけで区切る */
   --shadow-soft:   0 18px 50px rgba(180,150,150,.07);
   --shadow-softer: 0 12px 36px rgba(180,150,150,.05);
 }
@@ -224,6 +224,15 @@ h1, h2, h3, p { margin: 0; }
   font-size: clamp(.82rem, 3.4vw, .98rem);
   letter-spacing: .2em;
   color: #6E5B5D;
+}
+/* 商品カテゴリの説明（商品名の直下・控えめに）。動画上でも読めるよう、ごく弱い白グローのみ */
+.hero__desc {
+  margin-top: .9em;
+  font-size: clamp(.72rem, 3vw, .86rem);
+  line-height: 1.9;
+  letter-spacing: .08em;
+  color: #6E5B5D;
+  text-shadow: 0 1px 6px rgba(255,255,255,.55);
 }
 .hero__cta { margin-top: clamp(2.2rem, 8vw, 3rem); }
 .hero__scroll {
@@ -576,6 +585,9 @@ h1, h2, h3, p { margin: 0; }
 .btn-buy__price { font-family: var(--f-num); font-size: 1.55rem; font-weight: 600; letter-spacing: .02em; line-height: 1.15; }
 .btn-buy__price small { font-family: var(--f-sans); font-size: .48em; letter-spacing: .04em; margin-left: .15em; }
 .btn-buy__note { font-size: .72rem; letter-spacing: .04em; opacity: .92; margin-top: .1em; }
+/* 1本あたり価格（価格の直下・小さく）。価格の納得感を支える補足表示 */
+.btn-buy__unit { font-size: .74rem; letter-spacing: .05em; opacity: .92; margin-top: .15em; }
+.btn-buy--single .btn-buy__unit { color: var(--c-text-soft); opacity: 1; }
 .btn-buy__ship { font-size: .78rem; font-weight: 500; letter-spacing: .06em; margin-top: .15em; }
 /* 単品購入＝控えめ（アウトライン）。送料無料は赤で目に入る */
 .btn-buy--single { background: var(--c-white); border: 1.5px solid var(--c-pink-soft); color: var(--c-heading); box-shadow: 0 6px 18px rgba(200,150,160,.08); }
@@ -686,18 +698,8 @@ h1, h2, h3, p { margin: 0; }
   transition: transform .4s ease;
 }
 .sticky-cta.is-shown { transform: translateY(0); }
+/* 色は本文CTA（.btn）のブランドピンクをそのまま継承（パレット外の色は使わない） */
 .sticky-cta .btn { width: 100%; }
-/* 追従CTAのみ、ブランドのピンクではなく上品で落ち着いたティールに。
-   「いつでも購入できるボタン」として自然に目に入る別色。各セクションの購入ボタン(.btn単体)は変更しない */
-.sticky-cta .btn {
-  background: #5F8F8A;
-  color: #FFFFFF;
-  box-shadow: 0 12px 30px rgba(60,100,95,.32), inset 0 1px 0 rgba(255,255,255,.26);
-}
-.sticky-cta .btn:hover {
-  background: #4E7C77;
-  box-shadow: 0 18px 40px rgba(60,100,95,.44), inset 0 1px 0 rgba(255,255,255,.3);
-}
 @media (min-width: 768px) { .sticky-cta { display: none; } }
 
 /* =========================================================
