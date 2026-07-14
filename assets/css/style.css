@@ -322,9 +322,9 @@ h1, h2, h3, p { margin: 0; }
   border-radius: 50%; overflow: hidden;
   box-shadow: 0 10px 26px rgba(170,120,130,.28);
 }
-/* 円の中は施術者の顔まわりへ2倍ズーム（原画600pxの中央領域を表示＝小さくても鮮明）。
-   原画とコンテナが同比率だと cover ではズームされないため、明示的に拡大して位置合わせ */
-.expert__photo img { width: 200%; height: 200%; max-width: none; object-fit: cover; margin-left: -42%; margin-top: -38%; }
+/* 円の中は少し引き気味（130%）：顔だけのアップではなく、施術中の手元まで自然に入る構図で
+   親しみ・信頼感を伝える。原画とコンテナが同比率だと cover ではズームされないため明示的に拡大して位置合わせ */
+.expert__photo img { width: 130%; height: 130%; max-width: none; object-fit: cover; margin-left: -4.5%; margin-top: -21%; }
 /* コメントの白カード：角丸・広めの余白・やわらかい影。写真の下半分を受け止める */
 .expert__card {
   position: relative; z-index: 1;
