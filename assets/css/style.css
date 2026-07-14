@@ -406,13 +406,20 @@ h1, h2, h3, p { margin: 0; }
 /* 星の色をブランドピンクに（ウィジェット内共通） */
 .jdgm-star { color: #F2AFB1 !important; }
 
+/* SAFETY調の共通背景：淡いピンク（フラット・グラデなし）＋白い「＋」モチーフ（控えめな濃さ・ランダム配置のタイル） */
+:root {
+  --plus-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cg stroke='%23FFFFFF' stroke-width='1.8' stroke-linecap='round' opacity='.55'%3E%3Cpath d='M20 26h12M26 20v12'/%3E%3Cpath d='M96 12h10M101 7v10'/%3E%3Cpath d='M150 58h12M156 52v12'/%3E%3Cpath d='M52 96h10M57 91v10'/%3E%3Cpath d='M128 132h12M134 126v12'/%3E%3Cpath d='M28 152h10M33 147v10'/%3E%3Cpath d='M162 156h8M166 152v8'/%3E%3Cpath d='M88 62h8M92 58v8'/%3E%3C/g%3E%3C/svg%3E");
+}
+
 /* --- ①-2 FV直下のレビューカルーセル（社会的証明の帯） --- */
 .fv-reviews { background: var(--c-white); text-align: center; padding-block: clamp(2.6rem, 8vw, 4.5rem); }
-/* Judge.meが注入するカルーセルの各レビュー＝白カード（角丸・やわらかい影） */
+/* Judge.meが注入するカルーセルの各レビュー＝SAFETY調カード（淡ピンクのフラット地＋白い＋モチーフ） */
 .fv-reviews .jdgm-carousel-item {
-  background: #fff; border-radius: 16px;
+  background: #FBE7EA var(--plus-tile) repeat;
+  background-size: 180px 180px;
+  border-radius: 16px;
   box-shadow: 0 8px 24px rgba(200,150,160,.14);
-  border: 1px solid var(--c-line);
+  border: 0;
   padding: clamp(1.1rem, 3.5vw, 1.7rem);
 }
 /* カルーセルの矢印もブランドトーンに */
@@ -420,14 +427,20 @@ h1, h2, h3, p { margin: 0; }
 .fv-reviews [class*='jdgm-carousel'] svg { color: var(--c-pink-deep); fill: var(--c-pink-deep); }
 .fv-reviews__note { margin-top: 1.4em; }
 
-/* --- ② VOICE：All Reviews Widget（写真付き全レビュー・もっと見る対応） --- */
-/* 淡いピンクのパネルにウィジェットを収め、余白を活かして上品に */
+/* --- ② VOICE：Review Widget（写真付き全レビュー・もっと見る対応） --- */
+/* セクション背景をSAFETY調（淡ピンクのフラット地＋白い＋モチーフ）に統一。
+   白いレビューカードがピンク地に浮かぶ＝SAFETYの白カプセルと同じ関係性 */
+.reviews {
+  background: #FBE7EA var(--plus-tile) repeat;
+  background-size: 180px 180px;
+}
+/* パネルは透明化（背景はセクション側が担う）。幅と余白だけ管理 */
 .juwari-reviews {
   margin: clamp(2.4rem, 7vw, 3.4rem) auto 0;
   max-width: 940px;
-  background: #FFF7F8;
-  border-radius: 22px;
-  padding: clamp(1.6rem, 5vw, 2.8rem) clamp(1rem, 4vw, 2rem);
+  background: none;
+  border-radius: 0;
+  padding: 0;
   text-align: left;
 }
 /* レビュー1件＝白いカード（公式ウィジェットの区切り線の代わりにカードで区切る） */
