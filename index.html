@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
 <!-- ?v= はキャッシュ対策のバージョン番号。CSSを更新したらこの数字も上げる -->
-<link rel="stylesheet" href="assets/css/style.css?v=20260714-7" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260714-8" />
 
 <!-- Judge.me Store script（head内に1回だけ）。Published（承認済み）レビューのみ表示 -->
 <script>jdgm = window.jdgm || {};jdgm.SHOP_DOMAIN = 'qzkx7z-qc.myshopify.com';jdgm.PLATFORM = 'shopify';jdgm.PUBLIC_TOKEN = 'LHK6Tu4tuP8HMSigYrlookmAwbk';</script>
@@ -46,48 +46,19 @@
      3本の動画をフェードで連結・自動再生/ミュート/ループ
      ========================================================= -->
 <header class="hero" id="top">
-  <!-- FVは静止画構成（2026-07-14）：背景=CSSグラデーション（転送0KB）＋透過商品WebP（約7KB）で
-       スマホ初回表示を最速化。旧ヒーロー動画（hero-v2）は③解決策セクションへ遅延読み込みで移設 -->
-  <div class="hero__media" aria-hidden="true">
-    <!-- 装飾バブル（参考素材 JUWARI_LP_v4 (1).png を白抜き透過→WebP化・46KB／6個とも同一ファイルなので転送は1回）。
-         大小ランダム・一部は画面外にはみ出す配置。商品・文字より背面＆低不透明度で控えめに -->
-    <img class="hero__bubble hero__bubble--1" src="assets/images/bubble.webp" alt="" decoding="async" />
-    <img class="hero__bubble hero__bubble--2" src="assets/images/bubble.webp" alt="" decoding="async" />
-    <img class="hero__bubble hero__bubble--3" src="assets/images/bubble.webp" alt="" decoding="async" />
-    <img class="hero__bubble hero__bubble--4" src="assets/images/bubble.webp" alt="" decoding="async" />
-    <img class="hero__bubble hero__bubble--5" src="assets/images/bubble.webp" alt="" decoding="async" />
-    <img class="hero__bubble hero__bubble--6" src="assets/images/bubble.webp" alt="" decoding="async" />
-    <img class="hero__bubble hero__bubble--7" src="assets/images/bubble.webp" alt="" decoding="async" />
-    <img class="hero__bubble hero__bubble--8" src="assets/images/bubble.webp" alt="" decoding="async" />
-    <img class="hero__bubble hero__bubble--9" src="assets/images/bubble.webp" alt="" decoding="async" />
-    <img class="hero__bubble hero__bubble--10" src="assets/images/bubble.webp" alt="" decoding="async" />
-  </div>
-
-  <!-- メインビジュアル：3枚スライド（CSSスクロールスナップ＝ネイティブの滑らかスワイプ＋自動送り）。
-       ①商品セット（対角構図）②使用シーン（DSC_2358）③世界観（ユリと雫 DSC_2132）。
-       1枚目のみ即読み込み・2/3枚目はlazy。ロゴ/コピー/CTAは固定でスライドしない -->
-  <div class="hero__slider" aria-hidden="true">
-    <div class="hero__slides js-hero-slides">
-      <img class="hero__slide" src="assets/images/hero-set2.webp" alt="" width="640" height="918" fetchpriority="high" />
-      <img class="hero__slide" src="assets/images/hero-slide2.webp" alt="" width="640" height="918" loading="lazy" decoding="async" />
-      <img class="hero__slide" src="assets/images/hero-slide3.webp" alt="" width="640" height="918" loading="lazy" decoding="async" />
-    </div>
-    <div class="hero__dots">
-      <button type="button" class="hero__dot is-on" tabindex="-1"></button>
-      <button type="button" class="hero__dot" tabindex="-1"></button>
-      <button type="button" class="hero__dot" tabindex="-1"></button>
-    </div>
-  </div>
-
+  <!-- FVはメインビジュアル1枚のシンプル構成（2026-07-14）：
+       上=ロゴ・キャッチコピー・説明 → 中=写真（DSC_2358の上部空白のみカット・被写体は無傷のWebP 15KB）
+       → 下=CTAボタン（写真に重ねない）。縦積みフローで100svhに収める -->
   <div class="hero__inner">
     <img class="hero__logo" src="assets/images/logo-wordmark-hero.png" alt="JUWARI" width="320" height="80" />
     <h1 class="hero__title">女性としての私を、これからも。</h1>
     <!-- 初見のユーザー（SNS流入）に「何の商品か」を一言で伝えるカテゴリ説明 -->
     <p class="hero__desc"><span class="nb">デリケートゾーンにうるおいを届ける、</span><br class="br-sp" /><span class="nb">使い切り個包装のインナージェル</span></p>
-    <div class="hero__cta">
-      <!-- TODO: 購入リンク（Shopify URL）に差し替え -->
-      <a class="btn js-buy" href="#price"><span>今すぐ購入する</span><span class="arrow">→</span></a>
-    </div>
+  </div>
+  <img class="hero__photo" src="assets/images/hero-main.webp" alt="JUWARI デリケート・うるおいジェル ― アプリケーターから指先へジェルをひと滴落とす様子" width="720" height="807" fetchpriority="high" />
+  <div class="hero__cta">
+    <!-- TODO: 購入リンク（Shopify URL）に差し替え -->
+    <a class="btn js-buy" href="#price"><span>今すぐ購入する</span><span class="arrow">→</span></a>
   </div>
   <span class="hero__scroll">SCROLL</span>
 </header>

@@ -157,61 +157,31 @@ h1, h2, h3, p { margin: 0; }
 .cta-block .supp { display:block; font-size:.78rem; color: var(--c-text-soft); margin-top: 1em; }
 
 /* =========================================================
-   ① ファーストビュー（静止画：白背景＋スタジオ撮影風の商品グループショットWebP）
-   白背景に影ごと溶け込む商品写真＋装飾バブルで、上品・透明感・高級感を表現
+   ① ファーストビュー（メインビジュアル1枚のシンプル構成）
+   白背景×余白。上=ロゴ・コピー → 中=写真（主役・角丸） → 下=CTA。
+   縦積みフローで、スマホでスクロールせずCTAまで視認できる
    ========================================================= */
 .hero {
   position: relative;
   min-height: 100svh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: clamp(1.1rem, 3vh, 2rem);
   text-align: center;
   overflow: hidden;
   background: #FFFFFF;
+  padding: clamp(24px, 5vh, 56px) var(--gutter);
 }
-.hero__media { position: absolute; inset: 0; z-index: 0; }
-/* 商品の背後にほのかな光だまり（白いアプリケーターの輪郭を上品に立たせる） */
-.hero__glow { display: none; }
-/* メインビジュアル：3枚スライダー（640:918の縦長枠）。画面下部の中央、高さ基準でサイズを決め、
-   縦の短い画面でもテキストブロックと衝突しない。CSSスクロールスナップでネイティブの滑らかスワイプ */
-.hero__slider {
-  position: absolute; left: 50%; bottom: 3.5%;
-  transform: translateX(-50%);
-  height: min(42vh, 400px); aspect-ratio: 640 / 918;
-  max-width: 86vw; z-index: 1;
+.hero__inner { position: relative; }
+/* メインビジュアル：DSC_2358（幅・高さの両方に上限＝縦の短い画面でも比率を保ったまま自動で縮む） */
+.hero__photo {
+  width: min(88vw, calc(52vh * 0.892), 470px);   /* 0.892 = 画像の縦横比(720:807)ぶん高さを52vhに制限 */
+  height: auto;
+  border-radius: 22px;
+  box-shadow: 0 18px 44px rgba(180, 150, 155, .14);
 }
-.hero__slides {
-  display: flex; width: 100%; height: 100%;
-  overflow-x: auto; overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;               /* Firefox: スクロールバー非表示 */
-}
-.hero__slides::-webkit-scrollbar { display: none; }  /* Safari/Chrome */
-.hero__slide {
-  flex: 0 0 100%; width: 100%; height: 100%;
-  object-fit: cover; scroll-snap-align: center;
-}
-/* ドットインジケーター（画像の下・控えめに） */
-.hero__dots { position: absolute; left: 50%; bottom: -20px; transform: translateX(-50%); display: flex; gap: 9px; }
-.hero__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c-pink-soft); border: 0; padding: 0; cursor: pointer; transition: background .3s ease, transform .3s ease; }
-.hero__dot.is-on { background: var(--c-pink); transform: scale(1.25); }
-/* 装飾バブル：大小をつけたランダム配置・一部は画面外へはみ出し（.heroのoverflow:hiddenで横スクロールは発生しない）。
-   DOM順で商品より背面、低不透明度で主役（商品・テキスト）より控えめに。相互に重ならない配置 */
-.hero__bubble { position: absolute; height: auto; pointer-events: none; user-select: none; }
-.hero__bubble--1  { width: clamp(150px, 44vw, 300px); top: -7%;   left: -14%;  opacity: .60; }  /* 大・左上（画面外へ半分） */
-.hero__bubble--2  { width: clamp(44px, 13vw, 90px);   top: 12%;   right: 7%;   opacity: .55; }  /* 小・右上 */
-.hero__bubble--3  { width: clamp(76px, 22vw, 150px);  top: 36%;   right: -9%;  opacity: .50; }  /* 中・右（画面外へ半分） */
-.hero__bubble--4  { width: clamp(32px, 9vw, 64px);    top: 44%;   left: 7%;    opacity: .45; }  /* 極小・左中 */
-.hero__bubble--5  { width: clamp(100px, 30vw, 210px); bottom: 11%; left: -12%; opacity: .50; }  /* 中大・左下（画面外へ） */
-.hero__bubble--6  { width: clamp(40px, 11vw, 80px);   bottom: 26%; right: 9%;  opacity: .45; }  /* 小・右下 */
-.hero__bubble--7  { width: clamp(24px, 8vw, 48px);    top: 5%;    left: 33%;   opacity: .40; }  /* 極小・上中 */
-.hero__bubble--8  { width: clamp(30px, 9vw, 56px);    bottom: 34%; left: 19%;  opacity: .42; }  /* 小・左下寄り */
-.hero__bubble--9  { width: clamp(70px, 20vw, 140px);  bottom: -7%; right: -7%; opacity: .50; }  /* 中・右下角（画面外へ） */
-.hero__bubble--10 { width: clamp(22px, 7vw, 40px);    top: 30%;   right: 5%;   opacity: .38; }  /* 極小・右中 */
-/* テキストは商品より上のゾーンへ（下側に商品の高さぶんの余白を確保して flex中央のまま持ち上げる） */
-.hero__inner { position: relative; z-index: 2; padding: var(--gutter); padding-bottom: clamp(280px, 46vh, 460px); }
 /* ブランドロゴを主役に（最も印象的に） */
 .hero__logo {
   width: clamp(196px, 54vw, 312px);
@@ -256,7 +226,7 @@ h1, h2, h3, p { margin: 0; }
   color: #6E5B5D;
   text-shadow: 0 1px 6px rgba(255,255,255,.55);
 }
-.hero__cta { margin-top: clamp(2.2rem, 8vw, 3rem); }
+.hero__cta { margin-top: clamp(.2rem, 1vh, .8rem); }   /* 縦積みフローのgapが主な余白。写真とボタンの間を少しだけ広げる */
 .hero__scroll {
   /* 商品を画面下部中央に置いたため、SCROLLは左端へ（商品と重ねない・雑誌的な配置） */
   position: absolute; left: max(18px, 4.5vw); bottom: 30px; z-index: 2;
