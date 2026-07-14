@@ -388,36 +388,67 @@ h1, h2, h3, p { margin: 0; }
 .review-card__product { font-size:.74rem; color: var(--c-text-soft); }
 .reviews__sample-note { margin-top: 2em; }
 
-/* ===== Judge.me お客様の声（外部LP・Reviews Carousel） ===== */
-/* 淡いピンクのパネルにカルーセルを収め、余白を活かして上品に。ブランドカラーをアクセントに */
-.juwari-reviews {
-  --jdgm-primary-color: #F2AFB1;          /* Judge.me の星などのアクセント色 */
-  margin: clamp(2.4rem, 7vw, 3.4rem) auto 0;
-  max-width: 940px;
-  background: #FFF7F8;                     /* 淡いピンク（白でも可） */
-  border-radius: 22px;
-  padding: clamp(1.6rem, 5vw, 2.8rem) clamp(1rem, 4vw, 2rem);
-}
-.juwari-reviews .jdgm-carousel-wrapper { text-align: center; }
+/* ===== Judge.me レビュー連携（公式ウィジェット・共通のブランド調整） ===== */
+/* Judge.me全体のアクセント色をブランドピンクに統一（星・ボタン等） */
+:root { --jdgm-primary-color: #F2AFB1; }
 .jdgm-carousel-title {
-  font-family: var(--f-sans); font-weight: 500;
-  font-size: clamp(1.1rem, 4.6vw, 1.5rem); line-height: 1.6; letter-spacing: .04em;
+  font-family: var(--f-sans); font-weight: 700;
+  font-size: clamp(1.05rem, 4.4vw, 1.4rem); line-height: 1.6; letter-spacing: .04em;
   color: var(--c-heading); margin: 0 0 .3em;
 }
 /* 星評価は残しつつ、「from ○ reviews」の英語表記は目立たせない（文字を消して星だけ表示） */
 .jdgm-all-reviews-rating-wrapper {
   display: inline-flex; align-items: center; justify-content: center;
   color: transparent; font-size: 0; text-decoration: none;
-  margin-bottom: clamp(1.6rem, 5vw, 2.4rem);
+  margin-bottom: clamp(1.2rem, 4vw, 1.8rem);
 }
 .jdgm-all-reviews-rating-wrapper .jdgm-all-reviews-rating { font-size: 1.15rem; }
-/* Judge.me が注入するレビュー1件＝白いカード型（角丸・やわらかい影・余白） */
-.juwari-reviews .jdgm-carousel-item {
+/* 星の色をブランドピンクに（ウィジェット内共通） */
+.jdgm-star { color: #F2AFB1 !important; }
+
+/* --- ①-2 FV直下のレビューカルーセル（社会的証明の帯） --- */
+.fv-reviews { background: var(--c-white); text-align: center; padding-block: clamp(2.6rem, 8vw, 4.5rem); }
+/* Judge.meが注入するカルーセルの各レビュー＝白カード（角丸・やわらかい影） */
+.fv-reviews .jdgm-carousel-item {
   background: #fff; border-radius: 16px;
   box-shadow: 0 8px 24px rgba(200,150,160,.14);
-  padding: clamp(1.2rem, 4vw, 1.9rem);
+  border: 1px solid var(--c-line);
+  padding: clamp(1.1rem, 3.5vw, 1.7rem);
 }
-/* スマホでカルーセルが横幅いっぱいになりすぎないよう左右に余白（パネルのpaddingで確保済み＋念のため） */
+/* カルーセルの矢印もブランドトーンに */
+.fv-reviews .jdgm-carousel-arrows button,
+.fv-reviews [class*='jdgm-carousel'] svg { color: var(--c-pink-deep); fill: var(--c-pink-deep); }
+.fv-reviews__note { margin-top: 1.4em; }
+
+/* --- ② VOICE：All Reviews Widget（写真付き全レビュー・もっと見る対応） --- */
+/* 淡いピンクのパネルにウィジェットを収め、余白を活かして上品に */
+.juwari-reviews {
+  margin: clamp(2.4rem, 7vw, 3.4rem) auto 0;
+  max-width: 940px;
+  background: #FFF7F8;
+  border-radius: 22px;
+  padding: clamp(1.6rem, 5vw, 2.8rem) clamp(1rem, 4vw, 2rem);
+  text-align: left;
+}
+/* レビュー1件＝白いカード（公式ウィジェットの区切り線の代わりにカードで区切る） */
+.juwari-reviews .jdgm-rev {
+  background: #fff; border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(200,150,160,.10);
+  border: 0; padding: clamp(1.1rem, 3.5vw, 1.6rem);
+  margin-bottom: clamp(.9rem, 3vw, 1.3rem);
+}
+/* 投稿者名・タイトルをブランドの見出し色に、本文は本文色に */
+.juwari-reviews .jdgm-rev__author, .juwari-reviews .jdgm-rev__title { color: var(--c-heading); font-weight: 700; }
+.juwari-reviews .jdgm-rev__body { color: var(--c-text); line-height: 2.0; }
+/* 「もっと見る（Load More）」「レビューを書く」等のボタンをCTAと同じ丸ピルに */
+.juwari-reviews .jdgm-btn,
+.juwari-reviews .jdgm-paginate__load-more {
+  background: linear-gradient(135deg, #F3A7B0 0%, var(--c-pink-deep) 100%) !important;
+  color: #fff !important; border: 0 !important; border-radius: 999px !important;
+  padding: .7em 2em !important; font-weight: 700; letter-spacing: .08em;
+  box-shadow: 0 8px 22px rgba(211,98,111,.26);
+}
+/* スマホで左右いっぱいになりすぎないよう余白 */
 @media (max-width: 767px) {
   .juwari-reviews { margin-inline: clamp(0px, 1.5vw, 12px); }
 }

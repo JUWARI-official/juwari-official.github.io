@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
 <!-- ?v= はキャッシュ対策のバージョン番号。CSSを更新したらこの数字も上げる -->
-<link rel="stylesheet" href="assets/css/style.css?v=20260714-9" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260714-10" />
 
 <!-- Judge.me Store script（head内に1回だけ）。Published（承認済み）レビューのみ表示 -->
 <script>jdgm = window.jdgm || {};jdgm.SHOP_DOMAIN = 'qzkx7z-qc.myshopify.com';jdgm.PLATFORM = 'shopify';jdgm.PUBLIC_TOKEN = 'LHK6Tu4tuP8HMSigYrlookmAwbk';</script>
@@ -65,6 +65,23 @@
 </header>
 
 <main>
+
+  <!-- =========================================================
+       ①-2 FV直下：Judge.me レビューカルーセル（社会的証明を最初に）
+       公式ウィジェット＝レビューはJudge.meから自動取得（ハードコーディングなし）。
+       自動スクロール・表示順（おすすめ/注目）はJudge.me管理画面のCarousel設定で制御 -->
+  <section class="section fv-reviews" aria-label="お客様のレビュー">
+    <div class="container">
+      <div class="jdgm-carousel-wrapper">
+        <h2 class="jdgm-carousel-title">お客様のお声</h2>
+        <a href="#reviews-h" class="jdgm-all-reviews-rating-wrapper" aria-label="レビュー評価">
+          <div data-score="" class="jdgm-all-reviews-rating"></div>
+          from <span class="jdgm-all-reviews-count"></span> reviews
+        </a>
+      </div>
+      <p class="fv-reviews__note note">※個人の感想であり、効果効能を保証するものではありません。</p>
+    </div>
+  </section>
 
   <!-- =========================================================
        ② 共感 CHANGE
@@ -158,16 +175,12 @@
       <p class="lead">そんな想いを込めて、<br />JUWARIをご愛用くださるお客様を<br />「JEWEL」とお呼びしています。</p>
       <p class="lead">ここでは、<br class="br-sp" />そんなJEWELの皆さまから寄せられた<br />お声をご紹介します。</p>
 
-      <!-- ▼ Judge.me Reviews Carousel：Judge.me側で Published（承認済み）にしたレビューのみ自動表示。
-           旧サンプルカード（表示イメージ）から差し替え。効能効果表現は Judge.me の手動承認で管理する前提 -->
+      <!-- ▼ Judge.me All Reviews Widget（公式）：全レビューを写真付きで一覧表示。
+           評価・タイトル・本文・投稿者名・レビュー画像・「もっと見る（Load more）」を標準装備。
+           レビューはJudge.meから自動取得＝件数が増えても自動反映・メンテナンス不要。
+           Published（承認済み）のみ表示（効能効果表現はJudge.meの手動承認で管理） -->
       <div class="juwari-reviews">
-        <div class="jdgm-carousel-wrapper">
-          <h3 class="jdgm-carousel-title">JUWARIをご利用いただいた方のお声</h3>
-          <a href="#" class="jdgm-all-reviews-rating-wrapper" aria-label="レビュー評価">
-            <div data-score="" class="jdgm-all-reviews-rating"></div>
-            from <span class="jdgm-all-reviews-count"></span> reviews
-          </a>
-        </div>
+        <div class="jdgm-widget jdgm-all-reviews-widget"></div>
       </div>
       <p class="reviews__sample-note note">※お客様のお声は個人の感想であり、効果効能を保証するものではありません。</p>
       <!-- ▲ Judge.me ここまで -->
