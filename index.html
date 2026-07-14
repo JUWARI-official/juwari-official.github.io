@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
 <!-- ?v= はキャッシュ対策のバージョン番号。CSSを更新したらこの数字も上げる -->
-<link rel="stylesheet" href="assets/css/style.css?v=20260714-6" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260714-7" />
 
 <!-- Judge.me Store script（head内に1回だけ）。Published（承認済み）レビューのみ表示 -->
 <script>jdgm = window.jdgm || {};jdgm.SHOP_DOMAIN = 'qzkx7z-qc.myshopify.com';jdgm.PLATFORM = 'shopify';jdgm.PUBLIC_TOKEN = 'LHK6Tu4tuP8HMSigYrlookmAwbk';</script>
@@ -61,9 +61,22 @@
     <img class="hero__bubble hero__bubble--8" src="assets/images/bubble.webp" alt="" decoding="async" />
     <img class="hero__bubble hero__bubble--9" src="assets/images/bubble.webp" alt="" decoding="async" />
     <img class="hero__bubble hero__bubble--10" src="assets/images/bubble.webp" alt="" decoding="async" />
-    <!-- メインビジュアル: Photoroom_20260714_124154.jpg（アプリケーター＋個包装＋パウチの対角構図・
-         自然な影つき）を余白を残してトリミング→WebP化（hero-set2.webp・10KB）。白背景に影ごと溶け込む -->
-    <img class="hero__item" src="assets/images/hero-set2.webp" alt="" width="640" height="918" fetchpriority="high" />
+  </div>
+
+  <!-- メインビジュアル：3枚スライド（CSSスクロールスナップ＝ネイティブの滑らかスワイプ＋自動送り）。
+       ①商品セット（対角構図）②使用シーン（DSC_2358）③世界観（ユリと雫 DSC_2132）。
+       1枚目のみ即読み込み・2/3枚目はlazy。ロゴ/コピー/CTAは固定でスライドしない -->
+  <div class="hero__slider" aria-hidden="true">
+    <div class="hero__slides js-hero-slides">
+      <img class="hero__slide" src="assets/images/hero-set2.webp" alt="" width="640" height="918" fetchpriority="high" />
+      <img class="hero__slide" src="assets/images/hero-slide2.webp" alt="" width="640" height="918" loading="lazy" decoding="async" />
+      <img class="hero__slide" src="assets/images/hero-slide3.webp" alt="" width="640" height="918" loading="lazy" decoding="async" />
+    </div>
+    <div class="hero__dots">
+      <button type="button" class="hero__dot is-on" tabindex="-1"></button>
+      <button type="button" class="hero__dot" tabindex="-1"></button>
+      <button type="button" class="hero__dot" tabindex="-1"></button>
+    </div>
   </div>
 
   <div class="hero__inner">
@@ -544,6 +557,6 @@
   <a class="btn js-buy" href="#price"><span>今すぐ購入する</span><span class="arrow">→</span></a>
 </div>
 
-<script src="assets/js/main.js" defer></script>
+<script src="assets/js/main.js?v=20260714-7" defer></script>
 </body>
 </html>

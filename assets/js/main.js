@@ -138,8 +138,46 @@
     }
   }
 
+  /* ---------- ① FVスライダー（CSSスクロールスナップ＋自動送り） ----------
+     スワイプはブラウザネイティブ（JS介在なし＝ヌルヌル）。JSは「4.5秒ごとの自動送り」と
+     「ドットの同期」だけを担当。触っている間は自動送りを止め、モーション低減設定では自動送りしない */
+  function initHeroSlider() {
+    const wrap = document.querySelector('.js-hero-slides');
+    if (!wrap) return;
+    const count = wrap.children.length;
+    const dots = Array.from(document.querySelectorAll('.hero__dot'));
+    let idx = 0;
+    let timer = null;
+
+    const go = (i) => {
+      idx = (i + count) % count;
+      wrap.scrollTo({ left: wrap.clientWidth * idx, behavior: reduceMotion ? 'auto' : 'smooth' });
+    };
+    const sync = () => {
+      const i = Math.round(wrap.scrollLeft / wrap.clientWidth);
+      if (i >= 0 && i < count) idx = i;
+      dots.forEach((d, k) => d.classList.toggle('is-on', k === idx));
+    };
+    const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+    const start = () => {
+      if (reduceMotion) return;           // モーション低減時は自動送りしない
+      stop();
+      timer = setInterval(() => go(idx + 1), 4500);
+    };
+
+    wrap.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+    // 指で触れたら自動送りを停止し、離れて少し経ったら再開
+    wrap.addEventListener('touchstart', stop, { passive: true });
+    wrap.addEventListener('touchend', () => setTimeout(start, 6000), { passive: true });
+    dots.forEach((d, k) => d.addEventListener('click', () => { stop(); go(k); start(); }));
+
+    sync();
+    start();
+  }
+
   /* ---------- 初期化 ---------- */
   document.addEventListener('DOMContentLoaded', () => {
+    initHeroSlider();
     initSolutionVideo();
     initReveal();
     initSurveyBars();

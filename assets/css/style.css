@@ -173,13 +173,30 @@ h1, h2, h3, p { margin: 0; }
 .hero__media { position: absolute; inset: 0; z-index: 0; }
 /* 商品の背後にほのかな光だまり（白いアプリケーターの輪郭を上品に立たせる） */
 .hero__glow { display: none; }
-/* 商品（対角構図の縦長WebP・640×918）：画面下部の中央に。高さ基準でサイズを決め、
-   縦の短い画面でもテキストブロックと衝突しない（はみ出す場合は自動で縮む） */
-.hero__item {
-  position: absolute; left: 50%; bottom: 2%;
+/* メインビジュアル：3枚スライダー（640:918の縦長枠）。画面下部の中央、高さ基準でサイズを決め、
+   縦の短い画面でもテキストブロックと衝突しない。CSSスクロールスナップでネイティブの滑らかスワイプ */
+.hero__slider {
+  position: absolute; left: 50%; bottom: 3.5%;
   transform: translateX(-50%);
-  height: min(44vh, 420px); width: auto; max-width: 86vw;
+  height: min(42vh, 400px); aspect-ratio: 640 / 918;
+  max-width: 86vw; z-index: 1;
 }
+.hero__slides {
+  display: flex; width: 100%; height: 100%;
+  overflow-x: auto; overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;               /* Firefox: スクロールバー非表示 */
+}
+.hero__slides::-webkit-scrollbar { display: none; }  /* Safari/Chrome */
+.hero__slide {
+  flex: 0 0 100%; width: 100%; height: 100%;
+  object-fit: cover; scroll-snap-align: center;
+}
+/* ドットインジケーター（画像の下・控えめに） */
+.hero__dots { position: absolute; left: 50%; bottom: -20px; transform: translateX(-50%); display: flex; gap: 9px; }
+.hero__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c-pink-soft); border: 0; padding: 0; cursor: pointer; transition: background .3s ease, transform .3s ease; }
+.hero__dot.is-on { background: var(--c-pink); transform: scale(1.25); }
 /* 装飾バブル：大小をつけたランダム配置・一部は画面外へはみ出し（.heroのoverflow:hiddenで横スクロールは発生しない）。
    DOM順で商品より背面、低不透明度で主役（商品・テキスト）より控えめに。相互に重ならない配置 */
 .hero__bubble { position: absolute; height: auto; pointer-events: none; user-select: none; }
