@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
 <!-- ?v= はキャッシュ対策のバージョン番号。CSSを更新したらこの数字も上げる -->
-<link rel="stylesheet" href="assets/css/style.css?v=20260714-2" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260714-3" />
 
 <!-- Judge.me Store script（head内に1回だけ）。Published（承認済み）レビューのみ表示 -->
 <script>jdgm = window.jdgm || {};jdgm.SHOP_DOMAIN = 'qzkx7z-qc.myshopify.com';jdgm.PLATFORM = 'shopify';jdgm.PUBLIC_TOKEN = 'LHK6Tu4tuP8HMSigYrlookmAwbk';</script>
@@ -46,16 +46,13 @@
      3本の動画をフェードで連結・自動再生/ミュート/ループ
      ========================================================= -->
 <header class="hero" id="top">
+  <!-- FVは静止画構成（2026-07-14）：背景=CSSグラデーション（転送0KB）＋透過商品WebP（約7KB）で
+       スマホ初回表示を最速化。旧ヒーロー動画（hero-v2）は③解決策セクションへ遅延読み込みで移設 -->
   <div class="hero__media" aria-hidden="true">
-    <!-- ヒーロー動画（Web最適化済み・自動再生/ミュート/ループ/インライン）
-         元素材: copy_F4E7C665-...mov（HEVC縦1080×1920）→ H.264 MP4 / VP9 WebM に変換
-         poster=動画1コマ目のJPEG（約32KB）。preload="metadata"で先読みを抑え、初回表示を高速化 -->
-    <video class="hero__video is-active" muted loop autoplay playsinline preload="metadata" poster="assets/video/hero-poster-v2.jpg">
-      <source src="assets/video/hero-v2.webm" type="video/webm" />
-      <source src="assets/video/hero-v2.mp4" type="video/mp4" />
-    </video>
+    <span class="hero__glow"></span>
+    <!-- 元画像: Photoroom_20260714_104522.png（透過切り抜き）を商品部分だけトリミング→WebP化 -->
+    <img class="hero__item" src="assets/images/hero-product.webp" alt="" width="512" height="406" fetchpriority="high" />
   </div>
-  <div class="hero__overlay" aria-hidden="true"></div>
 
   <div class="hero__inner">
     <img class="hero__logo" src="assets/images/logo-wordmark-hero.png" alt="JUWARI" width="320" height="80" />
@@ -99,8 +96,13 @@
   <section class="section solution" aria-labelledby="solution-h">
     <!-- メインビジュアル（背景＋アプリケーター＋ジェルを1枚に構成した完成画像。これ1枚で世界観を表現） -->
     <div class="solution__bg" aria-hidden="true">
-      <!-- 旧: JUWARI_LP_v4 (2).png（1.2MB）→ WebP化＋リネーム（約20KB・見た目同一） -->
+      <!-- 旧: JUWARI_LP_v4 (2).png（1.2MB）→ WebP化＋リネーム（約20KB・見た目同一）。
+           動画再生が始まるまでの背景・動画非対応環境のフォールバックとして残す -->
       <img src="assets/images/solution-main.webp" alt="JUWARI デリケート・うるおいジェル ― みずみずしいジェルとアプリケーター、うるおいの水面イメージ" loading="lazy" />
+      <!-- 旧FVのヒーロー動画をここへ移設（2026-07-14）。preload="none"＋IntersectionObserver（main.js）で
+           セクションが近づいた時だけ読み込み・再生し、FVの表示速度と競合させない。srcはdata属性からJSが注入 -->
+      <video class="solution__video" muted loop playsinline preload="none"
+             data-src-webm="assets/video/hero-v2.webm" data-src-mp4="assets/video/hero-v2.mp4"></video>
     </div>
     <div class="solution__inner reveal">
       <h2 class="headline" id="solution-h"><span class="nb">うるおって、</span><br /><span class="nb">ふれたくなる私へ。</span></h2>

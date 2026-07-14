@@ -7,30 +7,43 @@
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- ① ヒーロー動画：3本をフェードで順送り ---------- */
-  function initHeroVideos() {
-    const videos = Array.from(document.querySelectorAll('.hero__video'));
-    if (!videos.length) return;
+  /* ---------- ③ 解決策セクションの動画（旧FVのヒーロー動画を移設） ----------
+     preload="none" のまま IntersectionObserver で「近づいた時だけ」srcを注入して読み込み・再生。
+     FVの表示速度と一切競合しない。画面外に出たら一時停止して通信・電池を節約。
+     モーション低減設定時は動画を読み込まず、背景の静止画（WebP）を表示し続ける */
+  function initSolutionVideo() {
+    const video = document.querySelector('.solution__video');
+    if (!video) return;
+    if (reduceMotion || !('IntersectionObserver' in window)) return; // 静止画のまま
 
-    let current = 0;
-    const SEGMENT = 6000; // 1本あたりの表示時間(ms)。動画尺に合わせて調整可
+    let loaded = false;
+    const load = () => {
+      if (loaded) return;
+      loaded = true;
+      [['srcWebm', 'video/webm'], ['srcMp4', 'video/mp4']].forEach(([key, type]) => {
+        const src = video.dataset[key];
+        if (!src) return;
+        const source = document.createElement('source');
+        source.src = src;
+        source.type = type;
+        video.appendChild(source);
+      });
+      video.load();
+    };
 
-    videos[0].classList.add('is-active');
-    const play = (v) => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
-    play(videos[0]);
+    video.addEventListener('playing', () => video.classList.add('is-playing'));
 
-    // モーション低減時は1本目を静止表示するだけ（切替アニメなし）
-    if (reduceMotion || videos.length < 2) return;
-
-    setInterval(() => {
-      const next = (current + 1) % videos.length;
-      const nextVideo = videos[next];
-      try { nextVideo.currentTime = 0; } catch (e) {}
-      play(nextVideo);
-      nextVideo.classList.add('is-active');
-      videos[current].classList.remove('is-active');
-      current = next;
-    }, SEGMENT);
+    new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          load();
+          const p = video.play();
+          if (p && p.catch) p.catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { rootMargin: '300px 0px' }).observe(video);
   }
 
   /* ---------- スクロール・フェードイン（IntersectionObserver） ---------- */
@@ -127,7 +140,7 @@
 
   /* ---------- 初期化 ---------- */
   document.addEventListener('DOMContentLoaded', () => {
-    initHeroVideos();
+    initSolutionVideo();
     initReveal();
     initSurveyBars();
     initFaq();
