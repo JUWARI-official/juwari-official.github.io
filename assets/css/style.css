@@ -312,37 +312,32 @@ h1, h2, h3, p { margin: 0; }
 /* =========================================================
    ④ 専門家コメント TRUST — 背景: アイボリー
    ========================================================= */
-/* 淡い花弁ピンクの面に、円形写真＋白カードを重ねるレイアウト */
-.trust { background: var(--c-sheer-2); }
+/* 白背景に、淡い花弁ピンクのカード＋円形写真を重ねるレイアウト（白でも単調にならない構成） */
+.trust { background: var(--c-white); }
 .expert { max-width: 560px; margin-inline: auto; position: relative; }
-/* 専門家写真：円形トリミング・コンパクト。カード上部に半分重なる */
+/* 専門家写真：円形トリミング・コンパクト。白いリングでカードから浮き立たせ、カード上部に半分重なる */
 .expert__photo {
   position: relative; z-index: 2; margin: 0 auto;
   width: clamp(118px, 32vw, 148px); aspect-ratio: 1 / 1;
   border-radius: 50%; overflow: hidden;
-  box-shadow: 0 10px 26px rgba(170,120,130,.28);
+  border: 4px solid var(--c-white);
+  box-shadow: 0 10px 26px rgba(170,120,130,.22);
 }
 /* 円の中は少し引き気味（130%）：顔だけのアップではなく、施術中の手元まで自然に入る構図で
    親しみ・信頼感を伝える。原画とコンテナが同比率だと cover ではズームされないため明示的に拡大して位置合わせ */
 .expert__photo img { width: 130%; height: 130%; max-width: none; object-fit: cover; margin-left: -4.5%; margin-top: -21%; }
-/* コメントの白カード：角丸・広めの余白・やわらかい影。写真の下半分を受け止める */
+/* コメントカード：白背景の中で浮かぶ淡い花弁ピンクの面（グラデでごく僅かに深みを付け単調さを回避）。
+   角丸・広めの余白・やわらかい影で上品に。写真の下半分を受け止める */
 .expert__card {
   position: relative; z-index: 1;
-  background: #fff; border-radius: 22px;
+  background: linear-gradient(180deg, var(--c-sheer-1) 0%, var(--c-sheer-2) 100%);
+  border-radius: 22px;
   margin-top: calc(clamp(118px, 32vw, 148px) / -2);
   padding: calc(clamp(118px, 32vw, 148px) / 2 + clamp(1.4rem, 4.5vw, 2rem))
            clamp(1.4rem, 5.5vw, 2.6rem)
            clamp(1.6rem, 5vw, 2.2rem);
-  box-shadow: var(--shadow-soft);
+  box-shadow: 0 16px 40px rgba(190,140,150,.14);
 }
-/* 引用符の飾り（参考レイアウトの“ ”）。ブランドの淡花弁ピンクで控えめに */
-.expert__card::before,
-.expert__card::after {
-  position: absolute; font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(3.4rem, 12vw, 4.6rem); line-height: 1; color: var(--c-pink-soft);
-}
-.expert__card::before { content: "\201C"; left: .12em; top: .55em; }
-.expert__card::after  { content: "\201D"; right: .12em; bottom: -.18em; }
 .expert__comment { font-size: clamp(.9rem, 3.8vw, 1rem); line-height: 2.05; margin: 0; text-align: left; }
 /* 肩書き・名前はカード内の末尾に右寄せ（署名らしく） */
 .expert__name { margin: 1.6em 0 0; font-size: .9rem; letter-spacing: .06em; text-align: right; }
