@@ -412,7 +412,9 @@ h1, h2, h3, p { margin: 0; }
    「星（上）→ 本文（中央）→ 投稿者名（下・全カードで位置が揃う）」に整列。
    Judge.meの内部レイアウト（比率固定）を明示的に置き換えるため !important で統一 */
 .fv-reviews .jdgm-carousel-item {
-  display: flex !important;
+  /* inline-flex＝Judge.meのスライダー（inline-block横並び＋translateX）を壊さずに内部だけflex縦組みにする */
+  display: inline-flex !important;
+  vertical-align: top;
   flex-direction: column !important;
   height: clamp(200px, 52vw, 236px) !important;
   box-sizing: border-box !important;
