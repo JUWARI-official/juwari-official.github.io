@@ -188,6 +188,15 @@ h1, h2, h3, p { margin: 0; }
   width: min(72vw, 400px, 36vh); height: auto;
   filter: drop-shadow(0 14px 30px rgba(180, 130, 140, .18));
 }
+/* 装飾バブル：大小をつけたランダム配置・一部は画面外へはみ出し（.heroのoverflow:hiddenで横スクロールは発生しない）。
+   DOM順で商品・グローより背面、低不透明度で主役（商品・テキスト）より控えめに */
+.hero__bubble { position: absolute; height: auto; pointer-events: none; user-select: none; }
+.hero__bubble--1 { width: clamp(150px, 44vw, 300px); top: -7%;  left: -14%;  opacity: .60; }  /* 大・左上（画面外へ半分） */
+.hero__bubble--2 { width: clamp(44px, 13vw, 90px);   top: 12%;  right: 7%;   opacity: .55; }  /* 小・右上 */
+.hero__bubble--3 { width: clamp(76px, 22vw, 150px);  top: 36%;  right: -9%;  opacity: .50; }  /* 中・右（画面外へ半分） */
+.hero__bubble--4 { width: clamp(32px, 9vw, 64px);    top: 44%;  left: 7%;    opacity: .45; }  /* 極小・左中 */
+.hero__bubble--5 { width: clamp(100px, 30vw, 210px); bottom: 11%; left: -12%; opacity: .50; } /* 中大・左下（画面外へ） */
+.hero__bubble--6 { width: clamp(40px, 11vw, 80px);   bottom: 26%; right: 9%;  opacity: .45; } /* 小・右下 */
 /* テキストは商品より上のゾーンへ（下側に余白を確保して flex中央のまま持ち上げる） */
 .hero__inner { position: relative; z-index: 2; padding: var(--gutter); padding-bottom: clamp(160px, 30vh, 300px); }
 /* ブランドロゴを主役に（最も印象的に） */

@@ -49,6 +49,14 @@
   <!-- FVは静止画構成（2026-07-14）：背景=CSSグラデーション（転送0KB）＋透過商品WebP（約7KB）で
        スマホ初回表示を最速化。旧ヒーロー動画（hero-v2）は③解決策セクションへ遅延読み込みで移設 -->
   <div class="hero__media" aria-hidden="true">
+    <!-- 装飾バブル（参考素材 JUWARI_LP_v4 (1).png を白抜き透過→WebP化・46KB／6個とも同一ファイルなので転送は1回）。
+         大小ランダム・一部は画面外にはみ出す配置。商品・文字より背面＆低不透明度で控えめに -->
+    <img class="hero__bubble hero__bubble--1" src="assets/images/bubble.webp" alt="" decoding="async" />
+    <img class="hero__bubble hero__bubble--2" src="assets/images/bubble.webp" alt="" decoding="async" />
+    <img class="hero__bubble hero__bubble--3" src="assets/images/bubble.webp" alt="" decoding="async" />
+    <img class="hero__bubble hero__bubble--4" src="assets/images/bubble.webp" alt="" decoding="async" />
+    <img class="hero__bubble hero__bubble--5" src="assets/images/bubble.webp" alt="" decoding="async" />
+    <img class="hero__bubble hero__bubble--6" src="assets/images/bubble.webp" alt="" decoding="async" />
     <span class="hero__glow"></span>
     <!-- 元画像: Photoroom_20260714_104522.png（透過切り抜き）を商品部分だけトリミング→WebP化 -->
     <img class="hero__item" src="assets/images/hero-product.webp" alt="" width="512" height="406" fetchpriority="high" />
