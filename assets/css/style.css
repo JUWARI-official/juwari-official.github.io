@@ -409,14 +409,18 @@ h1, h2, h3, p { margin: 0; }
 /* --- ①-2 FV直下のレビューカルーセル（社会的証明の帯） --- */
 .fv-reviews { background: var(--c-white); text-align: center; padding-block: clamp(2.6rem, 8vw, 4.5rem); }
 /* Judge.meが注入するカルーセルの各レビュー＝SAFETY調の淡ピンクをベースに、
-   上から下へ徐々に薄くなる控えめなグラデーション（文字コントラストは下ほど上がる） */
+   上から下へ徐々に薄くなる控えめなグラデーション（文字コントラストは下ほど上がる）。
+   ※paddingや高さはウィジェット既定のまま（上書きするとカード内部のレイアウトが崩れる） */
 .fv-reviews .jdgm-carousel-item {
   background: linear-gradient(180deg, #FBE7EA 0%, #FDF2F4 62%, #FEF8F9 100%);
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(200,150,160,.14);
   border: 0;
-  padding: clamp(1.1rem, 3.5vw, 1.7rem);
 }
+/* 投稿者名の下に自動で付く商品リンク（商品画像＋商品名）は表示しない */
+.fv-reviews .jdgm-carousel-item__product { display: none !important; }
+/* 商品リンクを消したぶん、本文エリアは比率固定をやめて自然な高さに */
+.fv-reviews .jdgm-carousel-wrapper .jdgm-carousel-item__review { height: auto; }
 /* カルーセルの矢印もブランドトーンに */
 .fv-reviews .jdgm-carousel-arrows button,
 .fv-reviews [class*='jdgm-carousel'] svg { color: var(--c-pink-deep); fill: var(--c-pink-deep); }
