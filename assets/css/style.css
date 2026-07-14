@@ -173,24 +173,28 @@ h1, h2, h3, p { margin: 0; }
 .hero__media { position: absolute; inset: 0; z-index: 0; }
 /* 商品の背後にほのかな光だまり（白いアプリケーターの輪郭を上品に立たせる） */
 .hero__glow { display: none; }
-/* 商品（透過WebP・512×406）：画面下部の中央に。テキストブロックとは重ねない。
-   36vh制限＝縦の短い画面（PCの小窓・横向き等）でもテキストと衝突しないよう高さに連動して縮む */
+/* 商品（対角構図の縦長WebP・640×918）：画面下部の中央に。高さ基準でサイズを決め、
+   縦の短い画面でもテキストブロックと衝突しない（はみ出す場合は自動で縮む） */
 .hero__item {
-  position: absolute; left: 50%; bottom: 3%;
+  position: absolute; left: 50%; bottom: 2%;
   transform: translateX(-50%);
-  width: min(88vw, 500px, 62vh); height: auto;
+  height: min(44vh, 420px); width: auto; max-width: 86vw;
 }
 /* 装飾バブル：大小をつけたランダム配置・一部は画面外へはみ出し（.heroのoverflow:hiddenで横スクロールは発生しない）。
-   DOM順で商品・グローより背面、低不透明度で主役（商品・テキスト）より控えめに */
+   DOM順で商品より背面、低不透明度で主役（商品・テキスト）より控えめに。相互に重ならない配置 */
 .hero__bubble { position: absolute; height: auto; pointer-events: none; user-select: none; }
-.hero__bubble--1 { width: clamp(150px, 44vw, 300px); top: -7%;  left: -14%;  opacity: .60; }  /* 大・左上（画面外へ半分） */
-.hero__bubble--2 { width: clamp(44px, 13vw, 90px);   top: 12%;  right: 7%;   opacity: .55; }  /* 小・右上 */
-.hero__bubble--3 { width: clamp(76px, 22vw, 150px);  top: 36%;  right: -9%;  opacity: .50; }  /* 中・右（画面外へ半分） */
-.hero__bubble--4 { width: clamp(32px, 9vw, 64px);    top: 44%;  left: 7%;    opacity: .45; }  /* 極小・左中 */
-.hero__bubble--5 { width: clamp(100px, 30vw, 210px); bottom: 11%; left: -12%; opacity: .50; } /* 中大・左下（画面外へ） */
-.hero__bubble--6 { width: clamp(40px, 11vw, 80px);   bottom: 26%; right: 9%;  opacity: .45; } /* 小・右下 */
-/* テキストは商品より上のゾーンへ（下側に余白を確保して flex中央のまま持ち上げる） */
-.hero__inner { position: relative; z-index: 2; padding: var(--gutter); padding-bottom: clamp(160px, 30vh, 300px); }
+.hero__bubble--1  { width: clamp(150px, 44vw, 300px); top: -7%;   left: -14%;  opacity: .60; }  /* 大・左上（画面外へ半分） */
+.hero__bubble--2  { width: clamp(44px, 13vw, 90px);   top: 12%;   right: 7%;   opacity: .55; }  /* 小・右上 */
+.hero__bubble--3  { width: clamp(76px, 22vw, 150px);  top: 36%;   right: -9%;  opacity: .50; }  /* 中・右（画面外へ半分） */
+.hero__bubble--4  { width: clamp(32px, 9vw, 64px);    top: 44%;   left: 7%;    opacity: .45; }  /* 極小・左中 */
+.hero__bubble--5  { width: clamp(100px, 30vw, 210px); bottom: 11%; left: -12%; opacity: .50; }  /* 中大・左下（画面外へ） */
+.hero__bubble--6  { width: clamp(40px, 11vw, 80px);   bottom: 26%; right: 9%;  opacity: .45; }  /* 小・右下 */
+.hero__bubble--7  { width: clamp(24px, 8vw, 48px);    top: 5%;    left: 33%;   opacity: .40; }  /* 極小・上中 */
+.hero__bubble--8  { width: clamp(30px, 9vw, 56px);    bottom: 34%; left: 19%;  opacity: .42; }  /* 小・左下寄り */
+.hero__bubble--9  { width: clamp(70px, 20vw, 140px);  bottom: -7%; right: -7%; opacity: .50; }  /* 中・右下角（画面外へ） */
+.hero__bubble--10 { width: clamp(22px, 7vw, 40px);    top: 30%;   right: 5%;   opacity: .38; }  /* 極小・右中 */
+/* テキストは商品より上のゾーンへ（下側に商品の高さぶんの余白を確保して flex中央のまま持ち上げる） */
+.hero__inner { position: relative; z-index: 2; padding: var(--gutter); padding-bottom: clamp(280px, 46vh, 460px); }
 /* ブランドロゴを主役に（最も印象的に） */
 .hero__logo {
   width: clamp(196px, 54vw, 312px);
@@ -226,15 +230,9 @@ h1, h2, h3, p { margin: 0; }
 }
 /* 見出し内の各フレーズは意味の途中で折れないように */
 .hero__title .nb { display: inline-block; }
-.hero__product {
-  margin-top: 1.8em;
-  font-size: clamp(.82rem, 3.4vw, .98rem);
-  letter-spacing: .2em;
-  color: #6E5B5D;
-}
-/* 商品カテゴリの説明（商品名の直下・控えめに）。動画上でも読めるよう、ごく弱い白グローのみ */
+/* 商品カテゴリの説明（キャッチコピーの直下・控えめに） */
 .hero__desc {
-  margin-top: .9em;
+  margin-top: 1.5em;
   font-size: clamp(.72rem, 3vw, .86rem);
   line-height: 1.9;
   letter-spacing: .08em;
