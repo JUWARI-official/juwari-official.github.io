@@ -470,10 +470,11 @@ h1, h2, h3, p { margin: 0; }
 /* 投稿者名・タイトルをブランドの見出し色に、本文は本文色に */
 .juwari-reviews .jdgm-rev__author, .juwari-reviews .jdgm-rev__title { color: var(--c-heading); font-weight: 700; }
 .juwari-reviews .jdgm-rev__body { color: var(--c-text); line-height: 2.0; }
-/* カード内の不要要素（商品リンク・透明性バッジ等）はJSで除去するがCSSでも保険的に非表示 */
+/* カード内の不要要素（商品リンク・透明性バッジ・イニシャルアイコン等）はJSで除去するがCSSでも保険的に非表示 */
 .juwari-reviews .jdgm-rev__prod-info-wrapper,
 .juwari-reviews .jdgm-rev__transparency-badge-wrapper,
 .juwari-reviews .jdgm-rev__actions,
+.juwari-reviews .jdgm-rev__icon,
 .juwari-reviews .jdgm-rev__reply { display: none !important; }
 /* レビュー写真：カード内で上品なサムネイルに */
 .juwari-reviews .jdgm-rev__pic-img { max-width: 130px; border-radius: 10px; }
