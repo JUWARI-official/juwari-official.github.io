@@ -310,7 +310,7 @@ h1, h2, h3, p { margin: 0; }
   position: absolute; left: 0; right: 0; top: clamp(1.6rem, 6vw, 3.6rem);
   z-index: 2; padding: 0 var(--gutter);
 }
-.solution .headline { font-size: clamp(1.85rem, 8vw, 3rem); line-height: 1.62; letter-spacing: .05em; text-wrap: balance; }
+/* 見出しサイズはLP共通の .headline に統一（このセクション専用の拡大指定は廃止） */
 /* 続くコンテンツ（注記〜）は画像の直後から。ハッシュタグは画像内に移動したため引き上げは不要 */
 .solution__inner { max-width: 640px; margin-inline: auto; padding: 0 var(--gutter); position: relative; z-index: 2; }
 /* ハッシュタグ：装飾なしのテキストのみ・1行1つ・右揃え。
