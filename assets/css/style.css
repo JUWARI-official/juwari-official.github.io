@@ -300,10 +300,9 @@ h1, h2, h3, p { margin: 0; }
 .solution__visual { position: relative; width: 100%; max-width: 640px; margin-inline: auto; }
 .solution__photo {
   display: block; width: 100%; height: auto;
-  /* 上下とも白へなめらかにフェード（上: 白背景から0→13%で自然に現れる／下: 76%→99%で白へ溶ける）。
-     商品は画像の29〜80%の帯にあるためフェードは掛からない。境界線なし */
-  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, #000 13%, #000 76%, rgba(0,0,0,0) 99%);
-          mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, #000 13%, #000 76%, rgba(0,0,0,0) 99%);
+  /* 下部のみ白へなめらかにフェード（76%→99%。上部フェードは廃止）。境界線なし */
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 76%, rgba(0,0,0,0) 99%);
+          mask-image: linear-gradient(180deg, #000 0%, #000 76%, rgba(0,0,0,0) 99%);
 }
 /* 見出し：画像上部の余白（商品より上）に重ねる。淡いグレー地の上なのでキーカラーのまま読める */
 .solution__headline {
