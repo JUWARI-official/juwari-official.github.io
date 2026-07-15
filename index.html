@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
 <!-- ?v= はキャッシュ対策のバージョン番号。CSSを更新したらこの数字も上げる -->
-<link rel="stylesheet" href="assets/css/style.css?v=20260715-1" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260715-2" />
 
 <!-- Judge.me Store script（head内に1回だけ）。Published（承認済み）レビューのみ表示 -->
 <script>jdgm = window.jdgm || {};jdgm.SHOP_DOMAIN = 'qzkx7z-qc.myshopify.com';jdgm.PLATFORM = 'shopify';jdgm.PUBLIC_TOKEN = 'LHK6Tu4tuP8HMSigYrlookmAwbk';</script>
@@ -107,12 +107,14 @@
        ③ 解決策 うるおって、ふれたくなる私へ。（商品＋おすすめ3ポイント）
        ========================================================= -->
   <section class="section solution" aria-labelledby="solution-h">
-    <!-- 動画は廃止（2026-07-15）。メインビジュアル＝商品フルラインナップの静止画（DSC_2493の
-         商品部分をトリミング→WebP化 solution-set.webp・13KB）。
-         構成: 見出し → 画像 → ハッシュタグ（画像に重ねず下へ） → 注記 → CTA → 安心アイコン3つ -->
+    <!-- メインビジュアル＝セクション全幅の静止画（DSC_2493・枠/角丸/影なし・比率維持 solution-full.webp 15KB）。
+         見出しは画像上部の余白へ重ね（商品には重ねない）、画像下部はマスクで白へフェード。
+         構成: 画像（+見出し） → ハッシュタグ → 注記 → CTA → 安心アイコン3つ -->
+    <div class="solution__visual reveal">
+      <img class="solution__photo" src="assets/images/solution-full.webp" alt="JUWARI デリケート・うるおいジェル ― パウチと個包装、アプリケーターのセット" loading="lazy" width="780" height="1278" />
+      <h2 class="headline solution__headline" id="solution-h"><span class="nb">うるおって、</span><br /><span class="nb">ふれたくなる私へ。</span></h2>
+    </div>
     <div class="solution__inner reveal">
-      <h2 class="headline" id="solution-h"><span class="nb">うるおって、</span><br /><span class="nb">ふれたくなる私へ。</span></h2>
-      <img class="solution__photo" src="assets/images/solution-set.webp" alt="JUWARI デリケート・うるおいジェル ― パウチと個包装、アプリケーターのセット" loading="lazy" width="760" height="568" />
       <ul class="points">
         <li class="point"># 長時間自然なうるおい</li>
         <li class="point"># NMN配合</li>

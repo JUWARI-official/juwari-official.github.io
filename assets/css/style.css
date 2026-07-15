@@ -287,21 +287,30 @@ h1, h2, h3, p { margin: 0; }
 /* =========================================================
    ③ 解決策 BEFORE SLEEP — 背景: シアーピンク + 写真
    ========================================================= */
-/* うるおって、ふれたくなる私へ。 — 商品フルラインナップの静止画を主役にした縦積み構成
-   （見出し → 画像 → ハッシュタグ → 注記 → CTA → 安心アイコン）。動画・全面背景は廃止 */
+/* うるおって、ふれたくなる私へ。 — セクション全幅のメインビジュアル構成。
+   画像は枠・角丸・影なしの素のまま（比率維持）。見出しは画像上部の余白へ、
+   画像下部はマスクで白へフェードし、ピル→CTA→安心アイコンが白地に自然に続く */
 .solution {
   color: var(--c-heading); text-align: center;
-  background: linear-gradient(160deg, #FBEFF1 0%, #FBF2F3 55%, #F6EEF0 100%);
+  background: var(--c-white);
+  padding: 0 0 var(--section-y);
 }
-.solution__inner { max-width: 640px; margin-inline: auto; }
-.solution .headline { font-size: clamp(1.85rem, 8vw, 3rem); line-height: 1.62; letter-spacing: .05em; text-wrap: balance; }
-/* メインビジュアル：角丸カードで上品に。トリミング・引き伸ばしなし（比率固定・幅上限のみ） */
+/* 全幅ビジュアル（PCは横に間延びしないよう幅を上限で抑えて中央配置） */
+.solution__visual { position: relative; width: 100%; max-width: 640px; margin-inline: auto; }
 .solution__photo {
-  width: min(88vw, 560px); height: auto;
-  margin: clamp(2rem, 6vw, 3rem) auto 0;
-  border-radius: 22px;
-  box-shadow: 0 16px 40px rgba(190, 140, 150, .16);
+  display: block; width: 100%; height: auto;
+  /* 下部を白へなめらかにフェード（66%までは原画のまま→98%で完全に白へ。境界線なし） */
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 66%, rgba(0,0,0,0) 98%);
+          mask-image: linear-gradient(180deg, #000 0%, #000 66%, rgba(0,0,0,0) 98%);
 }
+/* 見出し：画像上部の余白（商品より上）に重ねる。淡いグレー地の上なのでキーカラーのまま読める */
+.solution__headline {
+  position: absolute; left: 0; right: 0; top: clamp(1.6rem, 6vw, 3.6rem);
+  z-index: 2; padding: 0 var(--gutter);
+}
+.solution .headline { font-size: clamp(1.85rem, 8vw, 3rem); line-height: 1.62; letter-spacing: .05em; text-wrap: balance; }
+/* 画像下の白フェードゾーンへ、続くコンテンツを少し引き上げて自然な流れに */
+.solution__inner { max-width: 640px; margin-inline: auto; padding: 0 var(--gutter); margin-top: clamp(-4.5rem, -10vw, -1.5rem); position: relative; z-index: 2; }
 /* ハッシュタグ：画像の下に適度な余白を空けて縦積み（各ピルは1行・折り返さない） */
 .points { list-style: none; margin: clamp(1.8rem, 5.5vw, 2.6rem) 0 0; padding: 0; display: flex; flex-direction: column; align-items: center; gap: .7em; }
 .point {
