@@ -62,11 +62,6 @@ body {
 .br-sp { display: inline; }
 @media (min-width: 768px) { .br-sp { display: none; } }
 img, video { max-width: 100%; height: auto; display: block; }
-/* 内容写真は読み込み失敗・待機中も、壊れアイコンではなく上品なシアーピンク面を見せる
-   （不透明JPEGのみ対象。ロゴ透過PNG・使い方SVGは除外して透過を保つ） */
-.solution__bg img {
-  background: linear-gradient(135deg, var(--c-sheer-2), var(--c-sheer-3));
-}
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; }
 h1, h2, h3, p { margin: 0; }
@@ -292,38 +287,33 @@ h1, h2, h3, p { margin: 0; }
 /* =========================================================
    ③ 解決策 BEFORE SLEEP — 背景: シアーピンク + 写真
    ========================================================= */
-/* うるおって、ふれたくなる私へ。 — 商品を大胆に背面レイヤー、テキストを前面に融合 */
+/* うるおって、ふれたくなる私へ。 — 商品フルラインナップの静止画を主役にした縦積み構成
+   （見出し → 画像 → ハッシュタグ → 注記 → CTA → 安心アイコン）。動画・全面背景は廃止 */
 .solution {
-  position: relative; overflow: hidden; padding: 0; color: var(--c-heading); text-align: center;
+  color: var(--c-heading); text-align: center;
   background: linear-gradient(160deg, #FBEFF1 0%, #FBF2F3 55%, #F6EEF0 100%);
 }
-/* メインビジュアル：完成画像を主役として全面に（不透明・カバー）。上部を少しだけ明るくして文字を読みやすく */
-.solution__bg { position: absolute; inset: 0; z-index: 0; }
-.solution__bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; opacity: 1; }
-/* 旧FVのヒーロー動画（遅延読み込み）。読み込み・再生が始まったら静止画の上にフェードイン。
-   縦動画=商品が中央〜下のため、旧FVと同じく object-position でバランスを取る */
-.solution__bg video {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center 55%;
-  opacity: 0;
-  transition: opacity 1.4s ease-in-out;
-}
-.solution__bg video.is-playing { opacity: 1; }
-.solution__bg::after { content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(180deg, rgba(255,252,253,.6) 0%, rgba(255,252,253,.15) 30%, rgba(255,252,253,0) 52%); }
-/* テキスト（前面・上寄せ）。メインビジュアルを活かし、上部の水面エリアにコピー／ハッシュタグ／CTAを配置 */
-.solution__inner { position: relative; z-index: 2; max-width: 640px; margin-inline: auto; padding: var(--section-y) var(--gutter); min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-start; }
+.solution__inner { max-width: 640px; margin-inline: auto; }
 .solution .headline { font-size: clamp(1.85rem, 8vw, 3rem); line-height: 1.62; letter-spacing: .05em; text-wrap: balance; }
-.points { list-style: none; margin: clamp(1.6rem, 6vw, 2.6rem) 0 0; padding: 0; display: flex; flex-direction: column; align-items: center; gap: .6em; }
+/* メインビジュアル：角丸カードで上品に。トリミング・引き伸ばしなし（比率固定・幅上限のみ） */
+.solution__photo {
+  width: min(88vw, 560px); height: auto;
+  margin: clamp(2rem, 6vw, 3rem) auto 0;
+  border-radius: 22px;
+  box-shadow: 0 16px 40px rgba(190, 140, 150, .16);
+}
+/* ハッシュタグ：画像の下に適度な余白を空けて縦積み（各ピルは1行・折り返さない） */
+.points { list-style: none; margin: clamp(1.8rem, 5.5vw, 2.6rem) 0 0; padding: 0; display: flex; flex-direction: column; align-items: center; gap: .7em; }
 .point {
   border: 1px solid var(--c-pink-soft); border-radius: 999px;
-  background: rgba(255,255,255,.86); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
-  padding: .5em 1.2em; font-size: clamp(.76rem, 3.4vw, .92rem); color: var(--c-pink-deep); font-weight: 500; letter-spacing: .01em; white-space: nowrap;
+  background: rgba(255,255,255,.9);
+  padding: .55em 1.35em; font-size: clamp(.78rem, 3.4vw, .92rem); color: var(--c-pink-deep); font-weight: 500; letter-spacing: .02em; white-space: nowrap;
   box-shadow: 0 4px 14px rgba(205,120,135,.12);
 }
-.points__note { margin-top: clamp(1.4rem, 4vw, 2rem); max-width: 32em; margin-inline: auto; text-shadow: 0 1px 8px rgba(255,250,251,.9); }
+.points__note { margin-top: clamp(1.4rem, 4vw, 2rem); max-width: 32em; margin-inline: auto; }
 .solution .cta-block { margin-top: clamp(1.8rem, 5vw, 2.6rem); }
+/* 安心アイコン（購入セクションと同じ .assure デザインを再利用）：CTAの下に適度な間隔で */
+.solution .assure { margin-top: clamp(1.8rem, 5.5vw, 2.6rem); }
 
 /* =========================================================
    ④ 専門家コメント TRUST — 背景: アイボリー
@@ -888,5 +878,4 @@ h1, h2, h3, p { margin: 0; }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; scroll-behavior: auto !important; }
   .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .solution__bg video { transition: none; }
 }
