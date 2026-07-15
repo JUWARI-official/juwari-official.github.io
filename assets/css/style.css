@@ -293,15 +293,17 @@ h1, h2, h3, p { margin: 0; }
 .solution {
   color: var(--c-heading); text-align: center;
   background: var(--c-white);
-  padding: 0 0 var(--section-y);
+  /* 上に適度な余白（セクション上端との詰まりを解消。間延びしない控えめな量） */
+  padding: clamp(2.2rem, 7vw, 4.5rem) 0 var(--section-y);
 }
 /* 全幅ビジュアル（PCは横に間延びしないよう幅を上限で抑えて中央配置） */
 .solution__visual { position: relative; width: 100%; max-width: 640px; margin-inline: auto; }
 .solution__photo {
   display: block; width: 100%; height: auto;
-  /* 下部を白へなめらかにフェード（76%までは原画のまま→99%で完全に白へ。境界線なし） */
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 76%, rgba(0,0,0,0) 99%);
-          mask-image: linear-gradient(180deg, #000 0%, #000 76%, rgba(0,0,0,0) 99%);
+  /* 上下とも白へなめらかにフェード（上: 白背景から0→13%で自然に現れる／下: 76%→99%で白へ溶ける）。
+     商品は画像の29〜80%の帯にあるためフェードは掛からない。境界線なし */
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, #000 13%, #000 76%, rgba(0,0,0,0) 99%);
+          mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, #000 13%, #000 76%, rgba(0,0,0,0) 99%);
 }
 /* 見出し：画像上部の余白（商品より上）に重ねる。淡いグレー地の上なのでキーカラーのまま読める */
 .solution__headline {
@@ -309,18 +311,20 @@ h1, h2, h3, p { margin: 0; }
   z-index: 2; padding: 0 var(--gutter);
 }
 .solution .headline { font-size: clamp(1.85rem, 8vw, 3rem); line-height: 1.62; letter-spacing: .05em; text-wrap: balance; }
-/* 画像下の白フェードゾーンへ、続くコンテンツを少し引き上げて自然な流れに（下余白の縮小に合わせ控えめに） */
-.solution__inner { max-width: 640px; margin-inline: auto; padding: 0 var(--gutter); margin-top: clamp(-2.2rem, -5vw, -.8rem); position: relative; z-index: 2; }
-/* ハッシュタグ：装飾なし（背景・枠線・角丸なし）のテキストのみを2列グリッドで整列 */
+/* 続くコンテンツ（注記〜）は画像の直後から。ハッシュタグは画像内に移動したため引き上げは不要 */
+.solution__inner { max-width: 640px; margin-inline: auto; padding: 0 var(--gutter); position: relative; z-index: 2; }
+/* ハッシュタグ：装飾なしのテキストのみ・1行1つ・右揃え。
+   画像下部のフェード開始位置（商品より下・右下の余白）に重ね、白へのグラデに自然に溶け込ませる */
 .points {
-  list-style: none; margin: clamp(1.5rem, 4.5vw, 2.2rem) auto 0; padding: 0;
-  display: grid; grid-template-columns: repeat(2, 1fr);
-  column-gap: clamp(.8rem, 3vw, 1.6rem); row-gap: .85em;
-  max-width: 400px; justify-items: start; text-align: left;
+  position: absolute; right: clamp(1.2rem, 5.5vw, 2.6rem); bottom: clamp(.4rem, 1.8vw, 1.2rem);
+  margin: 0; padding: 0; list-style: none;
+  text-align: right; z-index: 2;
 }
+.points li + li { margin-top: .5em; }
 .point {
+  display: block;
   font-size: clamp(.78rem, 3.4vw, .9rem); color: var(--c-pink-deep);
-  font-weight: 500; letter-spacing: .03em; line-height: 1.5; white-space: nowrap;
+  font-weight: 500; letter-spacing: .04em; line-height: 1.6; white-space: nowrap;
 }
 .points__note { margin-top: clamp(1.4rem, 4vw, 2rem); max-width: 32em; margin-inline: auto; }
 .solution .cta-block { margin-top: clamp(1.8rem, 5vw, 2.6rem); }
