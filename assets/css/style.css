@@ -299,9 +299,9 @@ h1, h2, h3, p { margin: 0; }
 .solution__visual { position: relative; width: 100%; max-width: 640px; margin-inline: auto; }
 .solution__photo {
   display: block; width: 100%; height: auto;
-  /* 下部を白へなめらかにフェード（66%までは原画のまま→98%で完全に白へ。境界線なし） */
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 66%, rgba(0,0,0,0) 98%);
-          mask-image: linear-gradient(180deg, #000 0%, #000 66%, rgba(0,0,0,0) 98%);
+  /* 下部を白へなめらかにフェード（76%までは原画のまま→99%で完全に白へ。境界線なし） */
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 76%, rgba(0,0,0,0) 99%);
+          mask-image: linear-gradient(180deg, #000 0%, #000 76%, rgba(0,0,0,0) 99%);
 }
 /* 見出し：画像上部の余白（商品より上）に重ねる。淡いグレー地の上なのでキーカラーのまま読める */
 .solution__headline {
@@ -309,15 +309,18 @@ h1, h2, h3, p { margin: 0; }
   z-index: 2; padding: 0 var(--gutter);
 }
 .solution .headline { font-size: clamp(1.85rem, 8vw, 3rem); line-height: 1.62; letter-spacing: .05em; text-wrap: balance; }
-/* 画像下の白フェードゾーンへ、続くコンテンツを少し引き上げて自然な流れに */
-.solution__inner { max-width: 640px; margin-inline: auto; padding: 0 var(--gutter); margin-top: clamp(-4.5rem, -10vw, -1.5rem); position: relative; z-index: 2; }
-/* ハッシュタグ：画像の下に適度な余白を空けて縦積み（各ピルは1行・折り返さない） */
-.points { list-style: none; margin: clamp(1.8rem, 5.5vw, 2.6rem) 0 0; padding: 0; display: flex; flex-direction: column; align-items: center; gap: .7em; }
+/* 画像下の白フェードゾーンへ、続くコンテンツを少し引き上げて自然な流れに（下余白の縮小に合わせ控えめに） */
+.solution__inner { max-width: 640px; margin-inline: auto; padding: 0 var(--gutter); margin-top: clamp(-2.2rem, -5vw, -.8rem); position: relative; z-index: 2; }
+/* ハッシュタグ：装飾なし（背景・枠線・角丸なし）のテキストのみを2列グリッドで整列 */
+.points {
+  list-style: none; margin: clamp(1.5rem, 4.5vw, 2.2rem) auto 0; padding: 0;
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  column-gap: clamp(.8rem, 3vw, 1.6rem); row-gap: .85em;
+  max-width: 400px; justify-items: start; text-align: left;
+}
 .point {
-  border: 1px solid var(--c-pink-soft); border-radius: 999px;
-  background: rgba(255,255,255,.9);
-  padding: .55em 1.35em; font-size: clamp(.78rem, 3.4vw, .92rem); color: var(--c-pink-deep); font-weight: 500; letter-spacing: .02em; white-space: nowrap;
-  box-shadow: 0 4px 14px rgba(205,120,135,.12);
+  font-size: clamp(.78rem, 3.4vw, .9rem); color: var(--c-pink-deep);
+  font-weight: 500; letter-spacing: .03em; line-height: 1.5; white-space: nowrap;
 }
 .points__note { margin-top: clamp(1.4rem, 4vw, 2rem); max-width: 32em; margin-inline: auto; }
 .solution .cta-block { margin-top: clamp(1.8rem, 5vw, 2.6rem); }
