@@ -175,6 +175,77 @@
     start();
   }
 
+  /* ---------- ⑤ VOICE：Judge.me公式Widgets APIによるカスタムレビュー表示 ----------
+     公開トークンのWidgets API（CORS許可済み・Publishedレビューのみ返る）から実レビューHTMLを取得。
+     仕様: 読み込み時に全件をランダム順へ並び替え（閲覧中は順序固定）→1件だけ表示→
+     「もっと見る」で5件ずつその場展開（重複なし・リロードなし）→全件表示後はボタン非表示。
+     レビューが増えても自動反映（ハードコーディングなし） */
+  function initVoiceReviews() {
+    const list = document.querySelector('.js-voice-list');
+    const moreBtn = document.querySelector('.js-voice-more');
+    if (!list || !moreBtn) return;
+
+    const TOKEN = 'LHK6Tu4tuP8HMSigYrlookmAwbk';
+    const SHOP = 'qzkx7z-qc.myshopify.com';
+    const PER_PAGE = 10;   // APIの1ページあたり件数（Judge.me既定）
+    const STEP = 5;        // 「もっと見る」1回で追加する件数
+    let pool = [];
+    let shown = 0;
+
+    // カード内の不要要素を除去し、ウィジェットJSなしでも完全表示になるよう整える
+    const clean = (rev) => {
+      rev.querySelectorAll('.jdgm-rev__prod-info-wrapper, .jdgm-rev__transparency-badge-wrapper, .jdgm-rev__actions, .jdgm-rev__reply, .jdgm-rev__custom-form').forEach((e) => e.remove());
+      const ts = rev.querySelector('.jdgm-rev__timestamp');
+      if (ts) {
+        const d = new Date((ts.dataset.content || '').replace(' UTC', ' GMT').replace(/-/g, '/'));
+        ts.textContent = isNaN(d) ? '' : ((d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear());
+        ts.classList.remove('jdgm-spinner');
+      }
+      rev.querySelectorAll('img[data-src]').forEach((img) => { img.src = img.getAttribute('data-src'); });
+      rev.querySelectorAll('.jdgm--loading').forEach((e) => e.classList.remove('jdgm--loading'));
+      return rev;
+    };
+
+    const show = (n) => {
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < n && shown < pool.length; i++, shown++) frag.appendChild(clean(pool[shown]));
+      list.appendChild(frag);
+      moreBtn.style.display = shown < pool.length ? '' : 'none';
+    };
+
+    const fetchPage = (page) =>
+      fetch('https://api.judge.me/api/v1/widgets/all_reviews_page?api_token=' + TOKEN + '&shop_domain=' + SHOP + '&page=' + page)
+        .then((r) => r.json())
+        .then((j) => {
+          const tmp = document.createElement('div');
+          tmp.innerHTML = j.all_reviews || '';
+          return Array.from(tmp.querySelectorAll('.jdgm-rev'));
+        });
+
+    (async () => {
+      try {
+        // 全ページ取得（安全上限10ページ=100件）→ Fisher-Yatesでランダム順に
+        let all = [];
+        for (let page = 1; page <= 10; page++) {
+          const revs = await fetchPage(page);
+          all = all.concat(revs);
+          if (revs.length < PER_PAGE) break;
+        }
+        for (let i = all.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          const t = all[i]; all[i] = all[j]; all[j] = t;
+        }
+        pool = all;
+        if (!pool.length) { moreBtn.style.display = 'none'; return; }
+        show(1);   // 初期表示は1件（ランダム）
+      } catch (e) {
+        moreBtn.style.display = 'none';
+      }
+    })();
+
+    moreBtn.addEventListener('click', () => show(STEP));
+  }
+
   /* ---------- 初期化 ---------- */
   document.addEventListener('DOMContentLoaded', () => {
     initHeroSlider();
@@ -184,5 +255,6 @@
     initFaq();
     initAllIngredients();
     initStickyCta();
+    initVoiceReviews();
   });
 })();

@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
 <!-- ?v= はキャッシュ対策のバージョン番号。CSSを更新したらこの数字も上げる -->
-<link rel="stylesheet" href="assets/css/style.css?v=20260715-10" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260715-11" />
 
 <!-- Judge.me Store script（head内に1回だけ）。Published（承認済み）レビューのみ表示 -->
 <script>jdgm = window.jdgm || {};jdgm.SHOP_DOMAIN = 'qzkx7z-qc.myshopify.com';jdgm.PLATFORM = 'shopify';jdgm.PUBLIC_TOKEN = 'LHK6Tu4tuP8HMSigYrlookmAwbk';</script>
@@ -193,14 +193,16 @@
       <p class="lead">そんな想いを込めて、<br />JUWARIをご愛用くださるお客様を<br />「JEWEL」とお呼びしています。</p>
       <p class="lead">ここでは、<br class="br-sp" />そんなJEWELの皆さまから寄せられた<br />お声をご紹介します。</p>
 
-      <!-- ▼ Judge.me Review Widget（公式・外部サイト正式対応）：
-           評価・タイトル・本文・投稿者名・レビュー画像・「もっと見る」を標準装備。
-           data-id はShopify商品ID（10本入り）。4商品はJudge.me側で「JUWARI共通レビュー」に
-           グループ化済みのため、どの商品へのレビューもここに全件自動表示される。
-           レビューはJudge.meから自動取得＝件数が増えても自動反映・メンテナンス不要。
-           ※All Reviews Widgetは外部サイトの自動描画非対応だったためReview Widgetを採用 -->
+      <!-- ▼ レビュー：Judge.me公式Widgets API（公開トークン・CORS許可済み）から実レビューHTMLを取得し、
+           JS（main.js initVoiceReviews）で制御するカスタム表示。
+           仕様: 読み込み時にランダム順へ並び替え→1件表示→「もっと見る」で5件ずつ追加（重複なし・
+           リロードなしでその場展開）→全件表示後はボタン非表示。件数が増えても自動反映。
+           見出し・総数・評価分布グラフは表示しない -->
       <div class="juwari-reviews">
-        <div class="jdgm-widget jdgm-review-widget" data-id="10283571642659" data-product-title="JUWARI デリケート・うるおいジェル"></div>
+        <div class="js-voice-list" aria-live="polite"></div>
+        <div class="juwari-more-wrap">
+          <button type="button" class="juwari-more js-voice-more" style="display:none">もっと見る</button>
+        </div>
       </div>
       <p class="reviews__sample-note note">※お客様のお声は個人の感想であり、効果効能を保証するものではありません。</p>
       <!-- ▲ Judge.me ここまで -->
@@ -562,6 +564,6 @@
   <a class="btn js-buy" href="#price"><span>今すぐ購入する</span><span class="arrow">→</span></a>
 </div>
 
-<script src="assets/js/main.js?v=20260714-7" defer></script>
+<script src="assets/js/main.js?v=20260715-11" defer></script>
 </body>
 </html>

@@ -448,22 +448,14 @@ h1, h2, h3, p { margin: 0; }
 .fv-reviews [class*='jdgm-carousel'] svg { color: var(--c-pink-deep); fill: var(--c-pink-deep); }
 .fv-reviews__note { margin-top: 1.4em; }
 
-/* --- ② VOICE：Review Widget（写真付き全レビュー・もっと見る対応） --- */
-/* セクション背景は白（ピンク・グラデ・＋モチーフは使用しない）。
-   カード側を淡ピンクのグラデにして浮かせる */
+/* --- ② VOICE：カスタムレビュー表示（Judge.me公式Widgets APIから取得・main.jsで制御） --- */
+/* セクション背景は白。カード側を淡ピンクのグラデにして浮かせる。
+   見出し・総数・評価分布グラフは出力自体しない（カスタム表示のため） */
 .reviews { background: var(--c-white); }
-/* 「レビューを書く」ボタンは非表示（レビュー投稿は購入後メール経由で収集） */
-.juwari-reviews .jdgm-write-rev-link { display: none !important; }
-/* 「お客様の写真と動画」ギャラリー（タイトル・サムネイル・投稿促し文言を含む）は非表示 */
-.juwari-reviews .jdgm-gallery,
-.juwari-reviews [class*='jdgm-gallery'] { display: none !important; }
-/* パネルは透明化（背景はセクション側が担う）。幅と余白だけ管理 */
+/* コンテナ：幅と余白だけ管理 */
 .juwari-reviews {
   margin: clamp(2.4rem, 7vw, 3.4rem) auto 0;
   max-width: 940px;
-  background: none;
-  border-radius: 0;
-  padding: 0;
   text-align: left;
 }
 /* レビュー1件＝淡ピンクの上下グラデカード（上から下へ自然に薄く・控えめで上品に）。
@@ -478,14 +470,26 @@ h1, h2, h3, p { margin: 0; }
 /* 投稿者名・タイトルをブランドの見出し色に、本文は本文色に */
 .juwari-reviews .jdgm-rev__author, .juwari-reviews .jdgm-rev__title { color: var(--c-heading); font-weight: 700; }
 .juwari-reviews .jdgm-rev__body { color: var(--c-text); line-height: 2.0; }
-/* 「もっと見る（Load More）」「レビューを書く」等のボタンをCTAと同じ丸ピルに */
-.juwari-reviews .jdgm-btn,
-.juwari-reviews .jdgm-paginate__load-more {
-  background: linear-gradient(135deg, #F3A7B0 0%, var(--c-pink-deep) 100%) !important;
-  color: #fff !important; border: 0 !important; border-radius: 999px !important;
-  padding: .7em 2em !important; font-weight: 700; letter-spacing: .08em;
-  box-shadow: 0 8px 22px rgba(211,98,111,.26);
+/* カード内の不要要素（商品リンク・透明性バッジ等）はJSで除去するがCSSでも保険的に非表示 */
+.juwari-reviews .jdgm-rev__prod-info-wrapper,
+.juwari-reviews .jdgm-rev__transparency-badge-wrapper,
+.juwari-reviews .jdgm-rev__actions,
+.juwari-reviews .jdgm-rev__reply { display: none !important; }
+/* レビュー写真：カード内で上品なサムネイルに */
+.juwari-reviews .jdgm-rev__pic-img { max-width: 130px; border-radius: 10px; }
+/* 「もっと見る」ボタン：上品なアウトラインの丸ピル（スマホでタップしやすい高さ・幅） */
+.juwari-more-wrap { text-align: center; margin-top: clamp(1.4rem, 4vw, 2rem); }
+.juwari-more {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 52px; min-width: min(72vw, 300px);
+  padding: 0 2.4em; border: 1.5px solid var(--c-pink); border-radius: 999px;
+  background: #fff; color: var(--c-pink-deep);
+  font-family: var(--f-sans); font-size: .95rem; font-weight: 700; letter-spacing: .14em;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(211,98,111,.10);
+  transition: background .3s ease, transform .3s ease, box-shadow .3s ease;
 }
+.juwari-more:hover { background: var(--c-sheer-1); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(211,98,111,.16); }
 /* スマホで左右いっぱいになりすぎないよう余白 */
 @media (max-width: 767px) {
   .juwari-reviews { margin-inline: clamp(0px, 1.5vw, 12px); }
