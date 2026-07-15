@@ -237,7 +237,14 @@
         }
         pool = all;
         if (!pool.length) { moreBtn.style.display = 'none'; return; }
-        show(1);   // 初期表示は1件（ランダム）
+        // 最初の1件は★5レビュー限定：シャッフル済み配列の先頭に、最初に見つかった★5を移動
+        // （シャッフル後なので「★5の中からランダムに1件」と等価。★5が無い場合はそのまま先頭を表示）
+        const idx5 = pool.findIndex((rev) => {
+          const r = rev.querySelector('.jdgm-rev__rating');
+          return r && r.getAttribute('data-score') === '5';
+        });
+        if (idx5 > 0) { const t = pool[0]; pool[0] = pool[idx5]; pool[idx5] = t; }
+        show(1);   // 初期表示は★5からランダムに1件
       } catch (e) {
         moreBtn.style.display = 'none';
       }
