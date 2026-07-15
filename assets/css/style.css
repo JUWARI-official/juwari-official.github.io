@@ -307,7 +307,7 @@ h1, h2, h3, p { margin: 0; }
 /* 見出し：画像上部の余白（商品より上）に重ねる。画像の上端から適度に離し、
    ゆとりを持たせて読みやすく（余白は画像内の上部スペースで確保） */
 .solution__headline {
-  position: absolute; left: 0; right: 0; top: clamp(2.6rem, 10vw, 5rem);
+  position: absolute; left: 0; right: 0; top: clamp(3.4rem, 13.5vw, 6.5rem);
   z-index: 2; padding: 0 var(--gutter);
 }
 /* 見出しサイズはLP共通の .headline に統一（このセクション専用の拡大指定は廃止） */
