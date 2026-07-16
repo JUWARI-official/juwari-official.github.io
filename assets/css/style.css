@@ -259,7 +259,12 @@ h1, h2, h3, p { margin: 0; }
   background: var(--c-white);
 }
 /* 女性をセクション全高いっぱいに（下端まで隙間なく／背景として全体を支える・鮮明なまま） */
-.empathy__photo { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+/* 写真の下端120pxを白へなめらかにフェード（区切り線を出さず、白背景＝次セクションへ自然につなぐ）。
+   テキストは中央配置のためフェード帯には掛からない */
+.empathy__photo { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 calc(100% - 120px), rgba(0,0,0,0) 100%);
+          mask-image: linear-gradient(180deg, #000 0%, #000 calc(100% - 120px), rgba(0,0,0,0) 100%);
+}
 .empathy__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 60% center; display: block; }
 /* 左側だけをやさしく明るく（テキスト可読性を確保。右側の女性は加工せず鮮明なまま） */
 .empathy::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
@@ -293,8 +298,8 @@ h1, h2, h3, p { margin: 0; }
 .solution {
   color: var(--c-heading); text-align: center;
   background: var(--c-white);
-  /* 上パディングなし＝CHANGEセクションと隙間なく接続。見出しの余白は画像内の上部余白で確保 */
-  padding: 0 0 var(--section-y);
+  /* CHANGE下端のフェード終了後に、LP標準のセクション間余白（--section-y）を確保 */
+  padding: var(--section-y) 0;
 }
 /* 全幅ビジュアル（PCは横に間延びしないよう幅を上限で抑えて中央配置） */
 .solution__visual { position: relative; width: 100%; max-width: 640px; margin-inline: auto; }
