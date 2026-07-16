@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
 <!-- ?v= はキャッシュ対策のバージョン番号。CSSを更新したらこの数字も上げる -->
-<link rel="stylesheet" href="assets/css/style.css?v=20260716-2" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260716-3" />
 
 <!-- Judge.me Store script（head内に1回だけ）。Published（承認済み）レビューのみ表示 -->
 <script>jdgm = window.jdgm || {};jdgm.SHOP_DOMAIN = 'qzkx7z-qc.myshopify.com';jdgm.PLATFORM = 'shopify';jdgm.PUBLIC_TOKEN = 'LHK6Tu4tuP8HMSigYrlookmAwbk';</script>
@@ -427,11 +427,12 @@
       <!-- 定期購入の条件（回数縛りなし・いつでも解約/スキップ・配送間隔）。
            条件はShopify定期購入アプリの実仕様（2026-07-13 ユーザー確認済み）と一致させること -->
       <div class="plans__terms reveal">
-        <p class="plans__terms-title">定期購入は、安心してはじめられます</p>
+        <!-- タイトル・3項目とも nb（フレーズ単位で折らない）で、狭い画面でも自然な位置で改行させる -->
+        <p class="plans__terms-title"><span class="nb">定期購入は、</span><span class="nb">安心してはじめられます</span></p>
         <ul class="plans__terms-list">
-          <li><span class="check" aria-hidden="true">✓</span>回数のお約束はありません</li>
-          <li><span class="check" aria-hidden="true">✓</span>解約・スキップはいつでも可能</li>
-          <li><span class="check" aria-hidden="true">✓</span><span class="nb">お届け間隔は</span><span class="nb">1ヶ月・2ヶ月・3ヶ月</span><span class="nb">から選べます</span></li>
+          <li><span class="check" aria-hidden="true">✓</span><span class="plans__terms-text"><span class="nb">回数のお約束はありません</span></span></li>
+          <li><span class="check" aria-hidden="true">✓</span><span class="plans__terms-text"><span class="nb">解約・スキップは</span><span class="nb">いつでも可能</span></span></li>
+          <li><span class="check" aria-hidden="true">✓</span><span class="plans__terms-text"><span class="nb">お届け間隔は</span><span class="nb">1ヶ月・2ヶ月・3ヶ月から選べます</span></span></li>
         </ul>
       </div>
     </div>

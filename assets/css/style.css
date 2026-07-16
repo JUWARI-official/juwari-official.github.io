@@ -742,31 +742,35 @@ h1, h2, h3, p { margin: 0; }
   max-width: 480px;
   background: var(--c-sheer-1);
   border-radius: var(--radius);
-  padding: clamp(1.4rem, 5vw, 1.9rem) clamp(1.2rem, 5vw, 2rem);
+  /* 左右20〜24px・上下も広めに（端まで詰まらないゆとり）。高さは内容に応じて自動 */
+  padding: clamp(22px, 6vw, 30px) clamp(20px, 5.5vw, 24px);
 }
 .plans__terms-title {
   font-size: clamp(.92rem, 3.8vw, 1rem);
-  font-weight: 500;
+  font-weight: 700;
   color: var(--c-heading);
   letter-spacing: .04em;
+  line-height: 1.7;
 }
 .plans__terms-list {
   list-style: none;
-  margin: 1.1em 0 0;
+  margin: 1.2em 0 0;
   padding: 0;
   display: grid;
-  gap: .55em;
+  gap: .7em;
   text-align: left;
   justify-content: center;
 }
 .plans__terms-list li {
   display: flex;
   align-items: baseline;
-  gap: .6em;
+  gap: .65em;
   font-size: clamp(.84rem, 3.5vw, .94rem);
-  line-height: 1.7;
+  line-height: 1.8;
   color: var(--c-text);
 }
+/* 折り返し行もチェックの右側に揃う（flex子要素のためぶら下がりインデントが自然に効く） */
+.plans__terms-text { display: inline-block; min-width: 0; }
 .plans__terms-list .check {
   display: inline-grid; place-items: center;
   width: 1.35em; height: 1.35em; border-radius: 50%;
