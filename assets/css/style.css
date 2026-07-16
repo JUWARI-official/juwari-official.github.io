@@ -418,8 +418,10 @@ h1, h2, h3, p { margin: 0; }
    「星（上）→ 本文（中央）→ 投稿者名（下・全カードで位置が揃う）」に整列。
    Judge.meの内部レイアウト（比率固定）を明示的に置き換えるため !important で統一 */
 /* カードの高さは「ラッパー側」で統一し、カード自体は height:100%。
-   （カードを親より高くするとJudge.me側コンテナのoverflowで下端が切られ、下の角丸が消えるため） */
-.fv-reviews .jdgm-carousel__item-container { height: auto !important; overflow: visible !important; }
+   （カードを親より高くするとJudge.me側コンテナのoverflowで下端が切られ、下の角丸が消えるため）
+   ※overflowはJudge.me既定のまま（横方向のクリップを外すとページ全体が横に広がり
+     スマホで全体が縮小表示される事故になる）。高さはautoで縦のクリップだけ解消 */
+.fv-reviews .jdgm-carousel__item-container { height: auto !important; }
 .fv-reviews .jdgm-carousel__item-wrapper { height: clamp(210px, 54vw, 246px) !important; align-items: stretch; }
 .fv-reviews .jdgm-carousel-item {
   /* inline-flex＝Judge.meのスライダー（inline-block横並び＋translateX）を壊さずに内部だけflex縦組みにする */
