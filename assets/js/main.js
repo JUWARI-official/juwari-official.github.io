@@ -253,6 +253,25 @@
     moreBtn.addEventListener('click', () => show(STEP));
   }
 
+  /* ---------- ①-2 FVレビューカード → VOICEセクションへのページ内リンク ----------
+     カード（星・本文・投稿者名どこでも）タップでVOICE(#voice)へスムーズスクロール。
+     カードはJudge.meが動的に生成するため、セクションへのイベント委譲で拾う。
+     横スワイプと区別するため、押下位置から10px以上動いた場合はリンクを発火しない */
+  function initFvReviewsLink() {
+    const area = document.querySelector('.fv-reviews');
+    const target = document.getElementById('voice');
+    if (!area || !target) return;
+    let downX = 0, downY = 0;
+    area.addEventListener('pointerdown', (e) => { downX = e.clientX; downY = e.clientY; }, { passive: true });
+    area.addEventListener('click', (e) => {
+      const card = e.target.closest('.jdgm-carousel-item');
+      if (!card) return;
+      if (Math.abs(e.clientX - downX) > 10 || Math.abs(e.clientY - downY) > 10) return; // スワイプは無視
+      e.preventDefault();
+      target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    });
+  }
+
   /* ---------- 初期化 ---------- */
   document.addEventListener('DOMContentLoaded', () => {
     initHeroSlider();
@@ -263,5 +282,6 @@
     initAllIngredients();
     initStickyCta();
     initVoiceReviews();
+    initFvReviewsLink();
   });
 })();

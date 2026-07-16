@@ -417,19 +417,30 @@ h1, h2, h3, p { margin: 0; }
 /* カード＝角丸長方形・全カード同一高さ。内部はflex縦組みで
    「星（上）→ 本文（中央）→ 投稿者名（下・全カードで位置が揃う）」に整列。
    Judge.meの内部レイアウト（比率固定）を明示的に置き換えるため !important で統一 */
+/* カードの高さは「ラッパー側」で統一し、カード自体は height:100%。
+   （カードを親より高くするとJudge.me側コンテナのoverflowで下端が切られ、下の角丸が消えるため） */
+.fv-reviews .jdgm-carousel__item-container { height: auto !important; overflow: visible !important; }
+.fv-reviews .jdgm-carousel__item-wrapper { height: clamp(210px, 54vw, 246px) !important; align-items: stretch; }
 .fv-reviews .jdgm-carousel-item {
   /* inline-flex＝Judge.meのスライダー（inline-block横並び＋translateX）を壊さずに内部だけflex縦組みにする */
   display: inline-flex !important;
   vertical-align: top;
   flex-direction: column !important;
-  height: clamp(200px, 52vw, 236px) !important;
+  height: 100% !important;
   box-sizing: border-box !important;
   padding: clamp(1.2rem, 4vw, 1.6rem) clamp(1.1rem, 3.6vw, 1.5rem) !important;
   background: linear-gradient(180deg, #FBE7EA 0%, #FDF2F4 62%, #FEF8F9 100%) !important;
-  border-radius: 16px !important;
+  border-radius: 16px !important;               /* 上下4隅とも均一の角丸 */
   border: 0 !important;
   box-shadow: 0 8px 24px rgba(200,150,160,.14);
-  overflow: hidden;
+  overflow: hidden;                              /* グラデが角丸の外へはみ出さない */
+  /* タップ/クリックでVOICEへ移動（main.js）。押下時は控えめな縮小フィードバック */
+  cursor: pointer;
+  transition: transform .25s ease, opacity .25s ease, box-shadow .25s ease;
+}
+.fv-reviews .jdgm-carousel-item:active { transform: scale(.985); opacity: .92; }
+@media (hover: hover) {
+  .fv-reviews .jdgm-carousel-item:hover { box-shadow: 0 12px 30px rgba(200,150,160,.22); }
 }
 /* 星＋本文ブロック：比率固定をやめ、均等な間隔の縦組みに */
 .fv-reviews .jdgm-carousel-item__review {
@@ -450,8 +461,9 @@ h1, h2, h3, p { margin: 0; }
 
 /* --- ② VOICE：カスタムレビュー表示（Judge.me公式Widgets APIから取得・main.jsで制御） --- */
 /* セクション背景は白。カード側を淡ピンクのグラデにして浮かせる。
-   見出し・総数・評価分布グラフは出力自体しない（カスタム表示のため） */
-.reviews { background: var(--c-white); }
+   見出し・総数・評価分布グラフは出力自体しない（カスタム表示のため）。
+   scroll-margin-top＝アンカー到達時に見出しが上端に張り付いて隠れないための余白 */
+.reviews { background: var(--c-white); scroll-margin-top: 24px; }
 /* コンテナ：幅と余白だけ管理 */
 .juwari-reviews {
   margin: clamp(2.4rem, 7vw, 3.4rem) auto 0;
