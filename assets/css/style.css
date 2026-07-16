@@ -436,10 +436,10 @@ h1, h2, h3, p { margin: 0; }
   height: 100% !important;
   box-sizing: border-box !important;
   padding: clamp(1.2rem, 4vw, 1.6rem) clamp(1.1rem, 3.6vw, 1.5rem) !important;
-  background: linear-gradient(180deg, #FBE7EA 0%, #FDF2F4 62%, #FEF8F9 100%) !important;
+  background: var(--c-sheer-2) !important;      /* 淡花弁ピンクの単色（グラデ廃止・ブランドカラー準拠） */
   border-radius: 16px !important;               /* 上下4隅とも均一の角丸 */
   border: 0 !important;
-  box-shadow: 0 8px 24px rgba(200,150,160,.14);
+  box-shadow: 0 5px 16px rgba(200,150,160,.10); /* ごく控えめなシャドウ */
   overflow: hidden;                              /* グラデが角丸の外へはみ出さない */
   /* タップ/クリックでVOICEへ移動（main.js）。押下時は控えめな縮小フィードバック */
   cursor: pointer;
@@ -477,12 +477,12 @@ h1, h2, h3, p { margin: 0; }
   max-width: 940px;
   text-align: left;
 }
-/* レビュー1件＝淡ピンクの上下グラデカード（上から下へ自然に薄く・控えめで上品に）。
+/* レビュー1件＝淡花弁ピンクの単色カード（グラデ廃止・ブランドカラー準拠）。
    角丸・余白・横幅は全カード共通＝並べても形が揃う。白背景に浮かぶ構成 */
 .juwari-reviews .jdgm-rev {
-  background: linear-gradient(180deg, #FBE7EA 0%, #FDF3F5 60%, #FEF9FA 100%) !important;
+  background: var(--c-sheer-2) !important;
   border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(200,150,160,.12);
+  box-shadow: 0 5px 16px rgba(200,150,160,.10);  /* ごく控えめなシャドウ */
   border: 0 !important; padding: clamp(1.2rem, 3.8vw, 1.7rem);
   margin-bottom: clamp(.9rem, 3vw, 1.3rem);
 }
