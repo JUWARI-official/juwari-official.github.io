@@ -1,0 +1,5 @@
+# juwari.jp — すべてのクローラー（検索エンジン・AI）を許可
+User-agent: *
+Allow: /
+
+Sitemap: https://juwari.jp/sitemap.xml
