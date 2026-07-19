@@ -33,11 +33,180 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
 <!-- ?v= はキャッシュ対策のバージョン番号。CSSを更新したらこの数字も上げる -->
-<link rel="stylesheet" href="assets/css/style.css?v=20260719-1" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260719-2" />
 
 <!-- Judge.me Store script（head内に1回だけ）。Published（承認済み）レビューのみ表示 -->
 <script>jdgm = window.jdgm || {};jdgm.SHOP_DOMAIN = 'qzkx7z-qc.myshopify.com';jdgm.PLATFORM = 'shopify';jdgm.PUBLIC_TOKEN = 'LHK6Tu4tuP8HMSigYrlookmAwbk';</script>
 <script data-cfasync='false' type='text/javascript' async src='https://cdnwidget.judge.me/widget_preloader.js'></script>
+
+<!-- =========================================================
+     構造化データ（JSON-LD）— AI検索・リッチリザルト対策
+     マスター: 01_LP作業中/AI検索最適化/05_json-ld_shopify.html
+     ページ内の表示内容と完全一致させること（片方だけの更新は禁止）。
+     TODO: ShopifyのSKU確定後に各Offerへ "sku" を追加。
+     TODO: Judge.meの実レビューが貯まったら aggregateRating / review を追加
+           （架空の数値は絶対に入れない） -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://2sec.co.jp/#organization",
+  "name": "株式会社2sec",
+  "url": "https://2sec.co.jp",
+  "brand": {
+    "@type": "Brand",
+    "@id": "https://juwari.jp/#brand",
+    "name": "JUWARI",
+    "alternateName": "ジュワリ",
+    "url": "https://juwari.jp/",
+    "slogan": "女性としての私を、これからも。",
+    "logo": "https://juwari.jp/assets/images/logo-wordmark-hero.png",
+    "sameAs": [
+      "https://www.instagram.com/juwari_official"
+    ],
+    "description": "日本発のプレミアムフェムケアブランド。年齢やライフステージの変化で自分を後回しにしがちな女性が「私を大切にする時間」を思い出すためのブランドです。"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "@id": "https://juwari.jp/#product",
+  "name": "JUWARI デリケート・うるおいジェル",
+  "alternateName": "ジュワリ デリケート・うるおいジェル",
+  "brand": { "@id": "https://juwari.jp/#brand" },
+  "manufacturer": { "@id": "https://2sec.co.jp/#organization" },
+  "category": "フェムケア > デリケートゾーンケア > 保湿ジェル",
+  "description": "デリケートゾーンにうるおいを届ける、使い切り個包装のインナージェル。NMN（ジヒドロナイアシンアミドリボシドアセチルトリ-t-ブチルトリプトファン）、5種のヒト型セラミド、ナイアシンアミド、ラクトバチルス由来発酵成分（乳酸桿菌／豆乳発酵液）、ザクロエキス配合。日本製・弱酸性・低刺激処方・6つの無添加（パラベン、合成香料、合成着色料、鉱物油、アルコール、石油系界面活性剤 不使用）。第三者機関安全テスト実施済み（※すべての方に刺激が起きないわけではありません）。1本1.7gの使い切りタイプで、週1〜3回、お風呂上がりや夜寝る前の使用がおすすめ。医薬品ではありません。",
+  "image": [
+    "https://juwari.jp/assets/images/ogp-juwari-v2.jpg",
+    "https://juwari.jp/assets/images/price-3.jpg",
+    "https://juwari.jp/assets/images/price-10.jpg"
+  ],
+  "countryOfOrigin": "JP",
+  "audience": {
+    "@type": "PeopleAudience",
+    "suggestedGender": "female",
+    "suggestedMinAge": 30,
+    "suggestedMaxAge": 59
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "3本入り（1.7g×3本）",
+      "url": "https://shop.juwari.jp/products/juwari-3set",
+      "price": "2640",
+      "priceCurrency": "JPY",
+      "priceValidUntil": "2027-07-31",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "JPY" },
+        "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "JP" }
+      },
+      "seller": { "@id": "https://2sec.co.jp/#organization" }
+    },
+    {
+      "@type": "Offer",
+      "name": "10本入り（1.7g×10本）",
+      "url": "https://shop.juwari.jp/products/juwari-10set",
+      "price": "7480",
+      "priceCurrency": "JPY",
+      "priceValidUntil": "2027-07-31",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "JPY" },
+        "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "JP" }
+      },
+      "seller": { "@id": "https://2sec.co.jp/#organization" }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://juwari.jp/#faq",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "いつ使うのがおすすめですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "1日の終わり、お風呂上がりや夜寝る前がおすすめです。" }
+    },
+    {
+      "@type": "Question",
+      "name": "どれくらいの頻度で使いますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "おすすめは週に1〜3回程度です。乾燥が気になる時は、3日程度継続してお試しください。" }
+    },
+    {
+      "@type": "Question",
+      "name": "使用後に漏れてきませんか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "個人差はありますが、なじませた後、しっとりとした潤いが続きます。また、ご使用後はすぐに横になってお休みいただくと、ジェルがなじみやすく、漏れも気になりにくくなります。気になる方は、おりものシートなどを併用いただくと、より快適にお過ごしいただけます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "生理中でも使えますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "生理中の経血が多いタイミングは避けて、体調に合わせてご使用ください。" }
+    },
+    {
+      "@type": "Question",
+      "name": "大切な時期（妊娠中など）でも使えますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "お身体がデリケートな時期ですので、念のためご使用をお控えください。" }
+    },
+    {
+      "@type": "Question",
+      "name": "刺激はありますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "容器は安全規格をクリアした素材で、滑らかな形状になっています。中身のジェルも、第三者機関による安全テスト実施済み※の低刺激処方の製品です。※すべての方に刺激が起きないわけではありません。" }
+    },
+    {
+      "@type": "Question",
+      "name": "口に入っても大丈夫ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "口に入れてもやさしい成分で作られています。ですが食べ物ではありませんので、故意に食べることはお控えください。" }
+    },
+    {
+      "@type": "Question",
+      "name": "使用後は洗い流した方がいいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "洗い流す必要はありません。" }
+    },
+    {
+      "@type": "Question",
+      "name": "保管方法は？",
+      "acceptedAnswer": { "@type": "Answer", "text": "直射日光を避け、湿気の少ない涼しいところに保管してください。" }
+    },
+    {
+      "@type": "Question",
+      "name": "使用期限はありますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "使用期限は未開封で製造から3年間です。パッケージ背面にも記載しておりますのでご確認ください。" }
+    },
+    {
+      "@type": "Question",
+      "name": "プライバシーへの配慮はありますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "中身がわからない無地の箱で、雑貨表記でお届けしますのでご安心ください。" }
+    },
+    {
+      "@type": "Question",
+      "name": "北海道・沖縄・離島へのお届けについて",
+      "acceptedAnswer": { "@type": "Answer", "text": "北海道、沖縄、離島へのお届けは、本州よりお時間をいただく場合があります。配送会社が表示するお届け予定日は最短でのお届け予定日となるため、実際のお届け日は前後する場合がございます。あらかじめご了承ください。" }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "@id": "https://juwari.jp/#breadcrumb",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "JUWARI 公式", "item": "https://juwari.jp/" },
+    { "@type": "ListItem", "position": 2, "name": "デリケート・うるおいジェル", "item": "https://shop.juwari.jp/products/juwari-3set" }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -329,17 +498,21 @@
       <div class="steps">
         <div class="step reveal">
           <p class="step__no">01</p>
+          <p class="step__title">パウチを開ける</p>
           <img class="step__img step__illust" src="assets/images/howto-01.png" alt="ステップ1：パウチを開けるイラスト" loading="lazy" width="190" height="190" />
         </div>
         <div class="step reveal">
           <p class="step__no">02</p>
+          <p class="step__title">キャップを引き抜く</p>
           <img class="step__img step__illust" src="assets/images/howto-02.png" alt="ステップ2：キャップを引き抜くイラスト" loading="lazy" width="190" height="190" />
         </div>
         <div class="step reveal">
           <p class="step__no">03</p>
+          <p class="step__title">ジェルを押し出してなじませる</p>
           <img class="step__img step__illust" src="assets/images/howto-03.png" alt="ステップ3：ジェルを押し出すイラスト" loading="lazy" width="190" height="190" />
         </div>
       </div>
+      <p class="howto__note reveal">使用後は洗い流す必要はありません。<br class="br-sp" />そのままおやすみください。</p>
     </div>
   </section>
 
@@ -438,6 +611,39 @@
           <li><span class="check" aria-hidden="true">✓</span><span class="plans__terms-text"><span class="nb">お届け間隔は</span><span class="nb">1ヶ月・2ヶ月・3ヶ月から選べます</span></span></li>
         </ul>
       </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SPEC 商品情報（仕様表）— AI検索・検索エンジンが読み取りやすい表形式。
+       内容はJSON-LD（head内）およびAI検索最適化/01_商品属性.mdと完全一致させること
+       ========================================================= -->
+  <section class="section spec" aria-labelledby="spec-h">
+    <div class="container container--narrow center reveal">
+      <p class="eyebrow">SPEC</p>
+      <h2 class="headline" id="spec-h">商品情報</h2>
+    </div>
+    <div class="container container--narrow reveal">
+      <table class="spec__table">
+        <tbody>
+          <tr><th>商品名</th><td>JUWARI デリケート・うるおいジェル</td></tr>
+          <tr><th>カテゴリ</th><td>フェムケア／デリケートゾーン用うるおいジェル</td></tr>
+          <tr><th>内容量</th><td>3本入り：1.7g×3本（2,640円・税込）<br />10本入り：1.7g×10本（7,480円・税込）</td></tr>
+          <tr><th>使用目安</th><td>週1〜3回・1回1本（使い切り個包装）</td></tr>
+          <tr><th>主要成分</th><td>NMN<sup>※1</sup>・ヒト型セラミド<sup>※2</sup>・ナイアシンアミド・ラクトバチルス由来発酵成分<sup>※3</sup>・ザクロエキス</td></tr>
+          <tr><th>処方</th><td>弱酸性・低刺激処方<sup>※4</sup>・6つの無添加<sup>※5</sup>・日本製</td></tr>
+          <tr><th>使用期限</th><td>未開封で製造から3年</td></tr>
+          <tr><th>配送</th><td>全国送料無料・無地箱（雑貨表記）でお届け</td></tr>
+        </tbody>
+      </table>
+      <p class="note spec__note">
+        ※1 ジヒドロナイアシンアミドリボシドアセチルトリ-t-ブチルトリプトファン<br />
+        ※2 セラミドNG、セラミドAP、セラミドAG、セラミドNP、セラミドOP<br />
+        ※3 乳酸桿菌／豆乳発酵液<br />
+        ※4 すべての方に刺激が起きないわけではありません。<br />
+        ※5 パラベン、合成香料、合成着色料、鉱物油、アルコール、石油系界面活性剤は使用していません。
+      </p>
+      <p class="spec__disclaimer">本品は医薬品ではありません。</p>
     </div>
   </section>
 

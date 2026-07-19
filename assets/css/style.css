@@ -676,6 +676,18 @@ h1, h2, h3, p { margin: 0; }
 /* 使い方イラスト（SVG・円形カット済み）は正方形でそのまま表示 */
 /* 使い方イラスト（原本PNG・背景透過の円形／無加工でそのまま表示） */
 .step__illust { width: clamp(150px, 48vw, 200px); aspect-ratio: 1/1; object-fit: contain; border-radius: 0; background: none; margin: 1.4em auto .4em; }
+/* 使い方の締め（洗い流し不要の案内・FAQの確定文言と一致させる） */
+.howto__note { margin-top: clamp(2.4rem, 8vw, 3.2rem); font-size: .94rem; letter-spacing: .05em; line-height: 2; color: var(--c-text); }
+
+/* =========================================================
+   SPEC 商品情報 — 仕様表（背景: 最淡シアーピンクで白セクションに挟んで呼吸感）
+   ========================================================= */
+.spec { background: var(--c-sheer-1); }
+.spec__table { width: 100%; border-collapse: collapse; margin-top: clamp(1.6rem, 6vw, 2.6rem); font-size: .88rem; line-height: 1.9; text-align: left; }
+.spec__table th, .spec__table td { padding: 1.05em .4em; border-bottom: 1px solid var(--c-line); vertical-align: top; }
+.spec__table th { color: var(--c-heading); font-weight: 700; white-space: nowrap; width: 6.5em; letter-spacing: .04em; }
+.spec__note { margin-top: 1.8em; }
+.spec__disclaimer { margin-top: 2.2em; font-size: .88rem; letter-spacing: .08em; color: var(--c-text); text-align: center; }
 
 /* =========================================================
    PRICE ご購入 — 背景: シアーピンク最淡（TODO: 価格要確定）
