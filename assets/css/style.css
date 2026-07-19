@@ -58,6 +58,8 @@ body {
 }
 /* 意味の途中で改行させたくない語句に付ける小ユーティリティ（助詞・末尾の孤立を防ぐ） */
 .nb { white-space: nowrap; }
+/* 画面には表示せず、検索エンジン・スクリーンリーダーにのみ読ませるテキスト（h1商品名など） */
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 /* 改行ユーティリティ：スマホのみ改行（PCでは1行に）。意味の区切りで改行を制御 */
 .br-sp { display: inline; }
 @media (min-width: 768px) { .br-sp { display: none; } }
