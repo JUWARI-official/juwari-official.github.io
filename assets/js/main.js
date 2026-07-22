@@ -285,7 +285,7 @@
     const markMoved = () => { userMoved = true; };
     ['wheel', 'touchmove', 'pointerdown', 'keydown'].forEach((ev) =>
       window.addEventListener(ev, markMoved, { passive: true, once: true }));
-    [500, 1400, 2600].forEach((ms) => setTimeout(() => {
+    [500, 1400, 2600, 4200].forEach((ms) => setTimeout(() => {
       if (userMoved) return;
       const top = target.getBoundingClientRect().top;
       if (Math.abs(top - 24) > 30) target.scrollIntoView({ behavior: 'auto', block: 'start' });
