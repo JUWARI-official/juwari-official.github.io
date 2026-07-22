@@ -845,7 +845,8 @@ h1, h2, h3, p { margin: 0; }
 /* =========================================================
    ⑩ FAQ QUESTIONS — 背景: 白
    ========================================================= */
-.faq { background: var(--c-white); }
+/* scroll-margin-top＝#faqアンカー着地時に見出しが上端に張り付かないための余白 */
+.faq { background: var(--c-white); scroll-margin-top: 24px; }
 .faq__list { margin-top: 3.2em; }
 .faq__item { border-bottom: 1px solid var(--c-line); }
 .faq__q {
