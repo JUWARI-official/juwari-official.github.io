@@ -703,7 +703,14 @@ h1, h2, h3, p { margin: 0; }
 .plan__limit { font-size: .8rem; color: var(--c-text-soft); margin-top: .4em; }
 
 /* 価格入りボタン（単品／定期）。CTAと統一しつつ、定期を主役に */
-.plan__cta { margin-top: 1.5em; display: grid; gap: 1em; width: min(100%, 360px); }
+/* 価格（単品・税込）：数字はJostで大きく上品に。単品/定期の選択は遷移先Shopifyで行う */
+.plan__price { margin-top: .9em; font-family: var(--f-num); font-weight: 600; font-size: clamp(1.7rem, 7vw, 2.1rem); color: var(--c-heading); line-height: 1.2; }
+.plan__price small { font-family: var(--f-sans); font-size: .45em; font-weight: 500; letter-spacing: .04em; margin-left: .2em; }
+.plan__unit { margin-top: .4em; font-size: clamp(.78rem, 3.2vw, .88rem); color: var(--c-text-soft); letter-spacing: .02em; }
+.plan__cta { margin-top: 1.4em; display: grid; gap: 1em; width: min(100%, 360px); }
+.plan__cta .btn { width: 100%; }
+/* 定期の選択肢がある旨の注記（ボタン直下・控えめに） */
+.plan__select { margin-top: .9em; }
 .btn-buy {
   position: relative; display: flex; flex-direction: column; align-items: center; gap: .12em;
   border-radius: 18px; padding: 1.05em 1.2em; text-decoration: none;

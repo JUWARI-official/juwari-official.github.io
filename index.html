@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
 <!-- ?v= はキャッシュ対策のバージョン番号。CSSを更新したらこの数字も上げる -->
-<link rel="stylesheet" href="assets/css/style.css?v=20260719-2" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260718-1" />
 
 <!-- Judge.me Store script（head内に1回だけ）。Published（承認済み）レビューのみ表示 -->
 <script>jdgm = window.jdgm || {};jdgm.SHOP_DOMAIN = 'qzkx7z-qc.myshopify.com';jdgm.PLATFORM = 'shopify';jdgm.PUBLIC_TOKEN = 'LHK6Tu4tuP8HMSigYrlookmAwbk';</script>
@@ -527,55 +527,34 @@
       <h2 class="headline" id="price-h">JUWARIをはじめる</h2>
       <div class="plans">
 
+        <!-- 単品/定期の選択は遷移先のShopify商品ページで行う方針（2026-07-18）。
+             LPでは3本入り/10本入りの紹介＋購入ページへの1ボタンのみ。
+             表示価格は単品（税込）。定期割引の選択肢がある旨は注記で案内 -->
+
         <!-- 3本入り -->
         <article class="plan reveal">
           <div class="plan__media"><img src="assets/images/price-3.jpg" alt="JUWARI デリケート・うるおいジェル 3本入り（個包装3本＋パウチ）" loading="lazy" /></div>
           <p class="plan__name">3本入り</p>
           <p class="plan__limit">1本＝1回分の使い切り（1.7g × 3本）</p>
+          <p class="plan__price">￥2,640<small>（税込）</small></p>
+          <p class="plan__unit">1本あたり880円／全国送料無料</p>
           <div class="plan__cta">
-            <!-- Shopify正式URL（3本入り・通常購入）。1本あたり=2,640÷3=880円 -->
-            <a class="btn-buy btn-buy--single js-buy" href="https://shop.juwari.jp/products/juwari-3set">
-              <span class="btn-buy__title">1回のみ購入</span>
-              <span class="btn-buy__price">￥2,640<small>（税込）</small></span>
-              <span class="btn-buy__unit">1本あたり880円</span>
-              <span class="btn-buy__ship">全国送料無料</span>
-            </a>
-            <!-- Shopify正式URL（定期便6本セット＝3本入り×2セット）。2,640×2=5,280→4,620（12.5%OFF）
-                 1本あたり=4,620÷6=770円 -->
-            <a class="btn-buy btn-buy--sub js-buy" href="https://shop.juwari.jp/products/juwari-subscription-6set">
-              <span class="btn-buy__pops"><span class="pop">12%OFF</span><span class="pop">選べる配送スパン</span></span>
-              <span class="btn-buy__title">定期購入</span>
-              <span class="btn-buy__note">2セット以上から購入可能</span>
-              <span class="btn-buy__price">2セット ￥4,620<small>（税込）</small></span>
-              <span class="btn-buy__unit">6本お届け・1本あたり770円</span>
-              <span class="btn-buy__ship">全国送料無料</span>
-            </a>
+            <a class="btn js-buy" href="https://shop.juwari.jp/products/juwari-3set"><span>購入ページへ</span><span class="arrow">→</span></a>
           </div>
+          <p class="plan__select note">単品・おトクな定期購入は<br class="br-sp" />購入ページでお選びいただけます</p>
         </article>
 
-        <!-- 10本入り（1番お得） -->
+        <!-- 10本入り -->
         <article class="plan reveal">
           <div class="plan__media"><img src="assets/images/price-10.jpg" alt="JUWARI デリケート・うるおいジェル 10本入り（個包装10本＋パウチ）" loading="lazy" /></div>
           <p class="plan__name">10本入り</p>
           <p class="plan__limit">1本＝1回分の使い切り（1.7g × 10本）</p>
+          <p class="plan__price">￥7,480<small>（税込）</small></p>
+          <p class="plan__unit">1本あたり748円／全国送料無料</p>
           <div class="plan__cta">
-            <!-- Shopify正式URL（10本入り・通常購入）。1本あたり=7,480÷10=748円 -->
-            <a class="btn-buy btn-buy--single js-buy" href="https://shop.juwari.jp/products/juwari-10set">
-              <span class="btn-buy__title">1回のみ購入</span>
-              <span class="btn-buy__price">￥7,480<small>（税込）</small></span>
-              <span class="btn-buy__unit">1本あたり748円</span>
-              <span class="btn-buy__ship">全国送料無料</span>
-            </a>
-            <!-- Shopify正式URL（定期便10本セット）。7,480→6,600（11.8%OFF）
-                 バッジは実際の割引率を上回らないよう切り捨てで「11%OFF」と表記（景表法・有利誤認の回避） -->
-            <a class="btn-buy btn-buy--sub js-buy" href="https://shop.juwari.jp/products/juwari-subscription-10set">
-              <span class="btn-buy__pops"><span class="pop pop--best">1番お得</span><span class="pop">11%OFF</span><span class="pop">選べる配送スパン</span></span>
-              <span class="btn-buy__title">定期購入</span>
-              <span class="btn-buy__price">￥6,600<small>（税込）</small></span>
-              <span class="btn-buy__unit">1本あたり660円</span>
-              <span class="btn-buy__ship">全国送料無料</span>
-            </a>
+            <a class="btn js-buy" href="https://shop.juwari.jp/products/juwari-10set"><span>購入ページへ</span><span class="arrow">→</span></a>
           </div>
+          <p class="plan__select note">単品・おトクな定期購入は<br class="br-sp" />購入ページでお選びいただけます</p>
         </article>
 
       </div>
