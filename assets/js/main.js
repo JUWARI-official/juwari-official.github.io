@@ -272,6 +272,26 @@
     });
   }
 
+  /* ---------- アンカー着地の補正（LINEリッチメニュー等の #voice 直リンク用） ----------
+     読み込み直後はレビュー等の非同期コンテンツで上部の高さが変わり、アンカー位置がズレるため、
+     レイアウトが落ち着くタイミングで数回だけ着地位置を補正する。
+     ユーザーが自分でスクロールし始めたら補正しない（操作を奪わない） */
+  function initAnchorLanding() {
+    if (!location.hash) return;
+    let target;
+    try { target = document.querySelector(location.hash); } catch (e) { return; }
+    if (!target) return;
+    let userMoved = false;
+    const markMoved = () => { userMoved = true; };
+    ['wheel', 'touchmove', 'pointerdown', 'keydown'].forEach((ev) =>
+      window.addEventListener(ev, markMoved, { passive: true, once: true }));
+    [500, 1400, 2600].forEach((ms) => setTimeout(() => {
+      if (userMoved) return;
+      const top = target.getBoundingClientRect().top;
+      if (Math.abs(top - 24) > 30) target.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }, ms));
+  }
+
   /* ---------- 初期化 ---------- */
   document.addEventListener('DOMContentLoaded', () => {
     initHeroSlider();
@@ -283,5 +303,6 @@
     initStickyCta();
     initVoiceReviews();
     initFvReviewsLink();
+    initAnchorLanding();
   });
 })();
