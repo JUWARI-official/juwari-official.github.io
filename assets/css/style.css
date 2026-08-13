@@ -707,7 +707,15 @@ h1, h2, h3, p { margin: 0; }
 .plan__price { margin-top: .9em; font-family: var(--f-num); font-weight: 600; font-size: clamp(1.7rem, 7vw, 2.1rem); color: var(--c-heading); line-height: 1.2; }
 .plan__price small { font-family: var(--f-sans); font-size: .45em; font-weight: 500; letter-spacing: .04em; margin-left: .2em; }
 .plan__unit { margin-top: .4em; font-size: clamp(.78rem, 3.2vw, .88rem); color: var(--c-text-soft); letter-spacing: .02em; }
-.plan__cta { margin-top: 1.4em; display: grid; gap: 1em; width: min(100%, 360px); }
+/* 購入数の上限（1回の注文あたり）— ボタン直上に控えめなピルで表示 */
+.plan__cap {
+  display: inline-block; margin-top: 1em;
+  padding: .32em 1.1em;
+  border: 1px solid var(--c-pink-soft); border-radius: 999px;
+  background: var(--c-white);
+  font-size: clamp(.72rem, 3vw, .78rem); color: #877074; letter-spacing: .04em;
+}
+.plan__cta { margin-top: 1.1em; display: grid; gap: 1em; width: min(100%, 360px); }
 .plan__cta .btn { width: 100%; }
 /* 定期の選択肢がある旨の注記（ボタン直下・控えめに） */
 .plan__select { margin-top: .9em; }
