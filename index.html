@@ -255,7 +255,7 @@ src="https://www.facebook.com/tr?id=1766685658109915&ev=PageView&noscript=1"
   </div>
   <div class="hero__cta">
     <!-- TODO: 購入リンク（Shopify URL）に差し替え -->
-    <a class="btn js-buy" href="#price"><span>今すぐ購入する</span><span class="arrow">→</span></a>
+    <a class="btn js-buy" href="https://shop.juwari.jp/"><span>今すぐ購入する</span><span class="arrow">→</span></a>
   </div>
   <span class="hero__scroll">SCROLL</span>
 </header>
@@ -403,7 +403,7 @@ src="https://www.facebook.com/tr?id=1766685658109915&ev=PageView&noscript=1"
       <p class="reviews__sample-note note">※お客様のお声は個人の感想であり、効果効能を保証するものではありません。</p>
       <!-- ▲ Judge.me ここまで -->
       <div class="cta-block">
-        <a class="btn js-buy" href="#price"><span>今すぐ購入する</span><span class="arrow">→</span></a>
+        <a class="btn js-buy" href="https://shop.juwari.jp/"><span>今すぐ購入する</span><span class="arrow">→</span></a>
       </div>
     </div>
   </section>
@@ -740,7 +740,7 @@ src="https://www.facebook.com/tr?id=1766685658109915&ev=PageView&noscript=1"
       </div>
       <p class="story__sign">女性としての私を、これからも。</p>
       <div class="cta-block">
-        <a class="btn js-buy" href="#price"><span>今すぐ購入する</span><span class="arrow">→</span></a>
+        <a class="btn js-buy" href="https://shop.juwari.jp/"><span>今すぐ購入する</span><span class="arrow">→</span></a>
       </div>
     </div>
   </section>
@@ -777,17 +777,21 @@ src="https://www.facebook.com/tr?id=1766685658109915&ev=PageView&noscript=1"
 <!-- スマホ固定CTA（画面下部・常時表示） -->
 <div class="sticky-cta" aria-hidden="false">
   <!-- TODO: 購入リンク（Shopify URL）に差し替え -->
-  <a class="btn js-buy" href="#price"><span>今すぐ購入する</span><span class="arrow">→</span></a>
+  <a class="btn js-buy" href="https://shop.juwari.jp/"><span>今すぐ購入する</span><span class="arrow">→</span></a>
 </div>
 
 <script src="assets/js/main.js?v=20260722-1" defer></script>
 
-<!-- Meta Pixel: Shopify購入ページへのクリックを計測（カスタムイベント ClickToShop） -->
+<!-- Meta Pixel: Shopifyへのクリックを計測（カスタムイベント ClickToShop）。
+     content_name: 3set/10set=商品ページ直行、top=ショップトップ直行（今すぐ購入するボタン）。
+     ポリシーページ（/policies/）へのリンクは購入意図ではないため除外 -->
 <script>
 document.addEventListener('click', function (e) {
-  var link = e.target.closest('a[href*="shop.juwari.jp/products/"]');
+  var link = e.target.closest('a[href*="shop.juwari.jp"]');
   if (!link || typeof fbq !== 'function') return;
-  var name = link.href.indexOf('juwari-10set') !== -1 ? '10set' : '3set';
+  if (link.href.indexOf('/policies/') !== -1) return;
+  var name = link.href.indexOf('juwari-10set') !== -1 ? '10set'
+           : link.href.indexOf('juwari-3set') !== -1 ? '3set' : 'top';
   fbq('trackCustom', 'ClickToShop', { content_name: name });
 });
 </script>
