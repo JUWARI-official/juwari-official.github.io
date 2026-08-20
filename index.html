@@ -782,6 +782,73 @@ src="https://www.facebook.com/tr?id=1766685658109915&ev=PageView&noscript=1"
 
 <script src="assets/js/main.js?v=20260722-1" defer></script>
 
+<!-- 流入元の引き継ぎ：LP（juwari.jp）とショップ（shop.juwari.jp）は別ドメインのため、
+     何もしないとShopify側の参照元が一律「juwari.jp」になり、広告経由か自然流入かを区別できない。
+     そこでLP着地時のURLに付いている流入元情報を、ショップへのリンクへ引き継ぐ。
+       1) utm_source等がある場合  → そのまま引き継ぐ（広告のリンク先に付与済み。これが最も確実）
+       2) utm_sourceが無くfbclidだけある場合 → meta / fbclid として記録
+          ※fbclidはFacebook/Instagramが自動付与するが、広告以外（プロフィールのリンク等）でも
+            付くため、広告を表す utm_medium=paid とは区別している
+     ポリシーページ（/policies/）は購入導線ではないため対象外。
+     途中で失敗してもリンクは元のまま動くよう、全体をtry/catchで囲っている。 -->
+<script>
+(function () {
+  var KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  var STORE_KEY = 'juwari_attr';
+
+  // LP着地時のURLから流入元情報を取り出す（同じタブ内なら再読み込みしても保持）
+  function getAttribution() {
+    var params, i, v, found = {}, saved;
+    try { params = new URLSearchParams(window.location.search); } catch (e) { return null; }
+
+    for (i = 0; i < KEYS.length; i++) {
+      v = params.get(KEYS[i]);
+      if (v) found[KEYS[i]] = v;
+    }
+    if (!found.utm_source && params.get('fbclid')) {
+      found.utm_source = 'meta';
+      found.utm_medium = 'fbclid';
+    }
+    if (Object.keys(found).length) {
+      try { sessionStorage.setItem(STORE_KEY, JSON.stringify(found)); } catch (e) {}
+      return found;
+    }
+    try {
+      saved = sessionStorage.getItem(STORE_KEY);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {}
+    return null;
+  }
+
+  // ショップへのリンク（購入導線）に流入元情報を付け足す
+  function applyToShopLinks(attr) {
+    var links = document.querySelectorAll('a[href*="shop.juwari.jp"]');
+    Array.prototype.forEach.call(links, function (link) {
+      if (link.href.indexOf('/policies/') !== -1) return;
+      try {
+        var url = new URL(link.href);
+        Object.keys(attr).forEach(function (k) { url.searchParams.set(k, attr[k]); });
+        link.href = url.toString();
+      } catch (e) {}
+    });
+  }
+
+  function run() {
+    try {
+      var attr = getAttribution();
+      if (attr) applyToShopLinks(attr);
+    } catch (e) {}
+  }
+
+  // main.js（defer）が実行された後に走らせる
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+})();
+</script>
+
 <!-- Meta Pixel: Shopifyへのクリックを計測（カスタムイベント ClickToShop）。
      content_name: 3set/10set=商品ページ直行、top=ショップトップ直行（今すぐ購入するボタン）。
      ポリシーページ（/policies/）へのリンクは購入意図ではないため除外 -->
