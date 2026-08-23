@@ -953,3 +953,50 @@ h1, h2, h3, p { margin: 0; }
   * { animation: none !important; scroll-behavior: auto !important; }
   .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
+
+/* =========================================================
+   公式LINE連携クーポンの案内（購入ボタンの直前に添える）
+   広告で「LINE連携で最大10%OFF」と伝えているため、LPでも同じ情報を示して
+   メッセージのつながりを保つ。受け取り自体はショップ側のLINE導線で行うため、
+   ここからLINEへは飛ばさない（購入の流れから離脱させない）。
+   トーンは Quiet Luxury に合わせ、割引を叫ばず“そっと添える”表現にとどめる。
+   ========================================================= */
+.line-coupon {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto .85rem;
+  color: var(--c-heading);
+  font-size: .8rem;
+  line-height: 1.75;
+  letter-spacing: .06em;
+  text-align: center;
+}
+/* 12.8pxではピンク(--c-pink-deep)はコントラスト3.38でWCAG AA(4.5)未達のため、
+   強調は色ではなく太字で行い、色は可読な--c-headingを使う */
+.line-coupon em {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--c-heading);
+  letter-spacing: .02em;
+}
+
+/* ヒーローは動画の上に重なるため、背景を白寄りにして可読性を確保 */
+.hero__cta .line-coupon {
+  color: #6E5B5D;
+  text-shadow: 0 1px 10px rgba(255, 255, 255, .85);
+}
+
+/* スマホ固定CTA：常時表示のため高さを最小限に */
+.line-coupon--slim {
+  margin-bottom: .3rem;
+  font-size: .72rem;
+  letter-spacing: .04em;
+}
+
+/* 利用条件（景表法対応・LP内で1回だけ明記） */
+.line-coupon__terms {
+  margin: 1.6rem auto 0;
+  max-width: 40em;
+  text-align: center;
+}
