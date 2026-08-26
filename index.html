@@ -31,7 +31,10 @@
 <meta name="facebook-domain-verification" content="714ii1g6j396b0lspem8v43itaqwsl" />
 
 <!-- Meta Pixel（広告計測）ID: 1766685658109915
-     Shopify側（shop.juwari.jp）はFacebook&Instagram販売チャネルで同じピクセルに接続すること -->
+     Shopify側（shop.juwari.jp）はFacebook&Instagram販売チャネルで同じピクセルに接続すること
+     preconnect: fbevents.js の取得前にDNS解決とTLS接続を済ませ、PageView送信を早める
+     （ランディングページビューはピクセル発火が条件のため、離脱前に間に合う確率が上がる） -->
+<link rel="preconnect" href="https://connect.facebook.net" crossorigin />
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
