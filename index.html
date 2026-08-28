@@ -58,11 +58,16 @@ src="https://www.facebook.com/tr?id=1766685658109915&ev=PageView&noscript=1"
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
 <!-- ?v= はキャッシュ対策のバージョン番号。CSSを更新したらこの数字も上げる -->
-<link rel="stylesheet" href="assets/css/style.css?v=20260823-1" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260828-1" />
 
-<!-- Judge.me Store script（head内に1回だけ）。Published（承認済み）レビューのみ表示 -->
+<!-- Judge.me ウィジェット読み込み（2026-08-28 停止）
+     レビューは薬機法・景表法チェック済みの文面をLP内に直接記載する方式へ変更したため、
+     ウィジェットは不要（外部JSを1本減らして表示速度も改善）。
+     ※Shopify側でのレビュー収集・管理は従来どおり継続されます。
+     ※Judge.meウィジェット表示に戻す場合は、下2行のコメントを外してください。
 <script>jdgm = window.jdgm || {};jdgm.SHOP_DOMAIN = 'qzkx7z-qc.myshopify.com';jdgm.PLATFORM = 'shopify';jdgm.PUBLIC_TOKEN = 'LHK6Tu4tuP8HMSigYrlookmAwbk';</script>
 <script data-cfasync='false' type='text/javascript' async src='https://cdnwidget.judge.me/widget_preloader.js'></script>
+-->
 
 <!-- =========================================================
      構造化データ（JSON-LD）— AI検索・リッチリザルト対策
@@ -267,19 +272,90 @@ src="https://www.facebook.com/tr?id=1766685658109915&ev=PageView&noscript=1"
 <main>
 
   <!-- =========================================================
-       ①-2 FV直下：Judge.me レビューカルーセル（社会的証明を最初に）
-       公式ウィジェット＝レビューはJudge.meから自動取得（ハードコーディングなし）。
-       自動スクロール・表示順（おすすめ/注目）はJudge.me管理画面のCarousel設定で制御 -->
-  <section class="section fv-reviews" aria-label="お客様のレビュー">
+       ①-2 FV直下：お客様のお声（吹き出しカード・自動スクロール）
+       ▼ 文面について（重要）
+         実際にいただいたレビュー（Judge.me）から、薬機法・景品表示法の観点で
+         「症状の改善／身体の変化の断定／医薬品的表現」に当たる部分を削除し、
+         使用感・気持ちの範囲に収まる部分だけを抜粋・編集しています。原文にない効果表現は加えていません。
+       ▼ 差し替え方
+         下の li.bubble を1件＝1カードとして増減するだけ。JSが自動で複製してシームレスに流します。
+         （4〜6件が見やすい目安。1件あたり見出し＋2行程度に収める）
+       ========================================================= -->
+  <section class="section fv-reviews" aria-labelledby="fv-reviews-h">
     <div class="container">
-      <div class="jdgm-carousel-wrapper">
-        <h2 class="jdgm-carousel-title">お客様のお声</h2>
-        <a href="#voice" class="jdgm-all-reviews-rating-wrapper" aria-label="レビュー評価">
-          <div data-score="" class="jdgm-all-reviews-rating"></div>
-          from <span class="jdgm-all-reviews-count"></span> reviews
-        </a>
-      </div>
-      <p class="fv-reviews__note note">※個人の感想であり、効果効能を保証するものではありません。</p>
+      <p class="eyebrow">REVIEW</p>
+      <h2 class="fv-reviews__title" id="fv-reviews-h">お客様のお声</h2>
+    </div>
+
+    <!-- data-speed: 1秒あたりの移動px（大きいほど速い）。JSが読み取ります -->
+    <div class="bubbles js-bubbles" data-speed="55">
+      <ul class="bubbles__track js-bubbles-track">
+
+        <li class="bubble">
+          <a class="bubble__card" href="#voice">
+            <span class="bubble__tab">Review</span>
+            <p class="bubble__title">初めてでもスムーズ</p>
+            <p class="bubble__body">初めて使いましたが、何の抵抗もなくスムーズに使えました。形も細くて、先の丸みもちょうどよかったです。</p>
+            <p class="bubble__meta">
+              <span class="bubble__stars" aria-label="5段階中5">★★★★★</span>
+              <span class="bubble__name">匿名 様</span>
+            </p>
+          </a>
+        </li>
+
+        <li class="bubble">
+          <a class="bubble__card" href="#voice">
+            <span class="bubble__tab">Review</span>
+            <p class="bubble__title">自分を大切にできてる</p>
+            <p class="bubble__body">見えないところをケアしていることが、自分を大切にできているという自信になります。</p>
+            <p class="bubble__meta">
+              <span class="bubble__stars" aria-label="5段階中5">★★★★★</span>
+              <span class="bubble__name">uri 様</span>
+            </p>
+          </a>
+        </li>
+
+        <li class="bubble">
+          <a class="bubble__card" href="#voice">
+            <span class="bubble__tab">Review</span>
+            <p class="bubble__title">ご褒美の時間に</p>
+            <p class="bubble__body">ゆっくりできる土曜日のお風呂上がりに使うのが、自分へのご褒美になっています。</p>
+            <p class="bubble__meta">
+              <span class="bubble__stars" aria-label="5段階中5">★★★★★</span>
+              <span class="bubble__name">Ayaya 様</span>
+            </p>
+          </a>
+        </li>
+
+        <li class="bubble">
+          <a class="bubble__card" href="#voice">
+            <span class="bubble__tab">Review</span>
+            <p class="bubble__title">パッケージも好み</p>
+            <p class="bubble__body">パッケージの色もアプリケーターも、硬くなくてスムーズに使えるのが良かったです。</p>
+            <p class="bubble__meta">
+              <span class="bubble__stars" aria-label="5段階中5">★★★★★</span>
+              <span class="bubble__name">匿名 様</span>
+            </p>
+          </a>
+        </li>
+
+        <li class="bubble">
+          <a class="bubble__card" href="#voice">
+            <span class="bubble__tab">Review</span>
+            <p class="bubble__title">続けていきたい</p>
+            <p class="bubble__body">使いやすくて良いです。これからも続けていきたいです。</p>
+            <p class="bubble__meta">
+              <span class="bubble__stars" aria-label="5段階中5">★★★★★</span>
+              <span class="bubble__name">匿名 様</span>
+            </p>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="container">
+      <p class="fv-reviews__note note">※お客様のお声は個人の感想であり、効果効能を保証するものではありません。<br />※実際にいただいたレビューから一部を抜粋・編集して掲載しています。</p>
     </div>
   </section>
 
@@ -382,7 +458,7 @@ src="https://www.facebook.com/tr?id=1766685658109915&ev=PageView&noscript=1"
   </section>
 
   <!-- =========================================================
-       ⑤ レビュー（judge.me）
+       ⑤ レビュー（JEWELの声・長文）
        ========================================================= -->
   <section class="section reviews" id="voice" aria-labelledby="reviews-h">
     <div class="container reveal">
@@ -393,19 +469,61 @@ src="https://www.facebook.com/tr?id=1766685658109915&ev=PageView&noscript=1"
       <p class="lead">そんな想いを込めて、<br />JUWARIをご愛用くださるお客様を<br />「JEWEL」とお呼びしています。</p>
       <p class="lead">ここでは、<br class="br-sp" />そんなJEWELの皆さまから寄せられた<br />お声をご紹介します。</p>
 
-      <!-- ▼ レビュー：Judge.me公式Widgets API（公開トークン・CORS許可済み）から実レビューHTMLを取得し、
-           JS（main.js initVoiceReviews）で制御するカスタム表示。
-           仕様: 読み込み時にランダム順へ並び替え→1件表示→「もっと見る」で5件ずつ追加（重複なし・
-           リロードなしでその場展開）→全件表示後はボタン非表示。件数が増えても自動反映。
-           見出し・総数・評価分布グラフは表示しない -->
-      <div class="juwari-reviews">
-        <div class="js-voice-list" aria-live="polite"></div>
-        <div class="juwari-more-wrap">
-          <button type="button" class="juwari-more js-voice-more" style="display:none">もっと見る</button>
-        </div>
+      <!-- ▼ レビュー（長文）：実際にいただいたレビュー（Judge.me）から、薬機法・景品表示法の観点で
+           「症状の改善／身体の変化の断定／医薬品的表現／専門家としての推奨」に当たる部分を削除し、
+           使用感・気持ちの範囲に収まる部分だけを抜粋・編集しています。原文にない効果表現は加えていません。
+           仕様: 初期は2件表示 →「もっと見る」で残りをその場で展開 → 全件表示後はボタン非表示。
+           差し替え方: article.voice-card を1件＝1レビューとして増減するだけ（JSが件数を自動で判定します） -->
+      <div class="juwari-reviews js-voice-list">
+
+        <article class="voice-card">
+          <p class="voice-card__stars" aria-label="5段階中5">★★★★★</p>
+          <p class="voice-card__name">uri 様</p>
+          <p class="voice-card__body">フェムケアジェルは初めて使用しました。産後数年経っても、なんとなく自信が持てずにいました。<br />1回の使用でしっとりとした使い心地を感じます。<br />なにより、他人からは見えないところをケアしていることが、「自分を大切にできている」という自信につながりました。2セット購入してまだまだたくさんあるので、これからの毎日が楽しみです。</p>
+        </article>
+
+        <article class="voice-card">
+          <p class="voice-card__stars" aria-label="5段階中5">★★★★★</p>
+          <p class="voice-card__name">Ayaya 様</p>
+          <p class="voice-card__body">年齢を重ねるとともに、デリケートゾーンのケアの大切さを感じるようになり、今いちばん大切にしているケアです。季節の変わり目や脱毛のあとに乾燥が気になっていたとき、こちらの商品に出会いました。<br />デリケートな部分に使うものなので、自分に合うかどうかDMで相談させていただいてから購入を決めました。使ってみると、しっとりとした心地よさがありました。<br />商品自体も使いやすく、押し出しが硬いということも、ジェルが驚くほど飛び出すということもなく、軽く押し出せて良かったです。<br />自分へのご褒美として、ゆっくりできる土曜日のお風呂上がりに使ったり、乾燥が気になる日に使ったりと、楽しみながら続けています。</p>
+        </article>
+
+        <article class="voice-card">
+          <p class="voice-card__stars" aria-label="5段階中5">★★★★★</p>
+          <p class="voice-card__name">匿名 様</p>
+          <p class="voice-card__body">初めてこうしたアイテムを使ったのですが、何の抵抗もなくスムーズに使えました。形状が細くて、先の丸みもちょうど良かったと思います。<br />翌朝の心地よさにも驚きました。これまで使ってきたさまざまなケアよりも、自分にとってはしっくりくるものでした。</p>
+        </article>
+
+        <article class="voice-card">
+          <p class="voice-card__stars" aria-label="5段階中5">★★★★★</p>
+          <p class="voice-card__name">匿名 様</p>
+          <p class="voice-card__body">使用感がよかったです。パッケージの色もアプリケーターも、硬くなくてスムーズに使えるので良かったです。</p>
+        </article>
+
+        <article class="voice-card">
+          <p class="voice-card__stars" aria-label="5段階中4">★★★★<span class="voice-card__star--off">★</span></p>
+          <p class="voice-card__name">匿名 様</p>
+          <p class="voice-card__body">JUWARIを3本、3日おきに使い始めました。今では、しっとりとした心地よさが続いているように感じています。<br />一番気になっていた大切な人との時間も、前向きな気持ちで過ごせるようになり、とても嬉しく思っています。<br />そして驚いたのは、翌日まで心地よさが続いていること。まだ使い始めなので、これからも続けて楽しみたいと思います。<br />現時点でも十分満足していて、気持ちとしては★5つです。ただ、私は3日おきくらいのペースで使い続けたいので、もう少し手に取りやすい価格になったら嬉しいなという気持ちを込めて、今回は★4とさせていただきました。<br />まわりの女性にも、ぜひ紹介していきたいと思っています。素敵な製品を私たちに届けてくださり、本当にありがとうございます。</p>
+        </article>
+
+        <article class="voice-card">
+          <p class="voice-card__stars" aria-label="5段階中4">★★★★<span class="voice-card__star--off">★</span></p>
+          <p class="voice-card__name">Ryuka 様</p>
+          <p class="voice-card__body">もともと乾燥が気になっていました。使用するとしっとりとした使い心地で、心地よく過ごせています。私の場合は、週に2〜3回のペースで使うのが合っているようです。<br />外側にも塗り、中にも使うので、出し方や量の配分には少し気を使います。もう少し使い続けて、これからどう感じるのかを楽しみにしています。</p>
+        </article>
+
+        <article class="voice-card">
+          <p class="voice-card__stars" aria-label="5段階中4">★★★★<span class="voice-card__star--off">★</span></p>
+          <p class="voice-card__name">匿名 様</p>
+          <p class="voice-card__body">初めて使用しましたが、翌日も変わりなく過ごせたので、そのまま続けて使っています。<br />使った数日後は、心地よく過ごせているように思いました。</p>
+        </article>
+
       </div>
-      <p class="reviews__sample-note note">※お客様のお声は個人の感想であり、効果効能を保証するものではありません。</p>
-      <!-- ▲ Judge.me ここまで -->
+      <div class="juwari-more-wrap">
+        <button type="button" class="juwari-more js-voice-more" style="display:none">もっと見る</button>
+      </div>
+      <p class="reviews__sample-note note">※お客様のお声は個人の感想であり、効果効能を保証するものではありません。<br />※実際にいただいたレビューから一部を抜粋・編集して掲載しています。</p>
+      <!-- ▲ レビュー ここまで -->
       <div class="cta-block">
         <p class="line-coupon">＼公式LINE連携で <em>最大10%OFF</em>／</p>
         <a class="btn js-buy" href="https://shop.juwari.jp/"><span>今すぐ試してみる</span><span class="arrow">→</span></a>
@@ -790,7 +908,7 @@ src="https://www.facebook.com/tr?id=1766685658109915&ev=PageView&noscript=1"
   <a class="btn js-buy" href="https://shop.juwari.jp/"><span>今すぐ試してみる</span><span class="arrow">→</span></a>
 </div>
 
-<script src="assets/js/main.js?v=20260722-1" defer></script>
+<script src="assets/js/main.js?v=20260828-1" defer></script>
 
 <!-- 流入元の引き継ぎ：LP（juwari.jp）とショップ（shop.juwari.jp）は別ドメインのため、
      何もしないとShopify側の参照元が一律「juwari.jp」になり、広告経由か自然流入かを区別できない。

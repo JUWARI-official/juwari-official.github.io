@@ -175,101 +175,85 @@
     start();
   }
 
-  /* ---------- ⑤ VOICE：Judge.me公式Widgets APIによるカスタムレビュー表示 ----------
-     公開トークンのWidgets API（CORS許可済み・Publishedレビューのみ返る）から実レビューHTMLを取得。
-     仕様: 読み込み時に全件をランダム順へ並び替え（閲覧中は順序固定）→1件だけ表示→
-     「もっと見る」で5件ずつその場展開（重複なし・リロードなし）→全件表示後はボタン非表示。
-     レビューが増えても自動反映（ハードコーディングなし） */
+  /* ---------- ⑤ VOICE：JEWELの声（長文レビュー・HTML直書き） ----------
+     HTMLに書かれた .voice-card を、初期は先頭2件だけ表示 →「もっと見る」で残りをその場で展開。
+     全件表示したらボタンは消える。カードを増減してもJS側の修正は不要 */
   function initVoiceReviews() {
     const list = document.querySelector('.js-voice-list');
     const moreBtn = document.querySelector('.js-voice-more');
     if (!list || !moreBtn) return;
 
-    const TOKEN = 'LHK6Tu4tuP8HMSigYrlookmAwbk';
-    const SHOP = 'qzkx7z-qc.myshopify.com';
-    const PER_PAGE = 10;   // APIの1ページあたり件数（Judge.me既定）
-    const STEP = 5;        // 「もっと見る」1回で追加する件数
-    let pool = [];
-    let shown = 0;
+    const INITIAL = 2;   // 最初に見せる件数
+    const cards = Array.from(list.querySelectorAll('.voice-card'));
+    if (cards.length <= INITIAL) { moreBtn.style.display = 'none'; return; }
 
-    // カード内の不要要素を除去し、ウィジェットJSなしでも完全表示になるよう整える
-    const clean = (rev) => {
-      rev.querySelectorAll('.jdgm-rev__prod-info-wrapper, .jdgm-rev__transparency-badge-wrapper, .jdgm-rev__actions, .jdgm-rev__reply, .jdgm-rev__custom-form').forEach((e) => e.remove());
-      const ts = rev.querySelector('.jdgm-rev__timestamp');
-      if (ts) {
-        const d = new Date((ts.dataset.content || '').replace(' UTC', ' GMT').replace(/-/g, '/'));
-        ts.textContent = isNaN(d) ? '' : ((d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear());
-        ts.classList.remove('jdgm-spinner');
-      }
-      rev.querySelectorAll('img[data-src]').forEach((img) => { img.src = img.getAttribute('data-src'); });
-      rev.querySelectorAll('.jdgm--loading').forEach((e) => e.classList.remove('jdgm--loading'));
-      return rev;
-    };
-
-    const show = (n) => {
-      const frag = document.createDocumentFragment();
-      for (let i = 0; i < n && shown < pool.length; i++, shown++) frag.appendChild(clean(pool[shown]));
-      list.appendChild(frag);
-      moreBtn.style.display = shown < pool.length ? '' : 'none';
-    };
-
-    const fetchPage = (page) =>
-      fetch('https://api.judge.me/api/v1/widgets/all_reviews_page?api_token=' + TOKEN + '&shop_domain=' + SHOP + '&page=' + page)
-        .then((r) => r.json())
-        .then((j) => {
-          const tmp = document.createElement('div');
-          tmp.innerHTML = j.all_reviews || '';
-          return Array.from(tmp.querySelectorAll('.jdgm-rev'));
-        });
-
-    (async () => {
-      try {
-        // 全ページ取得（安全上限10ページ=100件）→ Fisher-Yatesでランダム順に
-        let all = [];
-        for (let page = 1; page <= 10; page++) {
-          const revs = await fetchPage(page);
-          all = all.concat(revs);
-          if (revs.length < PER_PAGE) break;
-        }
-        for (let i = all.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          const t = all[i]; all[i] = all[j]; all[j] = t;
-        }
-        pool = all;
-        if (!pool.length) { moreBtn.style.display = 'none'; return; }
-        // 最初の1件は★5レビュー限定：シャッフル済み配列の先頭に、最初に見つかった★5を移動
-        // （シャッフル後なので「★5の中からランダムに1件」と等価。★5が無い場合はそのまま先頭を表示）
-        const idx5 = pool.findIndex((rev) => {
-          const r = rev.querySelector('.jdgm-rev__rating');
-          return r && r.getAttribute('data-score') === '5';
-        });
-        if (idx5 > 0) { const t = pool[0]; pool[0] = pool[idx5]; pool[idx5] = t; }
-        show(1);   // 初期表示は★5からランダムに1件
-      } catch (e) {
-        moreBtn.style.display = 'none';
-      }
-    })();
-
-    moreBtn.addEventListener('click', () => show(STEP));
+    cards.forEach((card, i) => { if (i >= INITIAL) card.hidden = true; });
+    moreBtn.style.display = '';
+    moreBtn.addEventListener('click', () => {
+      cards.forEach((card) => { card.hidden = false; });
+      moreBtn.style.display = 'none';
+    });
   }
 
-  /* ---------- ①-2 FVレビューカード → VOICEセクションへのページ内リンク ----------
-     カード（星・本文・投稿者名どこでも）タップでVOICE(#voice)へスムーズスクロール。
-     カードはJudge.meが動的に生成するため、セクションへのイベント委譲で拾う。
-     横スワイプと区別するため、押下位置から10px以上動いた場合はリンクを発火しない */
-  function initFvReviewsLink() {
-    const area = document.querySelector('.fv-reviews');
-    const target = document.getElementById('voice');
-    if (!area || !target) return;
-    let downX = 0, downY = 0;
-    area.addEventListener('pointerdown', (e) => { downX = e.clientX; downY = e.clientY; }, { passive: true });
-    area.addEventListener('click', (e) => {
-      const card = e.target.closest('.jdgm-carousel-item');
-      if (!card) return;
-      if (Math.abs(e.clientX - downX) > 10 || Math.abs(e.clientY - downY) > 10) return; // スワイプは無視
-      e.preventDefault();
-      target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  /* ---------- ①-2 FV直下：吹き出しカードの自動スクロール ----------
+     カード一式をJSで複製して2セットにし、CSSアニメーションで「1セット分」だけ左へ流す。
+     1セット流し終えた瞬間に先頭へ戻るため、継ぎ目なくループして見える。
+     速度は data-speed（1秒あたりの移動px）で調整。指を置く／マウスを載せる間は停止。
+     モーション低減設定時は流さず、横スクロールで読める形（CSS側で制御） */
+  function initBubbles() {
+    const area = document.querySelector('.js-bubbles');
+    const track = document.querySelector('.js-bubbles-track');
+    if (!area || !track) return;
+    if (reduceMotion) return;   // 流さない（CSSで横スクロール表示に切り替わる）
+
+    const originals = Array.from(track.children);
+    if (!originals.length) return;
+
+    // 2セット目を複製（読み上げ・タブ移動の重複を避けるため支援技術からは隠す）
+    originals.forEach((item) => {
+      const clone = item.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.querySelectorAll('a').forEach((a) => a.setAttribute('tabindex', '-1'));
+      track.appendChild(clone);
     });
+
+    // 1セット分の幅（＝移動距離）を「1枚目」と「複製した1枚目」の左端の差から実測する。
+    // gapや端数の計算に頼らないので、フォント差・折り返し差があってもズレない
+    const setup = () => {
+      const first = track.children[0];
+      const firstClone = track.children[originals.length];
+      if (!first || !firstClone) return;
+      const width = firstClone.getBoundingClientRect().left - first.getBoundingClientRect().left;
+      if (width <= 0) return;
+      const speed = parseFloat(area.dataset.speed) || 34;   // px / 秒
+      track.style.setProperty('--bubbles-shift', width + 'px');
+      track.style.setProperty('--bubbles-duration', (width / speed) + 's');
+      area.classList.add('is-ready');
+    };
+
+    // Webフォントの反映・画面回転・リサイズでカード幅が変わると距離がズレるため、
+    // 幅が変わるたびに測り直す（ResizeObserverが使えない環境はresizeイベントで代用）
+    setup();
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(() => setup()).observe(track);
+    } else {
+      let timer;
+      window.addEventListener('resize', () => { clearTimeout(timer); timer = setTimeout(setup, 200); }, { passive: true });
+    }
+
+    // 読んでいる間は止める
+    const pause = () => area.classList.add('is-paused');
+    const resume = () => area.classList.remove('is-paused');
+    area.addEventListener('pointerenter', pause);
+    area.addEventListener('pointerleave', resume);
+    area.addEventListener('touchstart', pause, { passive: true });
+    area.addEventListener('touchend', () => setTimeout(resume, 2500), { passive: true });
+    // 画面外では動かさない（電池・CPUの節約）
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        entries.forEach((e) => area.classList.toggle('is-paused', !e.isIntersecting));
+      }, { threshold: 0 }).observe(area);
+    }
   }
 
   /* ---------- アンカー着地の補正（LINEリッチメニュー等の #voice 直リンク用） ----------
@@ -302,7 +286,7 @@
     initAllIngredients();
     initStickyCta();
     initVoiceReviews();
-    initFvReviewsLink();
+    initBubbles();
     initAnchorLanding();
   });
 })();
