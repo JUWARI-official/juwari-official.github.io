@@ -17,7 +17,8 @@
   --c-pink-deep:  #D3626F;  /* 強調：花弁を濃く（見出し・数字・CTA・#・アイコン） */
   --c-pink-soft:  #F8DBDE;  /* チップ・ピル背景・縁取り用の淡花弁 */
   --c-heading:    #7A555C;  /* 構造的見出し・名前・Q等（花弁系ダスティローズ・可読） */
-  --c-text:       #7D6A6D;  /* 本文（ローズトープ） */
+  --c-text:       #7D6A6D;  /* 本文（ローズトープ）／白背景の上で 5.05:1 */
+  --c-text-pink:  #6B585B;  /* 淡ピンクのカード上の本文。--c-text だと 4.26:1 でAA未満のため一段濃く（5.67:1） */
   --c-text-soft:  #A99B9E;  /* 補足テキスト */
   --c-line:       #F0DCE0;  /* 罫線（花弁ローズ） */
   --c-gold:       #C8A870;  /* シャンパンゴールド（アクセント5%以内・現状維持） */
@@ -416,7 +417,7 @@ h1, h2, h3, p { margin: 0; }
 .fv-reviews .container { padding-inline: var(--gutter); }
 .fv-reviews__title {
   font-family: var(--f-sans); font-weight: 700;
-  font-size: clamp(1.15rem, 4.8vw, 1.5rem); line-height: 1.6; letter-spacing: .06em;
+  font-size: clamp(1.25rem, 5.2vw, 1.63rem); line-height: 1.6; letter-spacing: .06em;
   color: var(--c-heading);
   margin: .1em 0 clamp(1.4rem, 5vw, 2rem);
 }
@@ -449,7 +450,7 @@ h1, h2, h3, p { margin: 0; }
 }
 
 /* --- 吹き出しカード1枚 --- */
-.bubble { flex: 0 0 auto; width: clamp(232px, 68vw, 290px); display: flex; }
+.bubble { flex: 0 0 auto; width: clamp(250px, 72vw, 310px); display: flex; }
 .bubble__card {
   position: relative;
   display: flex; flex-direction: column; gap: .55em;
@@ -487,20 +488,20 @@ h1, h2, h3, p { margin: 0; }
 }
 .bubble__title {
   margin: .2em 0 0;
-  font-size: clamp(1rem, 4vw, 1.08rem); font-weight: 700; line-height: 1.7; letter-spacing: .02em;
+  font-size: clamp(1.06rem, 4.4vw, 1.19rem); font-weight: 700; line-height: 1.7; letter-spacing: .02em;
   color: var(--c-heading);
 }
 .bubble__body {
   margin: 0;
-  font-size: .85rem; line-height: 1.95; color: var(--c-text);
+  font-size: .95rem; line-height: 1.95; color: var(--c-text);
 }
 .bubble__meta {
   display: flex; align-items: center; justify-content: space-between; gap: .8em;
   margin: .35em 0 0; padding-top: .5em;
   border-top: 1px solid var(--c-line);
 }
-.bubble__stars { color: var(--c-gold); font-size: .88rem; letter-spacing: .1em; line-height: 1; }
-.bubble__name { font-size: .74rem; color: var(--c-text-soft); letter-spacing: .04em; }
+.bubble__stars { color: var(--c-gold); font-size: .94rem; letter-spacing: .1em; line-height: 1; }
+.bubble__name { font-size: .81rem; color: var(--c-text-soft); letter-spacing: .04em; }
 .fv-reviews__note { margin-top: clamp(1.2rem, 4vw, 1.8rem); }
 
 /* 動きを控えたい設定の方には流さず、指で横スクロールできる形にする */
@@ -537,11 +538,13 @@ h1, h2, h3, p { margin: 0; }
 }
 /* JSで隠している2件目以降（もっと見るで表示） */
 .voice-card[hidden] { display: none; }
-.voice-card__stars { margin: 0; color: var(--c-gold); font-size: 1rem; letter-spacing: .14em; line-height: 1; }
+.voice-card__stars { margin: 0; color: var(--c-gold); font-size: 1.06rem; letter-spacing: .14em; line-height: 1; }
 /* ★の未取得ぶんは薄く（★4のときの5つ目） */
 .voice-card__star--off { color: rgba(200,168,112,.28); }   /* ゴールドを薄くして「空の星」に見せる */
-.voice-card__name { margin: .7em 0 .5em; font-size: .92rem; font-weight: 700; color: var(--c-heading); letter-spacing: .04em; }
-.voice-card__body { margin: 0; font-size: .92rem; line-height: 2.05; color: var(--c-text); }
+/* 注記（打消し表示）は小さすぎると読めないため、共通の .note より一段大きく */
+.fv-reviews__note, .reviews__sample-note { font-size: .81rem; }
+.voice-card__name { margin: .7em 0 .5em; font-size: 1rem; font-weight: 700; color: var(--c-heading); letter-spacing: .04em; }
+.voice-card__body { margin: 0; font-size: 1rem; line-height: 2.05; color: var(--c-text-pink); }
 
 /* 「もっと見る」ボタン：上品なアウトラインの丸ピル（スマホでタップしやすい高さ・幅） */
 .juwari-more-wrap { text-align: center; margin-top: clamp(1.4rem, 4vw, 2rem); }
