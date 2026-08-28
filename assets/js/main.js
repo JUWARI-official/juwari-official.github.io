@@ -233,13 +233,14 @@
 
     // Webフォントの反映・画面回転・リサイズでカード幅が変わると距離がズレるため、
     // 幅が変わるたびに測り直す（ResizeObserverが使えない環境はresizeイベントで代用）
+    // 初回 → 描画直後 → Webフォント反映後 → 幅が変わるたび、と複数回測り直す
     setup();
-    if ('ResizeObserver' in window) {
-      new ResizeObserver(() => setup()).observe(track);
-    } else {
-      let timer;
-      window.addEventListener('resize', () => { clearTimeout(timer); timer = setTimeout(setup, 200); }, { passive: true });
-    }
+    requestAnimationFrame(setup);
+    setTimeout(setup, 600);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(setup);
+    if ('ResizeObserver' in window) new ResizeObserver(() => setup()).observe(track);
+    let timer;
+    window.addEventListener('resize', () => { clearTimeout(timer); timer = setTimeout(setup, 200); }, { passive: true });
 
     // 読んでいる間は止める
     const pause = () => area.classList.add('is-paused');
