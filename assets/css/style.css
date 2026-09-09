@@ -501,6 +501,8 @@ h1, h2, h3, p { margin: 0; }
   border-top: 1px solid var(--c-line);
 }
 .bubble__stars { color: var(--c-gold); font-size: .88rem; letter-spacing: .1em; line-height: 1; }
+/* ★の未取得ぶんは薄く（★4のときの5つ目）。長文カードの .voice-card__star--off と同じ考え方 */
+.bubble__star--off { color: rgba(200,168,112,.28); }
 .bubble__name { font-size: .74rem; color: var(--c-text-soft); letter-spacing: .04em; }
 .fv-reviews__note { margin-top: clamp(1.2rem, 4vw, 1.8rem); }
 
