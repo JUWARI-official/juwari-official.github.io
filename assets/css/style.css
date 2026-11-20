@@ -228,6 +228,40 @@ h1, h2, h3, p { margin: 0; }
 }
 /* 見出し内の各フレーズは意味の途中で折れないように */
 .hero__title .nb { display: inline-block; }
+/* 販売実績（累計15,000本・2026-11-20達成）。金線はアクセント5%以内の範囲 */
+.hero__milestone {
+  margin-top: 1.3em;
+  font-weight: 700;
+  font-size: clamp(.82rem, 3.6vw, .98rem);
+  letter-spacing: .07em;
+  color: var(--c-heading);
+  text-shadow: 0 1px 8px rgba(255,255,255,.85), 0 0 4px rgba(255,255,255,.6);
+}
+/* 金線はスマホでは折り返しの原因になるためPC（768px〜）のみ表示 */
+@media (min-width: 768px) {
+  .hero__milestone::before, .hero__milestone::after {
+    content: ""; display: inline-block; width: 24px; height: 1px;
+    background: var(--c-gold); vertical-align: middle; margin: 0 .8em;
+  }
+  .hero__milestone::before { margin-left: 0; }
+}
+.hero__milestone em {
+  font-style: normal; font-family: var(--f-num); font-weight: 600;
+  font-size: 1.55em; color: var(--c-pink-deep); letter-spacing: .02em;
+  margin: 0 .06em;
+}
+.hero__milestone sup { font-size: .55em; }
+/* 注記（打消し表示）：読める大きさ・コントラスト4.5:1以上を確保（#746D6Aは実績値） */
+.hero__milestone-note {
+  display: inline-block;
+  margin-top: .55em;
+  padding: .22em .9em;
+  background: rgba(255,255,255,.6);
+  border-radius: 999px;
+  font-size: clamp(.6rem, 2.6vw, .68rem);
+  letter-spacing: .03em;
+  color: #746D6A;
+}
 /* 商品カテゴリの説明（キャッチコピーの直下・控えめに） */
 .hero__desc {
   margin-top: 1.5em;
