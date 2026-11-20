@@ -58,7 +58,7 @@ src="https://www.facebook.com/tr?id=1766685658109915&ev=PageView&noscript=1"
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
 <!-- ?v= はキャッシュ対策のバージョン番号。CSSを更新したらこの数字も上げる -->
-<link rel="stylesheet" href="assets/css/style.css?v=20261120-1" />
+<link rel="stylesheet" href="assets/css/style.css?v=20261120-2" />
 
 <!-- Judge.me ウィジェット読み込み（2026-08-28 停止）
      レビューは薬機法・景表法チェック済みの文面をLP内に直接記載する方式へ変更したため、
@@ -260,9 +260,6 @@ src="https://www.facebook.com/tr?id=1766685658109915&ev=PageView&noscript=1"
     <p class="hero__title">女性としての私を、これからも。</p>
     <!-- 初見のユーザー（SNS流入）に「何の商品か」を一言で伝えるカテゴリ説明 -->
     <p class="hero__desc"><span class="nb">デリケートゾーンにうるおいを届ける、</span><br class="br-sp" /><span class="nb">使い切り個包装のインナージェル</span></p>
-    <!-- 販売実績（2026-11-20 累計15,000本達成）。景表法対応：集計根拠の注記を直下に添える -->
-    <p class="hero__milestone"><span class="nb">おかげさまで</span><span class="nb">累計販売<em>15,000</em>本突破<sup>※</sup></span></p>
-    <p class="hero__milestone-note">※2026年6月の販売開始からの累計販売本数（自社調べ）</p>
   </div>
   <div class="hero__cta">
     <p class="line-coupon">＼公式LINE連携で <em>最大10%OFF</em>／</p>
@@ -273,6 +270,20 @@ src="https://www.facebook.com/tr?id=1766685658109915&ev=PageView&noscript=1"
 </header>
 
 <main>
+
+  <!-- 販売実績バンド（2026-11-20 累計15,000本達成）。
+       FVの写真に重ならないよう、ヒーロー直下・お客様の声の上に独立した帯として配置。
+       景表法対応：集計根拠の注記を直下に添える -->
+  <div class="milestone-band">
+    <!-- 紙吹雪（お祝い演出）：ブランドカラーの小片がゆっくり舞う。装飾のためaria-hidden。
+         prefers-reduced-motion時は全体のanimation無効化により自動で非表示になる -->
+    <div class="milestone-band__confetti" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <p class="milestone-band__text"><span class="nb">おかげさまで</span><span class="nb">累計販売<em>15,000</em>本突破<sup>※</sup></span></p>
+    <p class="milestone-band__note">※2026年6月の販売開始からの累計販売本数（自社調べ）</p>
+  </div>
 
   <!-- =========================================================
        ①-2 FV直下：お客様のお声（吹き出しカード・自動スクロール）

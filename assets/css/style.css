@@ -228,36 +228,79 @@ h1, h2, h3, p { margin: 0; }
 }
 /* 見出し内の各フレーズは意味の途中で折れないように */
 .hero__title .nb { display: inline-block; }
-/* 販売実績（累計15,000本・2026-11-20達成）。金線はアクセント5%以内の範囲 */
-.hero__milestone {
-  margin-top: 1.3em;
+/* 販売実績バンド（累計15,000本・2026-11-20達成）。
+   FV写真との重なりを避け、ヒーロー直下〜REVIEWの間に白帯で配置。金線はアクセント5%以内 */
+.milestone-band {
+  position: relative;
+  overflow: hidden;
+  background: var(--c-white);
+  text-align: center;
+  padding: clamp(1.7rem, 6vw, 2.6rem) var(--gutter) clamp(1.5rem, 5.4vw, 2.3rem);
+}
+/* 紙吹雪（お祝い演出）：小さく・まばらに・ゆっくり＝派手にしない（§5）。
+   色はブランドパレットのみ（金はアクセント5%以内として2片だけ）。
+   テキストより背面（z-index:0 と position で重なり順を確保） */
+/* PCの広い画面ではテキスト周りに寄せる（max-widthで中央に束ねる） */
+.milestone-band__confetti {
+  position: absolute; top: 0; bottom: 0; left: 0; right: 0;
+  max-width: 880px; margin-inline: auto;
+  pointer-events: none;
+}
+.milestone-band__text, .milestone-band__note { position: relative; }
+.milestone-band__confetti span {
+  position: absolute; top: -14px;
+  width: 7px; height: 11px; border-radius: 2px;
+  background: var(--c-pink-soft);
+  opacity: 0;
+  animation: confetti-fall 10s linear infinite;
+}
+@keyframes confetti-fall {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: .8; }
+  80%  { opacity: .55; }
+  100% { transform: translateY(220px) rotate(240deg); opacity: 0; }
+}
+@keyframes confetti-fall-r {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: .8; }
+  80%  { opacity: .55; }
+  100% { transform: translateY(220px) rotate(-260deg); opacity: 0; }
+}
+.milestone-band__confetti span:nth-child(even) { animation-name: confetti-fall-r; }
+.milestone-band__confetti span:nth-child(1)  { left: 5%;  animation-delay: -2s; }
+.milestone-band__confetti span:nth-child(2)  { left: 13%; width: 6px; height: 6px; border-radius: 50%; background: var(--c-pink); animation-delay: -7s; animation-duration: 12s; }
+.milestone-band__confetti span:nth-child(3)  { left: 21%; background: var(--c-gold); animation-delay: -4.5s; animation-duration: 11s; }
+.milestone-band__confetti span:nth-child(4)  { left: 29%; animation-delay: -9s; }
+.milestone-band__confetti span:nth-child(5)  { left: 38%; width: 5px; height: 5px; border-radius: 50%; background: var(--c-pink-deep); animation-delay: -1s; animation-duration: 13s; }
+.milestone-band__confetti span:nth-child(6)  { left: 47%; animation-delay: -6s; animation-duration: 11.5s; }
+.milestone-band__confetti span:nth-child(7)  { left: 56%; width: 6px; height: 6px; border-radius: 50%; background: var(--c-pink); animation-delay: -3.5s; }
+.milestone-band__confetti span:nth-child(8)  { left: 64%; animation-delay: -10.5s; animation-duration: 12.5s; }
+.milestone-band__confetti span:nth-child(9)  { left: 72%; background: var(--c-gold); animation-delay: -8s; animation-duration: 11s; }
+.milestone-band__confetti span:nth-child(10) { left: 80%; width: 5px; height: 5px; border-radius: 50%; background: var(--c-pink-deep); animation-delay: -5s; }
+.milestone-band__confetti span:nth-child(11) { left: 88%; animation-delay: -0.5s; animation-duration: 12s; }
+.milestone-band__confetti span:nth-child(12) { left: 95%; width: 6px; height: 6px; border-radius: 50%; background: var(--c-pink); animation-delay: -7.5s; animation-duration: 10.5s; }
+.milestone-band__text {
   font-weight: 700;
-  font-size: clamp(.82rem, 3.6vw, .98rem);
+  font-size: clamp(.92rem, 4vw, 1.15rem);
   letter-spacing: .07em;
   color: var(--c-heading);
-  text-shadow: 0 1px 8px rgba(255,255,255,.85), 0 0 4px rgba(255,255,255,.6);
 }
 /* 金線はスマホでは折り返しの原因になるためPC（768px〜）のみ表示 */
 @media (min-width: 768px) {
-  .hero__milestone::before, .hero__milestone::after {
-    content: ""; display: inline-block; width: 24px; height: 1px;
-    background: var(--c-gold); vertical-align: middle; margin: 0 .8em;
+  .milestone-band__text::before, .milestone-band__text::after {
+    content: ""; display: inline-block; width: 30px; height: 1px;
+    background: var(--c-gold); vertical-align: middle; margin: 0 1em;
   }
-  .hero__milestone::before { margin-left: 0; }
 }
-.hero__milestone em {
+.milestone-band__text em {
   font-style: normal; font-family: var(--f-num); font-weight: 600;
   font-size: 1.55em; color: var(--c-pink-deep); letter-spacing: .02em;
   margin: 0 .06em;
 }
-.hero__milestone sup { font-size: .55em; }
-/* 注記（打消し表示）：読める大きさ・コントラスト4.5:1以上を確保（#746D6Aは実績値） */
-.hero__milestone-note {
-  display: inline-block;
-  margin-top: .55em;
-  padding: .22em .9em;
-  background: rgba(255,255,255,.6);
-  border-radius: 999px;
+.milestone-band__text sup { font-size: .55em; }
+/* 注記（打消し表示）：読める大きさ・白地で4.5:1以上のコントラスト（#746D6Aは実績値） */
+.milestone-band__note {
+  margin-top: .7em;
   font-size: clamp(.6rem, 2.6vw, .68rem);
   letter-spacing: .03em;
   color: #746D6A;
